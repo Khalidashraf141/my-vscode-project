@@ -11,7 +11,7 @@ class A
         a = d;
     }
     ~A(){
-        cout << endl << "Object A being destroyed";
+        cout << endl << "Object A is being destroyed";
     }
     void show()
     {
