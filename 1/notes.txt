@@ -1,0 +1,340 @@
+### How to Run C++ Code in the Terminal:
+1. Compile the code:
+   g++ filename.cpp -o filename.exe
+2. Execute the compiled file:
+   ./filename.exe
+
+---
+
+### Key Concepts in C++:
+
+#### 1. Header Files:
+- `#include <iostream>`: A library that allows us to work with input and output objects, such as `cout`.
+
+#### 2. Namespace:
+- `using namespace std`: Enables the use of names for objects and variables from the standard library without needing to prefix them with `std::`.
+
+#### 3. Main Function:
+- `int main()`: The entry point of a C++ program. Any code inside its curly brackets `{}` will be executed.
+
+#### 4. General Rules:
+- C++ is **case-sensitive**.
+- Each statement ends with a **semicolon (;)**.
+- The compiler ignores **white spaces**.
+
+---
+
+### Input and Output:
+
+#### 1. `cout`:
+- Pronounced "see-out".
+- Used with the insertion operator (`<<`) to output/print text.
+- Does **not** insert a new line at the end of the output.
+
+#### 2. Breaking Lines:
+- Use `\n` (newline character) or `endl` to move the cursor to the beginning of the next line.
+  - `\n`: An escape sequence for breaking lines.
+  - `endl`: A manipulator that also breaks lines.
+
+---
+
+### Comments in C++:
+
+#### 1. Purpose:
+- Explain code and make it more readable.
+- Prevent execution of code when testing alternatives.
+
+#### 2. Types:
+- **Single-line comments**: Use `//`.
+- **Multi-line comments**: Use `/* */`.
+
+---
+
+### Variables in C++:
+
+#### 1. Types of Variables:
+- **int**: Stores integers (whole numbers) without decimals.  
+  - **Size**: 4 bytes (on most systems).  
+  - **Example**:  
+    ```cpp
+    int age = 25;
+    ```
+- **double**: Stores floating-point numbers with decimals.  
+  - **Size**: 8 bytes.  
+  - **Example**:  
+    ```cpp
+    double pi = 3.14159;
+    ```
+- **char**: Stores single characters, such as `'a'` or `'B'`.  
+  - **Size**: 1 byte.  
+  - **Example**:  
+    ```cpp
+    char grade = 'A';
+    ```
+- **string**: Stores text, such as `"Hello World"`.  
+  - **Note**: Requires the `#include <string>` header.  
+  - **Example**:  
+    ```cpp
+    #include <string>
+    string name = "John";
+    ```
+- **bool**: Stores values with two states: `true` or `false`.  
+  - **Size**: 1 byte.  
+  - **Note**: In C++, `true` is represented as `1` and `false` as `0`.  
+  - **Example**:  
+    ```cpp
+    bool isStudent = true;
+    ```
+
+---
+
+### Identifiers in C++:
+
+#### 1. What are Identifiers?
+- Identifiers are unique names used to identify variables, functions, or other entities in a program.
+
+#### 2. General Rules for Identifiers:
+- Names can contain **letters**, **digits**, and **underscores** (`_`).
+- Names **must begin** with a letter or an underscore (`_`).
+- Names are **case-sensitive** (e.g., `age` and `Age` are different).
+- Names **cannot contain** whitespaces or special characters like `!`, `#`, `%`, etc.
+- Reserved keywords (e.g., `int`, `double`, `return`) **cannot be used** as identifiers.
+
+#### 3. Examples:
+```cpp
+int age = 30;       // Valid
+double _salary = 50000.50; // Valid
+string firstName = "Alice"; // Valid
+int 2ndNumber = 10; // Invalid (cannot start with a digit)
+```
+
+---
+
+### Constants in C++:
+
+#### 1. What are Constants?
+- Constants are variables whose values cannot be changed once defined.
+
+#### 2. How to Declare Constants:
+- Use the `const` keyword to declare a constant variable.
+
+#### 3. Example:
+```cpp
+const double PI = 3.14159;
+const int DAYS_IN_WEEK = 7;
+```
+
+---
+
+### User Input in C++:
+
+#### 1. `cin` for Input:
+- `cin` is a predefined variable that reads data from the keyboard using the extraction operator (`>>`).
+- It is pronounced "see-in" and is used to take input from the user.
+- Example:
+  ```cpp
+  int age;
+  cout << "Enter your age: ";
+  cin >> age;
+  cout << "You entered: " << age << endl;
+  ```
+
+#### 2. `cout` for Output:
+- `cout` is pronounced "see-out" and is used for output.
+- It uses the insertion operator (`<<`) to display text or variables on the screen.
+- Both `cin` and `cout` belong to the `<iostream>` library.
+
+---
+
+### Float vs Double:
+
+- The **precision** of a floating-point value determines how many digits it can have after the decimal point.
+- **`float`**: Has a precision of 6-7 decimal digits.
+- **`double`**: Has a precision of about 15 decimal digits.
+- It is generally safer to use `double` for most calculations due to its higher precision.
+
+---
+
+### Operators in C++:
+
+#### 1. Arithmetic Operators:
+- Used to perform basic mathematical operations.
+  - `+` (Addition): Adds two values.
+  - `-` (Subtraction): Subtracts one value from another.
+  - `*` (Multiplication): Multiplies two values.
+  - `/` (Division): Divides one value by another.
+  - `%` (Modulus): Returns the remainder of a division.
+
+#### 2. Assignment Operators:
+- Used to assign values to variables.
+  - `=`: Assigns a value.
+  - `+=`: Adds and assigns.
+  - `-=`: Subtracts and assigns.
+  - `*=`: Multiplies and assigns.
+  - `/=`: Divides and assigns.
+  - `%=`: Modulus and assigns.
+
+#### 3. Comparison Operators:
+- Used to compare two values.
+  - `==`: Equal to.
+  - `!=`: Not equal to.
+  - `<`: Less than.
+  - `>`: Greater than.
+  - `<=`: Less than or equal to.
+  - `>=`: Greater than or equal to.
+
+#### 4. Logical Operators:
+- Used to perform logical operations.
+  - `&&`: Logical AND.
+  - `||`: Logical OR.
+  - `!`: Logical NOT.
+
+#### 5. Bitwise Operators:
+- Used to perform operations on bits.
+  - `&`: Bitwise AND.
+  - `|`: Bitwise OR.
+  - `^`: Bitwise XOR.
+  - `~`: Bitwise NOT.
+  - `<<`: Left shift.
+  - `>>`: Right shift.
+
+---
+
+### Strings in C++
+
+A string variable contains a collection of characters surrounded by double quotes.  
+To use strings, you must include the `<string>` library in your source code.
+
+#### String Concatenation:
+- The `+` operator can be used between strings to combine them into a new string. This is called **concatenation**.
+- In C++, the `+` operator is used for both addition and concatenation:
+  - **Numbers** are added.
+  - **Strings** are concatenated.
+
+#### String Length:
+- To get the length of a string, use the `length()` function.
+- Alternatively, you can use the `size()` function, which is an alias for `length()`.  
+  Both functions work the same way, so you can use either based on your preference.
+
+#### Accessing Characters in a String:
+- You can access characters in a string by referring to their **index number** inside square brackets `[]`.  
+  - String indexes start at `0`:  
+    - `[0]` is the first character.  
+    - `[1]` is the second character, and so on.
+- Alternatively, you can use the `at()` function from the `<string>` library to access characters in a string.
+
+#### User Input for Strings:
+- The `cin` object can only store a **single word** when taking input.
+- To read an entire line of text, use the `getline()` function.  
+  - It takes `cin` as the first parameter and the string variable as the second parameter.
+
+
+### Conditional Statements in C++:
+
+#### 1. `if` Statement:
+- Executes a block of code if a specified condition is `true`.
+- Example:
+  ```cpp
+  if (a < b) {
+      cout << "a is less than b";
+  }
+  ```
+
+#### 2. `if...else` Statement:
+- Executes one block of code if the condition is `true`, and another block if it is `false`.
+- Example:
+  ```cpp
+  if (a == b) {
+      cout << "a is equal to b";
+  } else {
+      cout << "a is not equal to b";
+  }
+  ```
+
+#### 3. `else if` Ladder:
+- Used to test multiple conditions.
+- Example:
+  ```cpp
+  if (a > b) {
+      cout << "a is greater than b";
+  } else if (a < b) {
+      cout << "a is less than b";
+  } else {
+      cout << "a is equal to b";
+  }
+  ```
+
+#### 4. Comparison Operators:
+- Used to compare two values:
+  - `<`: Less than.
+  - `<=`: Less than or equal to.
+  - `>`: Greater than.
+  - `>=`: Greater than or equal to.
+  - `==`: Equal to.
+  - `!=`: Not equal to.
+
+---
+
+### Loops in C++:
+
+#### 1. `for` Loop:
+- Repeats a block of code a specific number of times.
+- Example:
+  ```cpp
+  for (int i = 0; i < 5; i++) {
+      cout << "Iteration: " << i << endl;
+  }
+  ```
+
+#### 2. `while` Loop:
+- Repeats a block of code as long as the condition is `true`.
+- Example:
+  ```cpp
+  int i = 0;
+  while (i < 5) {
+      cout << "Iteration: " << i << endl;
+      i++;
+  }
+  ```
+
+#### 3. `do...while` Loop:
+- Executes the block of code at least once, then repeats as long as the condition is `true`.
+- Example:
+  ```cpp
+  int i = 0;
+  do {
+      cout << "Iteration: " << i << endl;
+      i++;
+  } while (i < 5);
+  ```
+
+#### 4. `foreach` Loop (Range-based `for` Loop):
+- Used to iterate over elements in a container (e.g., arrays, vectors).
+- Example:
+  ```cpp
+  #include <vector>
+  #include <iostream>
+  using namespace std;
+
+  int main() {
+      vector<int> numbers = {1, 2, 3, 4, 5};
+      for (int num : numbers) {
+          cout << "Number: " << num << endl;
+      }
+      return 0;
+  }
+  ```
+
+#### 5. `break` and `continue`:
+- `break`: Exits the loop immediately.
+- `continue`: Skips the current iteration and moves to the next.
+- Example:
+  ```cpp
+  for (int i = 0; i < 10; i++) {
+      if (i == 5) break; // Exit loop when i is 5
+      if (i % 2 == 0) continue; // Skip even numbers
+      cout << "Odd number: " << i << endl;
+  }
+  ```
+
+C++ also allows us to provide new definitions to some of the built in operators. This is we can give several meanings to an operator depneding upon the types of arguments used. This process is know as operator overloading..

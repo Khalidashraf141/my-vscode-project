@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosing Schedule Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+        .container-main {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .input-container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+        .medicine-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e7ff;
+        }
+        .medicine-name-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        .medicine-name-input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .medicine-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .input-field {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-field label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .input-field input {
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        .input-field input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .schedule-entries {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f0f4ff;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            border-left: 4px solid #667eea;
+        }
+        .schedule-item:last-child {
+            margin-bottom: 0;
+        }
+        .delete-btn, .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            font-size: 11px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .delete-btn:hover, .remove-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+        .delete-medicine-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .delete-medicine-btn:hover {
+            background: #c0392b;
+        }
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: space-between;
+        }
+        .add-medicine-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .add-medicine-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+        button.generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+        }
+        button.generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        button.generate-btn#downloadBtn {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        .pdf-output {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: none;
+        }
+        .pdf-output.show {
+            display: block;
+        }
+        .pdf-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .schedule-section {
+            margin-bottom: 25px;
+        }
+        .section-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #667eea;
+            margin-bottom: 12px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+        #medicinesContainer {
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-main">
+        <div class="header">
+            <h1>💊 Dosing Schedule</h1>
+            <p>Create your personalized medication schedule</p>
+        </div>
+
+        <div class="input-container">
+            <button class="add-medicine-btn" onclick="addMedicine()">+ Add Medicine</button>
+            <div id="medicinesContainer"></div>
+            
+            <div class="button-container">
+                <button class="generate-btn" onclick="generateSchedule()">Generate Schedule</button>
+                <button class="generate-btn" id="downloadBtn" onclick="downloadPDF()" style="display: none; background: linear-gradient(135deg, #27ae60 0%, #229954 100%);">Download PDF</button>
+            </div>
+        </div>
+
+        <div class="pdf-output" id="pdfContent">
+            <h1 class="pdf-title">Weekly Dosing Schedule</h1>
+            <div id="scheduleOutput"></div>
+            <div class="footer">
+                <p>Schedule generated on: <span id="date"></span></p>
+                <p style="margin-top: 8px;">This document is for reference purposes only.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let medicineId = 0;
+
+        function addMedicine() {
+            medicineId++;
+            const id = medicineId;
+            const html = `
+                <div class="medicine-item" id="medicine-${id}">
+                    <input type="text" placeholder="Medicine Name" class="medicine-name-input" id="name-${id}">
+                    <div class="medicine-inputs">
+                        <div class="input-field">
+                            <label>When</label>
+                            <input type="text" placeholder="e.g., Monday, Morning, Daily" class="when-input" id="when-${id}" onkeypress="handleEnter(event, ${id})">
+                        </div>
+                        <div class="input-field">
+                            <label>Dosage</label>
+                            <input type="text" placeholder="e.g., 150 mg, 20 mg" class="dosage-input" id="dosage-${id}" onkeypress="handleEnter(event, ${id})">
+                        </div>
+                    </div>
+                    <div class="schedule-entries" id="entries-${id}"></div>
+                    <div class="button-row">
+                        <button class="add-medicine-btn" onclick="addEntry(${id})" style="margin: 0; flex: 1; background: #667eea; padding: 10px;">Add Entry</button>
+                        <button class="delete-medicine-btn" onclick="deleteMedicine(${id})">Delete Medicine</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('medicinesContainer').insertAdjacentHTML('beforeend', html);
+            document.getElementById(`name-${id}`).focus();
+        }
+
+        function initializeWithData(medicines) {
+            medicines.forEach(med => {
+                medicineId++;
+                const id = medicineId;
+                const html = `
+                    <div class="medicine-item" id="medicine-${id}">
+                        <input type="text" placeholder="Medicine Name" class="medicine-name-input" id="name-${id}" value="${med.name}">
+                        <div class="medicine-inputs">
+                            <div class="input-field">
+                                <label>When</label>
+                                <input type="text" placeholder="e.g., Monday, Morning, Daily" class="when-input" id="when-${id}" onkeypress="handleEnter(event, ${id})">
+                            </div>
+                            <div class="input-field">
+                                <label>Dosage</label>
+                                <input type="text" placeholder="e.g., 150 mg, 20 mg" class="dosage-input" id="dosage-${id}" onkeypress="handleEnter(event, ${id})">
+                            </div>
+                        </div>
+                        <div class="schedule-entries" id="entries-${id}"></div>
+                        <div class="button-row">
+                            <button class="add-medicine-btn" onclick="addEntry(${id})" style="margin: 0; flex: 1; background: #667eea; padding: 10px;">Add Entry</button>
+                            <button class="delete-medicine-btn" onclick="deleteMedicine(${id})">Delete Medicine</button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('medicinesContainer').insertAdjacentHTML('beforeend', html);
+                
+                med.entries.forEach(entry => {
+                    const entryId = `entry-${id}-${Date.now()}-${Math.random()}`;
+                    const entryHtml = `
+                        <div class="schedule-item" id="${entryId}">
+                            <span><strong>${entry.when}</strong> - ${entry.dosage}</span>
+                            <button class="remove-btn" onclick="removeEntry('${entryId}')">Remove</button>
+                        </div>
+                    `;
+                    document.getElementById(`entries-${id}`).insertAdjacentHTML('beforeend', entryHtml);
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialData = [
+                {
+                    name: 'Testosterone enanthate',
+                    entries: [
+                        { when: 'Monday', dosage: '250 mg' },
+                        { when: 'Thursday', dosage: '250 mg' }
+                    ]
+                },
+                {
+                    name: 'Bolde',
+                    entries: [
+                        { when: 'Monday', dosage: '250 mg' },
+                        { when: 'Thursday', dosage: '250 mg' }
+                    ]
+                },
+                {
+                    name: 'Anavar',
+                    entries: [
+                        { when: 'Morning', dosage: '20 mg' },
+                        { when: 'Evening', dosage: '10 mg' }
+                    ]
+                },
+                {
+                    name: 'Dianabol',
+                    entries: [
+                        { when: 'Morning', dosage: '10 mg' },
+                        { when: 'Afternoon', dosage: '10 mg' },
+                        { when: 'Evening', dosage: '10 mg' }
+                    ]
+                }
+            ];
+            initializeWithData(initialData);
+        });
+
+        function handleEnter(e, id) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addEntry(id);
+            }
+        }
+
+        function addEntry(id) {
+            const name = document.getElementById(`name-${id}`).value.trim();
+            const when = document.getElementById(`when-${id}`).value.trim();
+            const dosage = document.getElementById(`dosage-${id}`).value.trim();
+
+            if (!name || !when || !dosage) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const entryId = `entry-${id}-${Date.now()}`;
+            const html = `
+                <div class="schedule-item" id="${entryId}">
+                    <span><strong>${when}</strong> - ${dosage}</span>
+                    <button class="remove-btn" onclick="removeEntry('${entryId}')">Remove</button>
+                </div>
+            `;
+            document.getElementById(`entries-${id}`).insertAdjacentHTML('beforeend', html);
+            document.getElementById(`when-${id}`).value = '';
+            document.getElementById(`dosage-${id}`).value = '';
+            document.getElementById(`when-${id}`).focus();
+        }
+
+        function removeEntry(entryId) {
+            document.getElementById(entryId).remove();
+        }
+
+        function deleteMedicine(id) {
+            document.getElementById(`medicine-${id}`).remove();
+        }
+
+        function generateSchedule() {
+            const medicineElements = document.querySelectorAll('.medicine-item');
+            if (medicineElements.length === 0) {
+                alert('Please add at least one medicine');
+                return;
+            }
+
+            let scheduleHTML = '';
+            let hasEntries = false;
+
+            medicineElements.forEach((el) => {
+                const nameInput = el.querySelector('.medicine-name-input');
+                const name = nameInput ? nameInput.value.trim() : 'Medicine';
+                const entries = el.querySelectorAll('.schedule-item');
+                
+                if (entries.length === 0 || !name) {
+                    return;
+                }
+                hasEntries = true;
+
+                scheduleHTML += `
+                    <div class="schedule-section">
+                        <div class="section-title">${name}</div>
+                        <table>
+                            <tr>
+                                <th>When</th>
+                                <th>Dosage</th>
+                            </tr>
+                `;
+
+                entries.forEach((entry) => {
+                    const spanText = entry.querySelector('span').textContent;
+                    const parts = spanText.split(' - ');
+                    const when = parts[0].replace(/^<strong>|<\/strong>$/g, '').trim();
+                    const dosage = parts.slice(1).join(' - ').trim();
+                    scheduleHTML += `
+                        <tr>
+                            <td>${when}</td>
+                            <td>${dosage}</td>
+                        </tr>
+                    `;
+                });
+
+                scheduleHTML += `
+                        </table>
+                    </div>
+                `;
+            });
+
+            if (!hasEntries) {
+                alert('Please add at least one entry');
+                return;
+            }
+
+            document.getElementById('scheduleOutput').innerHTML = scheduleHTML;
+            document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+
+            document.getElementById('pdfContent').classList.add('show');
+            document.getElementById('downloadBtn').style.display = 'block';
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('pdfContent');
+            const worker = html2pdf();
+            
+            worker.set({
+                margin: [10, 10, 10, 10],
+                filename: 'Dosing_Schedule.pdf',
+                image: {type: 'jpeg', quality: 0.98},
+                html2canvas: {scale: 2},
+                jsPDF: {orientation: 'portrait', unit: 'mm', format: 'a4'}
+            });
+            
+            worker.html(element);
+            worker.save();
+        }
+    </script>
+</body>
+</html>
