@@ -4,7 +4,30 @@
 
 #include <iostream>
 #include <cstring>
+#include <sstream>
 using namespace std;
+
+
+//Generic function for integer input with validation
+int getValidatedInt(const string &prompt)
+{
+    string input;
+    double value;
+
+    while(true){
+        cout << prompt;
+        getline(cin,input);
+        stringstream ss(input);
+
+        if(ss >> value &&  ss.eof()){
+            return value;
+        }else{
+            cout << "Invalid input! Please enter a valid integer.\n";
+        }
+
+
+    }
+}
 
 // Base class
 class Staff
@@ -15,9 +38,7 @@ class Staff
 public:
     void getdata()
     {
-        cout << "Enter code: ";
-        cin >> code;
-        cin.ignore(); //to ignore new line
+        code = getValidatedInt("Enter code: ");
         cout << "Enter name: ";
         getline(cin,name);
     }
@@ -78,8 +99,7 @@ public:
     void getdata()
     {
         Staff::getdata();
-        cout << "Enter typing speed (words per minute): ";
-        cin >> speed;
+        speed = getValidatedInt("Enter typing speed (words per minute): ");
     }
 
     void display()const{

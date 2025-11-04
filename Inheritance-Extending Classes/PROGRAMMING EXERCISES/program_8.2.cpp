@@ -7,6 +7,7 @@
 #include <cmath>
 #include <cstring>
 #include <cstdlib>
+#include <fstream>
 using namespace std;
 
 #define RED "\033[31m"
@@ -55,6 +56,28 @@ public:
         cout << "Deposited: " << amount << endl;
         display_balance();
     }
+
+void generateInvoice(string name, int acc_no, string type, double balance)
+{
+    // Step 1: Create an HTML file
+    ofstream file("invoice.html");
+    file << "<html><head><title>Account Invoice</title></head><body>";
+    file << "<h1 style='text-align:center;'>Account Invoice</h1>";
+    file << "<hr>";
+    file << "<h3>Customer Name: " << name << "</h3>";
+    file << "<p>Account Number: " << acc_no << "</p>";
+    file << "<p>Account Type: " << type << "</p>";
+    file << "<p><strong>Current Balance:</strong> ₹" << balance << "</p>";
+    file << "<hr><p style='text-align:center;'>Thank you for banking with us!</p>";
+    file << "</body></html>";
+    file.close();
+
+    // Step 2: Convert HTML → PDF
+    system("wkhtmltopdf invoice.html invoice.pdf");
+
+    cout << "✅ Invoice generated successfully: invoice.pdf\n";
+}
+
 
 
     // 🗒️ Display details
@@ -159,7 +182,7 @@ int main()
     cout << "\n--- Current Account ---";
     Curr_Acct c("Zero", 122323,10000);
     c.display();
-
+    s.generateInvoice("Khalid",324322,"Savings",20000);
     return 0;
 
 
