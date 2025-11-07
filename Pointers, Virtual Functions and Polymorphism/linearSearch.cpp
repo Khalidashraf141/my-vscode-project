@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int arr[10] = {1,99,4,37,88,3,19,45,62,87};
+    int num,*ptr;
+
+    //Assigning the base address of array arr to ptr
+    ptr = arr;
+
+    cout << "Enter the elements to be searched: ";
+    cin >> num;
+
+    for(int i = 0; i < 10; i++)
+    {
+        if(*ptr==num)
+        {
+            cout <<"\n" << num << " is present in the array";
+            break;
+        }
+
+        else if(i == 9)
+            cout << "\n" << num << "is not present in the array";
+        
+        ptr++; //increment the pointer to make it point to the next array element
+    }
+
+    return 0;
+}
