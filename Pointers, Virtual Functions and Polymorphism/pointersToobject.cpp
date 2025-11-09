@@ -134,6 +134,9 @@ int main()
         a->initialize(z,y);
         a++;
     }
+    /*
+        a is no longer pointing to the beginning of the array. it's pointing past the last element(to invalid memory).
+    */
 
     for(i = 0; i < size; i++)
     {
@@ -141,6 +144,7 @@ int main()
         p->display();
         p++;
     }
-
+    //this was done so that p always keeps the original starting address.
+    //This works correctly because p starts from the first element, and moves forward across valid objects
     return 0;
 }
