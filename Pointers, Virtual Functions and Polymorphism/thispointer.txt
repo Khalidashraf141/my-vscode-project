@@ -1,0 +1,67 @@
+---------------------------------------------
+           Concept of 'this' Pointer
+---------------------------------------------
+
+class Person
+{
+    string name;
+    int age;
+
+public:
+    void display()
+    {
+        cout << "Name: " << this->name 
+             << ", Age: " << this->age << endl;
+    }
+};
+
+---------------------------------------------
+           Memory and Pointer Flow
+---------------------------------------------
+
+     +-------------+             +-------------+
+     |   Object p1 |             |   Object p2 |
+     |-------------|             |-------------|
+     | name: "Ali" |             | name: "John"|
+     | age : 18    |             | age : 20    |
+     +-------------+             +-------------+
+
+         ↑                            ↑
+         |                            |
+   this → p1                    this → p2
+(when p1.display() is called)  (when p2.display() is called)
+
+---------------------------------------------
+           Internal Working
+---------------------------------------------
+
+When you call:
+    p1.show();
+
+C++ secretly converts it to something like:
+    show(&p1);   // compiler automatically passes address of p1
+
+That means — inside the show() function —
+there’s an invisible pointer called 'this',
+which points to the object that called the function.
+
+So in this case:
+    this == &p1
+
+If we call:
+    p2.show();
+
+Then:
+    this == &p2
+
+---------------------------------------------
+ Explanation:
+---------------------------------------------
+• Each object (p1, p2) has its own memory for data members.
+• When you call p1.display(), the compiler secretly passes 
+  the address of p1 to the function using 'this'.
+• So inside display(), 'this' points to p1.
+• Similarly, when p2.display() is called, 'this' points to p2.
+• 'this' is an implicit pointer available in all non-static
+  member functions, referring to the calling object.
+---------------------------------------------
