@@ -47,7 +47,7 @@ int main()
 
     cout << "\n\n bptr points to Derived\n";
     bptr = &D;
-    bptr->display();    //! calls Base version. This is because the function display() has not been made virtual in the Base class.
+    bptr->display();    //Note: calls Base version. This is because the function display() has not been made virtual in the Base class.
     bptr->show();   // calls Derived version
 
     return 0;
