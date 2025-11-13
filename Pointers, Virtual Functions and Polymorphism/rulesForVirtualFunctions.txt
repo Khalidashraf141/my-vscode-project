@@ -1,0 +1,369 @@
+                                *Rules for Virtual Function
+!Rule: 1. A virtual Function must be a member of some class
+-> Why "some class" and not specifically "a base class"?
+-> Because a class becomes a 'base class' when another class derives from it. Before any inheritance happens, it is just any ordinary class.
+->Example:
+    class A{
+        public:
+            virtual void show(){ }
+    };
+-> At the moment you write class A, is not yet a base class. It becomes a base class only after someone writes:
+->Example:
+    class B : public A{};
+-> So the rule is written as:
+✔️"A virtual function must be a member of some class"
+because:
+- You can declare a virtual function even if the class is not yet used as a base class.
+- The keyword virtual is allowed only inside a class, not outside.
+
+🟪 More Detail
+Why MUST a virtual function belong to a class?
+-Because virtual dispatch requires a vtable, and a vtable belongs to a class object.
+-Free functions or standalone functions do not have vtables:
+
+❌ Invalid:
+Example->
+virtual void func(); //ERROR - cannot declare virtual free function
+
+!Rule: 2. They cannot be static members.
+    📌 Why Virtual Functions Cannot Be Static Members
+    1. Virtual functions support runtime polymorphism
+    A virtual functions is meant to be called based on the actual object type at runtime, using:
+        - a base class pointer/reference
+        - a derived class object
+    This requires:
+        - vptr (virtual pointer) inside each object
+        - vtable(virtual table) for each class with virtual functions
+    Static members do not have these.
+
+    2. Static member functions do NOT belong to an object
+    A static function:
+        - belongs to the class, not to individual objects
+        - has no access to this pointer
+        - is called using ClassName::function() or through any object(same result)
+    Since the static function is not tied to a specific object, the compiler cannot use vptr/vtable
+
+    3.Virtual functions required this pointer
+    When a virtual function is called:
+        - This compiler uses this->vptr to find the function address from the vtable.
+        - This requires this to point to the actual object type.
+    But static function do not have a this pointer.
+    So they cannot access vptr or vtable -> cannot be virtual
+
+    4. Static functions cannot be overridden
+    virtual functions work because derived classes override base class functions.
+
+    class Base{
+        virtual void show();
+    };
+
+    class Derived : public Base{
+        void show();
+    };
+    Static functions do not participate in overriding.
+    They can only hide, not override.
+
+    So making a static function virtual has no meaning.
+
+    5. important exam points 
+    ❌ Static functions cannot be virtual because:
+     1. Static functions do not belong to an object, while virtual function work on objects.
+     2. Static functions do not have a this pointer, but virtual functions require it for vtable lookup.
+     3. Static functions cannot be overridden, they can only be hidden.
+     4. Virtual mechanism (vptr/vtable) exist only for non-static member functions.
+
+    6. Summary 
+        Note Virtual function cannot be static members because static functions do not have a this pointer and are not bound to object instances. Virtual dispatch requires object-level vptr and vtable, which static member do not possess.
+
+!Rule: 3. They accessed by using object pointer.
+📌 Notes: How Virtual Functions Are Accessed (Detailed Explanation)
+    1. Virtual functions are used to achieve Runtime Polymorphism
+    -> A virtual function allows the program to decide at runtime which version of the function (Base or Derived) to call
+
+    2. How virtual functions are accessed.
+    -> Virtual functions are invoked through a base-class pointer or base-class reference that points to a derived-class object.
+
+    ✔️ Correct way:
+        Base *ptr = new Derived;
+        ptr->show();    // Calls Derived::show() -> runtime Polymorphism
+    
+    ✔️ Using reference:
+        Base &ref = d;
+        ref.show(); // Calls Derived::show()
+    
+    3. Why pointer/reference is required for polymorphism
+    ✔️ Because the exact object type is not known at compile time
+    When you use a base pointer/reference, the compiler only knows the base type, not the derived type. 
+    So the function is chosen at runtime, using the virtual table (vtable).
+
+    ✔️ vtable mechanism
+    - Every class with a virtual function has a vtable.
+    - Each object has a vptr (pointer to its class's vtable).
+    - When you call a virtual function through a pointer/reference, the program looks up the 
+      correct function in the vtable.
+    
+    4. What happens if you use objects instead of pointers
+    if you call a virtual function using a base class object, polymorphism does NOT happen.
+    ❌ No polymorphism (object slicing):
+        Base b = Derived();
+        b.show(); // Calls Base::show()
+    ✔️ Derived object works normally, but not polymorphic:
+        Derived d;
+        d.show(); // Calls Derived::show()
+    
+    5. Summary (important for exams)
+        - Virtual functions must be accessed using base class pointer or reference for runtime polymorphism.
+        - Pointer/reference allows the program to check the actual object type at runtime.
+        - Direct objects do not provide polymorphism (object slicing).
+        - Behind the scenes, virtual function calls use vtable and vptr.
+
+!Rule: 4. A virtual function can be a friend of another class.
+📌 Virtual Functions Can Be Friends of Another Class
+    1. What is a friend function?
+    A friend function:
+        - is not member of the class
+        - is given special access to the private and protected members of the class
+        - is declare using the friend keyword inside a Class
+    Example:
+        class A{
+            friend void func();
+        }
+    
+    2. Can a virtual function be a friend of another class?
+    ✔️ Yes.
+    A virtual function (which is a member of its own class) can be declared as a friend in some other class.
+
+    important point:
+        -> The function is virtual in its own class,
+        -> but it is declared as a friend inside another class.
+    This gives the virtual function permission to access private/protected members of that other class.
+
+    3. Example
+    class B;
+
+    class A{
+        public:
+            virtual void show(B& obj);
+    };
+
+    class B{
+        friend void A::show(B& obj); // A::show is a friend of b
+        private:
+            int x = 10;
+    };
+    Here:
+        - A::show() is a virtual function inside class a
+        - But class B allows it as a friend function, so show() can access B's private data
+
+    4. Why is this allowed?
+    Because:
+        - The friend keyword only controls access permissions
+        - Virtual functions are still member functions of their own class
+        - C++ allows member functions of one class to be friends with another class
+        - Being virtual does not change this rule
+    There is not conflict between Being virtual and Being a friend
+
+    5. important exam points
+     ✔️ A virtual function must be a member of some class.
+     ✔️ It can be declare as a friend of another class.
+     ✔️ Friend status only give access; it does not affect virtual behavior.
+     ✔️ Virtual behavior still works normally (runtime polymorphism via pointers/references).
+     ✔️ Friendship is not inherited - only access is granted.
+
+    6. Summary
+        Note: A virtual function can be friend of another class because being virtual controls
+              polymorphic behavior, while being  a friend access permissions. They are independent concepts and can work together.
+
+!Rule: 5. A virtual function in a base class must be defined, even though it may not be used.
+📌 Note: Virtual Function Definition in Base Class
+    "A virtual function in a base class must be defined, even if it is not used."
+    
+    Why?
+        -> A normal virtual function needs a body because a base class object can still call it.
+        -> The vtable requires a valid function address.
+        -> Only pure virtual functions (=0) can skip definition.
+
+!Rule: 6. The prototypes of the base class version of a virtual function and all derived class version must be identical. If two functions with the same name have different prototypes, C++ consider them as overloaded functions, and the virtual functions mechanism is ignored.
+
+!Rule 7. We cannot have virtual constructors, but we can have virtual destructors.
+📌Virtual Constructors vs Virtual Destructors
+❌ We cannot have virtual constructors
+Why?
+    -> Constructors are used to crete objects, so the object does not exist yet.
+    -> Virtual mechanism needs a vptr inside the object, but the object hasn't been created.
+    -> Therefore, constructors cannot be virtual.
+
+✔️ We can have virtual destructors
+why?
+    -> When deleting an object through a base-class pointer, the correct derived destructor
+       must run.
+    -> Virtual destructor ensures proper cleanup of the derived object first.
+Example:
+    Base *ptr = new Derived();
+    delete *ptr; // Calls Derived destructor first (because virtual)
+
+📌 Summary
+    -> Constructors cannot be virtual because virtual dispatch requires an already created
+       object.
+    -> Destructors should be virtual when using polymorphism to avoid memory leaks.
+
+
+!Rule 8. While a base pointer can point to any type of derived object, the reverse is not     true. That is to say, we cannot use a pointer to a derived class to access an object of the base type.
+
+**📌 Base pointer → Derived object (Allowed)
+Derived pointer -> Base object (Not Allowed)**
+
+1️⃣ Base pointer derived object ko kyu point kar sakta hai?
+Because:
+    -Base class common features define karti hai
+    -Derived class base ke saare members inherit karti hai
+
+So, a base pointer at least base wala part definitely find kar sakta hai.
+
+Example:
+    class Base{ };
+    Class Derived : public Base{ };
+
+    Base *p = new Derived();  // ✓ Allowed
+
+Base pointer ko pata hia:
+    - Derived me base ka data hoga
+    - It can safely access base Members
+    - Extra derived members ignored ho jayenge (no problem)
+
+2️⃣ Derived pointer base object ko kyu nhi point kar sakta?
+Because:
+    - Derived class ke pass extra members hote hain jo base me nhi hote
+    - Agar derived pointer base object ko point karega, toh un extra members ko access karne
+      ki koshish karega.
+    - Lekin base object me who members exist nhi karte
+    - This is unsafe -> program crash/memory corruption possible
+Example:
+    Derived *p = new Base(); // ❌ NOT allowed
+
+3️⃣ Ek logical real-life Example
+    Base class = Vehicle
+    Derived class = crash
+
+    Har Car ek Vehicle hoti hai
+    ✔️So a Vehicle can point to a Car.
+
+    Lekin:
+    ❌ Har Vehicle Car nahi hota.
+    (Truck, Bike bhi hote hain)
+
+    So a Car pointer Vehicle object ko point nhi kar sakta.
+
+    isi reason se:
+        -Base pointer -> Derived object = safely
+        -Derived pointer -> Base object = unsafe
+
+        ✔️Base pointer can point to ANY object
+        Because every derived object contains the base part, so it is safe.
+
+        ❌ Derived pointer cannot point to a base object
+        Because a base class does not contain the additional members of derived class.
+
+!Rule: 9. When a base pointer points to a derived class, incrementing or decrementing it will not make it to point to the next object of the derived class. It is incremented or decremented only relative to its base type. Therefore, we should not use this method to move the pointer to the next object.
+📌 Base Pointer + Derived Object → Pointer Arithmetic Problem
+
+    1. important point
+        -> Agar base class pointer kisi derived object ko point kare, toh pointer increment/decrement base class ka size ke hisaab se hota hai, derived ke size ke hisab se nhi
+
+        isliye pointer Arithmetic (p++,p--) dangerous hota hai.
+
+    2 Simple Example (Very important)
+
+    class Base{
+        int a // size = 4bytes
+    };
+
+    class Derived : public Base{
+        int b, c; //size = 8 bytes
+    };
+
+    Derived size = 12 bytes
+    Base size = 4 bytes
+
+    now:
+    Base *p = new Derived[3];
+    
+    Agar if you write
+    p++;
+
+    so what happen?
+
+    -> Compiler pointer ko Base size (4 bytes) se aage badhaayega
+    -> Lekin Derived object ka size 12 bytes hai
+
+    Matlab pointer object ke beech me land karega -> corrupt memory.
+    ❌Yeh next Derived object pe nhi jaayega.
+
+
+    Why does this happen? Logical reason
+    Base pointer ko base class ka size pata hai. 
+    Usse Derived object ka extra data bilkul nhi pata.
+
+    Pointer increment rule:
+
+    imp -> p++ -> p = p + sizeof(pointer's own type)
+    Base pointer ka type = Base
+    so increment -> + sizeof(Base)
+
+    isliye base pointer kabhi bhi derived ka next object tak nhi pahunch sakta.
+
+
+
+    Note: Real life Analogy
+    Base = 1 room
+    Derived = 3 rooms
+
+
+Agar thmhare pass ke map ho jo sirf 1 room ka layout jaanta ho,
+aur thum keh rhe ho:
+
+"Agla house pe jaao."
+
+Toh thum 1 room chodkar aage jaoge,
+!jabki derived house 3 rooms ka hai-> beech me gir jaoge!
+
+
+Short Note:
+✔️ A base pointer performs Arithmetic using sizeof(base).
+✔️ If it points to a derived object, pointer Arithmetic becomes incorrect.
+✔️ incrementing the base pointer will NOT move it to next derived object.
+✔️ This may cause memory corruption
+✔️ Therefore, never use pointer Arithmetic on base pointer in polymorphic situations.
+
+one line Summary
+Base pointer -> Base size ke hisaab se move hota hai, Derived size ke hisaab se nhi.
+Isliye p++,p-- use nhi karna chahiye.
+
+!Rule: 10. If a virtual is defined in the base class, it need not be necessarily redefined in the derived class. In such cases, calls will invoked the base function.
+📌 Note: Redefinition of Virtual Function in Derived Class Is Optional
+
+Statement:
+"If a virtual function is defined in the base class, it does NOT to be defined in the derived class.If the derived class does not override it, the base class version is called."
+
+Explanation(Simple)
+    - A virtual function gives the option to override in derived class.
+    - It is not compulsory to redefine it in every derived class.
+    - If the derived class does not provide its own version, then the base function is used when the function is called.
+
+Example:
+    class Base{
+        public:
+            virtual void show(){
+                cout <<"Base version";
+            }
+    };
+
+    class Derived : public Base{
+        // No show() here (not overridden)
+    };
+
+int main(){
+    Base *p = new Derived();
+    p->show(); //Calls Base::show()
+}
+Because Derived did not override show(), the base version runs.
