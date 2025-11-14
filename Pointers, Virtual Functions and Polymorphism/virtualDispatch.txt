@@ -1,0 +1,122 @@
+⭐ What is Virtual Dispatch?
+    -Virtual dispatch = the mechanism C++ uses to decide which function to call at runtime when a function is declare virtual.
+
+In other words:
+    Virtual dispatch chooses the correct function base on the actual (runtime) type of the object, not the pointer type.
+
+⭐Simple Example
+    class Base{
+        public:
+            virtual void speak(){cout << "Base\n";}
+    };
+
+    class Derived : public Base{
+        public:
+            void speak()override{cout << "Derived\n";}
+    };
+
+    Base *b = new Derived();
+    b->speak();  // which speak()?
+
+    b is a Base pointer, but it points to a Derived object.
+
+        Virtual dispatch ensures:
+        ➡️ Derived::speak() runs
+        NOT
+        ➡️ Base::speak()
+
+⭐Why does this work?
+Because of two hidden things:
+    - vptr -> a pointer inside every object
+    - vtable -> table containing function pointers
+
+Virtual dispatch uses:
+    object.vptr -> vtable -> correct function pointer -> call Derived::speak()
+note: So virtual dispatch = using vptr + vtable to find the final overridden function.
+
+⭐ Step-by-Step: What virtual dispatch actually does
+When you call:
+    b->speak();
+
+C++ does this internally:
+    1. Look inside the object for its vptr
+    2. Follow vptr to the vtable
+    3. In the vtable, find the entry for function speak()
+    4. Call the function pointer stored There
+    5. That pointer points to -> Derived::speak()
+This is why the correct function gets called at runtime, not at compiler time.
+
+
+Diagram of Virtual Dispatch-
+
+Base* b = new Derived();
+
+    +---------------------+
+b → |     vptr ----------+-----> [ Derived vtable ]
+    +---------------------+          |
+                                     |
+                                     +-----> &Derived::speak()
+
+Call: 
+b->speak()
+
+Steps:
+    - follow vptr
+    - go to vtable
+    - fetch function pointer
+    - call Derived::speak()
+
+⭐ Why is this called "dispatch"?
+Because the system is dispatching (choosing) the correct function dynamically.
+
+There are two kinds:
+✔️ Static Dispatch
+Function choose at compile time (non-virtual functions)
+
+✔️ Dynamic Dispatch (Virtual Dispatch)
+Function chosen at runtime (virtual functions)
+
+
+In one line-
+    note: Virtual dispatch is the runtime mechanism that selects the correct overridden virtual function using the objects's vtable instead of the pointer type.
+
+
+
+
+!virtual constructor me virtual dispatch kaam nhi karega.
+and this is the main reason why constructor CANNOT be virtual.
+
+Why virtual dispatch does NOT work in a Constructor
+Virtual dispatch needs:
+    1. vptr(virtual pointer)
+    2. vtable(virtual table)
+    3. Object ka runtime type
+
+But...
+Constructor chalne ke time:
+❌vptr is NOT set
+❌vtable is NOT linked
+❌runtime type is NOT established
+
+this means:
+    Virtual dispatch system is not created yet.
+    So it cannot decide which constructor to call.
+    
+Because....
+Virtual dispatch kab shuru hota hai?
+after the constructor finishes.
+order:
+!1. memory allocated
+!2. Constructor runs (vtable/vptr not ready yet)
+!3. Constructor sets vptr to correct vtable
+!4. Now virtual dispatch starts working
+note: So virtual dispatch tabhi kaam karta hai jab constructor pura complete ho jaye.
+
+meaning
+✔️Destructor can use virtual dispatch
+(Because object already exists -> vtable active)
+❌Constructor cannot use virtual dispatch
+(Because object is not created -> vtable inactive)
+
+
+        !(Virtual dispatch is created because of virtual function, not because of constructors. Dispatch becomes active only after the constructor finishes setting the vptr).

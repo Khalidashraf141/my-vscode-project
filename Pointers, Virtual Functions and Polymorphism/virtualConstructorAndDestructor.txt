@@ -1,0 +1,63 @@
+                    📘 NOTES — Virtual Constructor & Virtual Destructor
+
+⭐ 1) Virtual Constructor & Virtual Destructor
+
+Definition:
+    A constructor cannot be virtual in C++ because the virtual dispatch system does not exist when the constructor is called.
+
+    reason:
+        (1) vtable does not exist before constructor runs
+            - Virtual function need vtable
+            - The vtable is created/assigned inside the constructor.
+            - Since the constructor runs before vtable setup, virtual dispatch is impossible.
+        
+        (2) Exact object type must be known before constructor
+         * To create an object compiler must known:
+            - size of object
+            - memory layout
+            - number of data Members
+         * This must be known at compiler time.
+         * Virtual means choose function at runtime,which is not possible before object exist.
+
+        (3) Constructor initializes the virtual system
+         * Constructor sets:
+            - vptr (virtual pointer)
+            - connects object to the vtable
+         * Virtual mechanism depends on vptr, so it cannot be used before constructor executes.
+
+        ✔️ Conclusion:
+        Constructor cannot be virtual because virtual dispatch begins only after the object is fully constructed.
+
+⭐ 2) Why Destructor Can Be Virtual
+Definition:
+    A virtual destructor is used to ensure that when an object is deleted through a base class pointer, the derived class destructor runs first, followed by the base destructor.
+
+    reason:
+        (1) vtable exist at destruction time
+            - By the time destruction runs, the object is fully created.
+            - The vptr is already set, and the vtable is active.
+            - So virtual dispatch works perfectly.
+
+        (2) Ensure proper cleanup in polymorphic classes
+         Example:
+            Base* b = new Derived();
+            delete b;   // base pointer
+
+        without virtual destructor:
+            - Only Base::~Base() runs → memory leak
+        with virtual destructor:
+            - first Derived::~Derived()
+            - Then Base::~Base()
+            - Correct cleanup
+
+        (3) Required for polymorphic deletion
+        If a class has any virtual function, it should have a virtual destructor to avoid resource leaks.
+
+        ✔️ Conclusion:
+        Destructor can be virtual because the vtable is already active, and runtime dispatch ensures complete and correct destructor.
+
+
+⭐ Final One-Line Answers (for exams)
+    ✔️ Constructor cannot be virtual because dispatch depends on the vtable, which is not created until the constructor finishes.
+
+    ✔️ Destructor can be virtual because the object's vtable exist at destruction time, allowing proper polymorphic cleanup.
