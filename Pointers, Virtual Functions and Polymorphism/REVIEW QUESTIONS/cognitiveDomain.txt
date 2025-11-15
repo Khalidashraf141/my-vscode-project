@@ -1,0 +1,287 @@
+Question:- 9.1 Interpret the meaning of polymorphism in C++ language.
+    ans->  Polymorphism in C++ means the ability of a function or object to take different
+           forms. It allows the same function name or operation to behave differently depending on the data type or the object that uses it. This helps in writing flexible and reusable code.
+
+Question:- 9.2 Indicate how polymorphism is achieved at (a) compile time and (b) run time
+    ans->  (a) Compile time (Static Polymorphism)
+            Polymorphism at compile time is achieved through:
+                1. Function Overloading
+                   Multiple functions share the same name but have different parameters lists.
+                   The compiler decides which function to call based on the arguments.
+                2. Operator Overloading
+                   Operators like + - == can be defined for user-defined types.
+                   The compiler selects the appropriate Overloading Operator during compilation.
+            (b) Runtime (Dynamic Polymorphism)
+             Polymorphism at runtime is achieved through:
+                1. Virtual Functions
+                   A function in the base class is marked virtual
+                   When a base class pointer refers to a derived object, the derived class function is called.
+                2. inheritance + Base/reference
+                   A base class pointer or reference is used to call overridden function in derived classes. The actual function is selected during program execution(runtime).
+                
+Question:- 9.3 Discuss the different ways by which we can access public member functions of an object.
+    ans->   1. Access Through an Object (Dot Operator)
+            This is the common method
+            syntax:
+                objectName.functionName();
+            Example:
+                Car c;
+                c.start();
+                
+            2. Access through a Pointer to an Object (Arrow Operator)
+            Used when the object is created dynamically or referred through a pointer
+            syntax:
+                pointerName->functionName();
+            Example:
+                Car* c = new Car();
+                c->start();
+            
+            3. Access through a reference to an Object (Dot Operator)
+            A reference behaves like an alias for the object
+            syntax:
+                referenceName.functionName();
+            Example:
+                Car c;
+                Car& ref = c;
+                ref.start();
+
+            4. Access though an Array of objects
+            if objects are stored in an array, you can access their methods using indexing.
+            syntax:
+                arrayName[index].functionName();
+            Example:
+                Car cars[3];
+                cars[0].start();
+            
+            5. Access though Base class pointer/reference (for inheritance)
+            if a base class pointer/reference points to a derived class object, you can call public(and virtual) functions.
+            syntax:
+                Base* ptr = new Derived();
+                ptr->functionName();
+Question:- 9.4 Illustrate about pointer to function; also demonstrate the situations in which such a concept is used.
+    ans->   Pointer to Function in C++
+            A pointer to function is a variable that stores the address of a function.
+            just like pointers can store the address of variables, they can store the address of functions.
+            This allows us to call f function indirectly using this pointer.
+
+            Example:
+                Step 1: A normal function
+                int add(int a, int b)
+                {
+                    result a + b;
+                }
+
+                step 2: int (*funcPtr)(int, int);
+
+                This means:
+                    - funcPtr is a pointer
+                    - it points to a function that takes two integers
+                    - and return int
+
+                step 3: Assign function address
+                funcPtr = &add;
+
+                step 4: Call the function using pointer
+                int result = funcPtr(5,3); // Calls add(5,3)
+
+
+                !When Do We Use Function Pointers?
+                1. Callbacks (Passing function as arguments)
+                Sometimes we want to pass a function to another function.
+                Example: sorting algorithm that allow customized comparison.
+                void process(int (*callback)(int,int));
+
+Question:- 9.5 Explain, with an example, how do you would create space for any array of objects using pointers.
+    ans->   In C++ we can create memory for Multiple objects dynamically using the new Operator with a pointer.
+            This is useful when the number of objects is not known at compile-time.
+
+            Example:
+                step 1: Define a class
+                class Student{
+                    public:
+                        void display(){
+                            cout << "I am a student object\n";
+                        }
+                };
+
+                step 2: Create a pointer to object
+                Student* ptr;
+
+                step 3: Allocate space for an array of objects
+                ptr = new Student[5];
+                This create space for 5 Student objects in the heap and ptr points to the first object.
+
+                step 4: Access objects using pointer notation
+                You can use array indexing:
+                ptr[0].display();
+                ptr[1].display();
+
+                Or pointer Arithmetic:
+                (ptr + 2)->display();  // calls display() of the 3rd object
+
+                step 5: Free the memory
+                delete[] ptr;
+
+Question:- 9.6 Examine what this pointer points to.
+    ans->   In C++, the this pointer is a special pointer available inside all not-static member function of a class.
+    it always points to the current object-the object that is calling the member function.
+
+    Meaning in simple words
+    When an object calls a function:
+        obj.show();
+    inside show(); the pointer this points to the address of the objet obj.
+
+    So:
+        - this -> address of the object
+        - *this - the object itself
+
+    Example:
+        class Demo{
+            public:
+                int x;
+
+                void setX(int x){
+                    this->x = x;  // this points to the calling object
+                }
+        };
+
+    Explanation:
+    if we create objects:
+        Demo d1, d2;
+        d1.setX(10); //here, 'this' points to d1
+        d2.setX(20); //here, 'this' points to d2
+    Each time a function is called, this points to that particular object
+
+Question:- 9.7 List the applications of this pointer.
+    ans->   1. Distinguishing between local variable and data Members
+            Used when parameter names and data member names are the same.
+            this->x = x;
+            
+            2. Returning the current object
+            Useful in Operator Overloading and function chaining.
+            return *this;
+
+            3. Accessing data member fo the calling object
+            Helps identify which is calling the function.
+
+            4. Passing the current object as an argument
+            we can pass this to another function or object.
+            someFunction(this);
+
+            5. Used in operator Overloading
+            Especially in assignment operator (operator=) to avoid self-assignment.
+
+            6. Used in operator Overloading
+            Function return this to allow chained calls.
+            example:
+                obj.setA(5).set(10).show();
+
+Question:- 9.8 A pointer of base class type points to an object of the derived class. Justify your answer with suitable example.
+    ans->    In C++, whenever a class is derived from a base class, a derived class object contains all the members of the base class. 
+    Therefore, a base class pointer can safely point to a derived object, because the base part always exists inside the derived object.
+
+    this concept is called polymorphism or upcasting.
+
+    example:
+        #include <iostream>
+        using namespace std;
+
+        class Base{
+            public:
+                void show(){
+                    cout << "Base class function\n";
+                }
+        };
+
+        class Derived : public Base{
+            public:
+                void display()
+                {
+                    cout << "Derived class function\n";
+                }
+        };
+    int main()
+    {
+        Derived d; // derived class object
+        Base* ptr; // base class pointer
+
+        ptr = &d   // base pointer pointing to derived object
+        ptr.show(); // valid: Base part exist in Derived
+
+        ptr->display(); // NOT valid: Base pointer cannot access derived-only members
+
+        return 0;
+    }
+Question:- 9.9 Express about a virtual function
+    ans->   A virtual function is a member function of a base class that is declared using the keyword virtual, and it allows runtime polymorphism.
+    When a base class pointer points to a derived class object, a virtual function ensures that the derived class version of the function is executed.
+    -ptr is a base class pointer
+    -it points to a derived class object
+    -Because show() is virtual, the derived version runs
+
+Question:- 9.10 Show the need of virtual function.
+    ans->   Virtual function are needed to achieve runtime polymorphism.
+            They allow C++ to decide which version of an overridden function to call based on the actual object being pointed to, not the pointer type.
+
+            without virtual function, a base class pointer pointing to derived class object will always call the base version of the function-even if the derived class overrides it. this prevents correct behavior in inheritance programs.
+
+Question:- 9.11 Describe when to make a virtual function "pure". Generalize the implications of making a function a pure virtual function.
+    ans->   1. When to Make a Virtual Function Pure?
+            A virtual function should be made pure (i.e., declared with = 0) when:
+
+            (a) The base class provides only a common interface
+            You want all derived classes to implemented their own version of the function, and the base class should not provide any default definition.
+
+            (b) The function has no meaningful implementation in the base class
+            For example, a base class Shape cannot define a meaningful area() because area is different for each shape.
+
+            (c) You want to enforce overriding in derived classes
+            A pure virtual function ensures that every derived class must override that function; otherwise, the derived class also becomes abstract.
+
+            (d) You want to create an abstract base class
+            If your base class is intended only for inheritance and never for object creation, you make its key function pure virtual
+
+            syntax:
+                virtual void display() = 0;
+
+            2. Generalize the implications of making a Function a Pure Virtual Function
+            declaring a function as pure virtual has the following important implications:
+
+            1. The class becomes an abstract class
+            a class containing at least one pure virtual function cannot be instantiated.
+            Base b; ❌Not allow
+
+            2. Derived classes must override the pure virtual function
+            otherwise, the derived class also becomes abstract.
+
+            3. it establishes a common interface
+            all derived classes follow the same function signature, ensuring consistency.
+
+            4. Supports Runtime Polymorphism More Effectively
+            it ensures that the correct derived class implementation is used at runtime.
+
+            5. Promotes generalization and abstraction
+            the base class focuses only on defining what should be done, while derived classes specify how it is done
+
+Question:- 9.12 Distinguish between early Behind and late binding
+    ans->   
++-------------------------------+----------------------------------------------+
+|          Early Binding        |                Late Binding                  |
++-------------------------------+----------------------------------------------+
+| Occurs at compile time.       | Occurs at run time.                          |
++-------------------------------+----------------------------------------------+
+| Also called static binding.   | Also called dynamic binding.                 |
++-------------------------------+----------------------------------------------+
+| Decided by compiler.          | Decided during program execution.            |
++-------------------------------+----------------------------------------------+
+| Used for non-virtual functions| Used for virtual functions.                  |
++-------------------------------+----------------------------------------------+
+| Supports compile-time         | Supports runtime polymorphism.               |
+| polymorphism.                 |                                              |
++-------------------------------+----------------------------------------------+
+| Faster execution.             | Slightly slower.                             |
++-------------------------------+----------------------------------------------+
+| Depends on declared type.     | Depends on actual object pointed to.         |
++-------------------------------+----------------------------------------------+
+| Example: normal function call.| Example: virtual function via base pointer.  |
++-------------------------------+----------------------------------------------+

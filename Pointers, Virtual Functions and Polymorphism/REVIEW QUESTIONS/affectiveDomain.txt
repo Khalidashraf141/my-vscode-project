@@ -1,0 +1,34 @@
+Question:- 1. Virtual functions are used to create pointers to base classes.
+Affective-Domain Justification:
+
+I support this statement because virtual functions give real purpose to using base class pointers. They assure me that even when a base pointer is used, the correct derived class function will run. This builds trust, confidence, and appreciation for polymorphism. Virtual functions help me value flexibility, clarity, and correctness in object-oriented programming, making base pointers powerful and meaningful.
+
+Question:- 2. Virtual functions allow us to use the same function call to invoke member functions of objects of different classes.
+Affective-Domain Justification:
+
+I agree with this statement because virtual functions show the true beauty of polymorphism. They allow one function call to adapt to different objects. This consistency makes me value clean programming, trust dynamic behavior, and appreciate how C++ supports flexible design.
+
+Question:- 3. A pointer to a base class cannot be made to point to objects of a derived class. (Incorrect Statement)
+Affective-Domain Refutation:
+
+I cannot accept this statement because it goes against the principles of inheritance and polymorphism. Knowing that a base class pointer can point to a derived class object helps me value flexibility, generalization, and dynamic behavior in C++. Rejecting this incorrect statement increases my respect for proper object-oriented design.
+
+Question:- 4. The this pointer points to the object that is currently used to invoke the function.
+Affective-Domain Justification:
+
+I fully support this statement because the this pointer provides clarity and fairness. It always refers to the exact object calling the function, which gives me confidence and helps me appreciate how cleanly C++ manages object identity.
+
+Question:- 5. The this pointer can be used like any other pointer to access the members of the object it points to.
+Affective-Domain Justification:
+
+I agree with this statement because this behaves like a normal pointer and helps me access object members clearly. This makes programming feel more natural and builds respect for how consistently C++ handles pointers and objects.
+
+Question:- 6. The this pointer can be made to point to an object by assigning the address of the object. (Incorrect Statement)
+Affective-Domain Refutation:
+
+I reject this statement because the this pointer cannot be reassigned. Understanding this makes me appreciate the safety, discipline, and reliability built into C++. It reassures me that this will always point to the correct object, preventing errors and misuse.
+
+Question:- 7. Pure virtual functions force the programmer to redefine the virtual function inside the derived classes.
+Affective-Domain Justification:
+
+I fully support this statement because pure virtual functions ensure discipline, completeness, and responsibility in design. They make sure every derived class gives its own meaningful implementation. This strengthens my appreciation for the structure and consistency of object-oriented programming.
