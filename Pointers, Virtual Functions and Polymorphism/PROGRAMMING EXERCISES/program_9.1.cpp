@@ -1,0 +1,88 @@
+/*
+Create a base class called shape. Use this class to store two double type values that could be used to compute the area of figures. Derive two specific classes called triangle and rectangle from the base shape. Add to the base class
+a member function get_data() to initialize base class data members and another member function display_area() to compute and display the area of figures. Make display_area() as a virtual function and redefine this function in the derived classes to suit their requirements.
+
+Using these three classes, design a program that will accept dimensions of a triangle or a react angle interactively, and display the area
+
+Remember the two values give as input will be treated of two sides in the case of rectangles, and as base and height in the case of triangles, and used as follows:
+*/
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Shape
+{
+protected:
+    float length;
+    float width;
+public:
+    void get_data(float l, float w = 0)
+    {
+        length = l;
+        width  = w;
+    };
+    virtual void display_area() = 0;
+};
+
+class Rectangle : public Shape
+{
+public:
+    Rectangle(){ };
+    Rectangle(float l, float w)
+    {
+        get_data(l,w);
+    }
+    void display_area()override
+    {
+        cout << "Area of Rectangle: " << length*width << endl;
+    }
+};
+
+class Triangle : public Shape
+{
+    public:
+        Triangle(){ }
+        Triangle(float b, float h)
+        {
+            get_data(b,h);
+        }
+        void display_area()override
+        {
+            cout << "Area of Triangle: " << 0.5*length*width << endl;
+        }
+};
+
+class Circle : public Shape
+{
+    public:
+        Circle(){ }
+        Circle(float radius)
+        {
+            get_data(radius);
+        }
+        void display_area()override{
+            cout << "Area of Circle: " << M_PI*length*length <<endl;
+        }
+};
+
+int main()
+{
+    Shape *ptr;
+    Rectangle r;
+    Triangle t;
+    Circle c;
+    ptr = &r;
+    r.get_data(10,10);
+    r.display_area();
+    ptr = &t;
+    ptr->get_data(4,14);
+    ptr->display_area();
+
+        //Note:Program 9.2
+    ptr = &c;
+    c.get_data(2);
+    c.display_area();
+    return 0;
+}
+//for improvement https://chatgpt.com/share/691928e3-578c-800e-a3be-bcee6498ebee
+//file:///C:/Users/zeros/Downloads/pointer_dataTypesError.pdf
