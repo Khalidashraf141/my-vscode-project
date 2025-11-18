@@ -17,7 +17,9 @@ In simple words:
 
 //Example
 #include <iostream>
+#include <cstdio>
 using namespace std;
+
 
 int main()
 {
@@ -43,6 +45,8 @@ int main()
     cout << "The address of a : " << add1 << "\n";
     add2+=2;
     cout << "The address of add1 : " << add2 << "\n";
+    printf("add%p\n",(void*)&add2);
+    printf("add%p\n",(void*)&add1);
 
 
     cout << "\n\n\n";

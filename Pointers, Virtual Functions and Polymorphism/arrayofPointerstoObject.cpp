@@ -12,7 +12,7 @@ class City
         City()
         {
             len = 0;
-            name = new char[len+1];
+            name = nullptr;
         }
         void getname(void)
         {
@@ -34,7 +34,7 @@ int main()
 {
     City *cptr[10]; //array of 10 pointers to cities
 
-    int n = 1;
+    int n = 0;
     int option;
 
     do
@@ -54,4 +54,19 @@ int main()
         cptr[i]->printname();
     }
     return 0;
-};
+}
+/*
++-----------+
+| cptr[0]   | → (will store pointer to a City)
++-----------+
+| cptr[1]   |
++-----------+
+| cptr[2]   |
++-----------+
+|   ...     |
++-----------+
+| cptr[9]   |
++-----------+
+
+*/
+//TODO:PRACTICE DONE

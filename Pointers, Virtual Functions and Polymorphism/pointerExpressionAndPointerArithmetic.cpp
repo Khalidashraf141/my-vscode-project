@@ -17,7 +17,7 @@ Pointer Arithmetic means adding or subtracting integer values to/from pointers(T
 
 #include <iostream>
 using namespace std;
-
+//TODO:PRACTICE DONE
 int main()
 {
     int a = 10, b = 20;

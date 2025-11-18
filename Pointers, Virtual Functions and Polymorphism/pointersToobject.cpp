@@ -65,7 +65,7 @@
         1. new item
          - The new operator asks the system (heap memory) to allocate enough memory to hold
             one complete object of class item. 
-            the size depends on how many and what type of data member the class has
+            the arrSize depends on how many and what type of data member the class has
         example
         class item{
 
@@ -77,7 +77,7 @@
         the (new) operator returns the starting address of that object in memory.
         ptr which is of type item* stores the address of the newly created object.
 */
-
+//TODO:PRACTICE DONE
 #include <iostream>
 using namespace std;
 
@@ -114,7 +114,7 @@ public:
              << "Price : " << price << "\n\n";
     }
 };
-const int size = 2;
+const int arrSize = 2;
 int main()
 {
     Item x;
@@ -122,12 +122,12 @@ int main()
     ptr->getdata(10,78.5);
     ptr->show();
 
-    newItem *a = new newItem[size];
+    newItem *a = new newItem[arrSize];
     newItem *p = a;
     int z, i;
     float y;
 
-    for(i = 0; i < size; i++)
+    for(i = 0; i < arrSize; i++)
     {
         cout << "Input code and price for item" << i+1;
         cin >> z >> y;
@@ -138,7 +138,7 @@ int main()
         a is no longer pointing to the beginning of the array. it's pointing past the last element(to invalid memory).
     */
 
-    for(i = 0; i < size; i++)
+    for(i = 0; i < arrSize; i++)
     {
         cout << "Item: " << i+1 << "\n";
         p->display();

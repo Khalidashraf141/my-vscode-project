@@ -10,7 +10,6 @@ int main()
     char str[] = "\nC++ is better than C";
     int len = strlen(str);
 
-    cout << len << endl;
     char *substr = new char[len];
 
     cout << "The main string is : " << str;
@@ -18,7 +17,6 @@ int main()
     cin >> substr;
 
     int k, len2=strlen(substr);
-    cout << len2 << endl;
 
     for(i = 0; i < len; i++)
     {

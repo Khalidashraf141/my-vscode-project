@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-
+//TODO:PRACTICE DONE
 int main()
 {
     const char *ptr[10] = 

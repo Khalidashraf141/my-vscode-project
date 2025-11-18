@@ -2,6 +2,7 @@
 When a base class pointer is used to access members of a derived class object, it can only access those members that are inherited from the base class, not the members that are unique to the derived class.
     *If the derived class defines a member with the same name as one in the base class, then any access through the base class pointer will always refer to the base class version of that member - not the derived one.
 */
+//TODO:PRACTICE DONE
 //Example:-
 #include <iostream>
 using namespace std;
