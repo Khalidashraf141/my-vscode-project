@@ -1,0 +1,1 @@
+Returns true if the eofbit flag of he respective ostream object is set to true. This is set to true when the end of file is encountered for the last operation on the stream.
