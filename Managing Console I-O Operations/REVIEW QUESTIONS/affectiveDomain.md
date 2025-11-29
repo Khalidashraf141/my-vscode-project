@@ -68,3 +68,4 @@ Thus, students defend the statement because it reflects **personal empowerment a
 ---
 
 # ✔ End of Affective Domain Answers (Markdown Format)
+Jo hume useful lagta hai, par waise actual me nahi hota — usko perceived usefulness kehte hain.
