@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Stream Statements Cheat Sheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .statement-card {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .statement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .statement-card.valid {
+            border-left-color: #28a745;
+        }
+        
+        .statement-card.error {
+            border-left-color: #dc3545;
+        }
+        
+        .code-label {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .code-block .keyword {
+            color: #f687b3;
+        }
+        
+        .code-block .function {
+            color: #68d391;
+        }
+        
+        .code-block .string {
+            color: #fbd38d;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .status.valid {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .issue-list {
+            margin: 15px 0;
+        }
+        
+        .issue-item {
+            display: flex;
+            align-items: start;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .issue-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .error-icon {
+            color: #dc3545;
+        }
+        
+        .valid-icon {
+            color: #28a745;
+        }
+        
+        .warning-icon {
+            color: #ffc107;
+        }
+        
+        .download-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .download-btn {
+                display: none;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 C++ Stream Statements</h1>
+            <p>Error Identification & Best Practices Guide</p>
+        </div>
+        
+        <div class="content">
+            <!-- Statement (a) -->
+            <div class="statement-card">
+                <span class="code-label">(a)</span>
+                <div class="code-block"><span class="keyword">cout</span> << (<span class="keyword">void</span>*) amount;</div>
+                <span class="status valid">⚠️ CONDITIONALLY VALID</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            <strong>Valid only if 'amount' is a pointer</strong><br>
+                            The (void*) cast forces printing the memory address
+                        </div>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-icon error-icon">✗</span>
+                        <div>If amount is not a pointer → logic issue</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (b) -->
+            <div class="statement-card error">
+                <span class="code-label">(b)</span>
+                <div class="code-block"><span class="keyword">cout</span> << <span class="function">put</span>(<span class="string">"john"</span>);</div>
+                <span class="status error">❌ ERROR</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon error-icon">✗</span>
+                        <div>
+                            <strong>put() accepts only a single char</strong>
+                        </div>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            <strong>Correct:</strong><br>
+                            <code>cout.put('J')</code> or <code>cout << "john"</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (c) -->
+            <div class="statement-card error">
+                <span class="code-label">(c)</span>
+                <div class="code-block"><span class="keyword">cout</span> << <span class="function">width</span>();</div>
+                <span class="status error">❌ ERROR</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon error-icon">✗</span>
+                        <div>
+                            <strong>width() is not a free function</strong>
+                        </div>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            <strong>Correct:</strong> <code>cout.width()</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (d) -->
+            <div class="statement-card error">
+                <span class="code-label">(d)</span>
+                <div class="code-block"><span class="keyword">int</span> p = <span class="keyword">cout</span>.<span class="function">width</span>(10);</div>
+                <span class="status error">❌ ERROR</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon error-icon">✗</span>
+                        <div>
+                            <strong>width() returns streamsize, not int</strong>
+                        </div>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            <strong>Correct:</strong><br>
+                            <code>std::streamsize p = cout.width(10);</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (e) -->
+            <div class="statement-card error">
+                <span class="code-label">(e)</span>
+                <div class="code-block"><span class="keyword">cout</span>.<span class="function">width</span>(10).<span class="function">precision</span>(3);</div>
+                <span class="status error">❌ ERROR</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon error-icon">✗</span>
+                        <div>
+                            <strong>width() returns a number, cannot chain methods</strong>
+                        </div>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            <strong>Correct:</strong><br>
+                            <code>cout.width(10); cout.precision(3);</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (f) -->
+            <div class="statement-card error">
+                <span class="code-label">(f)</span>
+                <div class="code-block"><span class="keyword">cout</span>.<span class="function">setf</span>(ios::scintific, ios::left);</div>
+                <span class="status error">❌ MULTIPLE ERRORS</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon error-icon">✗</span>
+                        <div>
+                            <strong>Typo:</strong> 'scintific' should be 'scientific'
+                        </div>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-icon error-icon">✗</span>
+                        <div>
+                            <strong>Flag mismatch:</strong> scientific (floatfield) cannot pair with left (adjustfield)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (g) -->
+            <div class="statement-card valid">
+                <span class="code-label">(g)</span>
+                <div class="code-block">ch = <span class="keyword">cin</span>.<span class="function">get</span>();</div>
+                <span class="status valid">✅ VALID</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            cin.get() returns int; char assignment allowed
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (h) -->
+            <div class="statement-card error">
+                <span class="code-label">(h)</span>
+                <div class="code-block"><span class="keyword">cin</span>.<span class="function">get</span>().<span class="function">get</span>();</div>
+                <span class="status error">❌ ERROR</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon error-icon">✗</span>
+                        <div>
+                            <strong>cin.get() returns int, cannot call .get() on int</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (i) -->
+            <div class="statement-card valid">
+                <span class="code-label">(i)</span>
+                <div class="code-block"><span class="keyword">cin</span>.<span class="function">get</span>(c).<span class="function">get</span>();</div>
+                <span class="status valid">✅ VALID</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            cin.get(c) returns cin, so chaining is allowed
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (j) -->
+            <div class="statement-card">
+                <span class="code-label">(j)</span>
+                <div class="code-block"><span class="keyword">cout</span> << <span class="function">setw</span>(5) << <span class="function">setprecision</span>(2);</div>
+                <span class="status valid">⚠️ VALID BUT INCOMPLETE</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon warning-icon">⚠</span>
+                        <div>
+                            <strong>Valid syntax but prints nothing</strong>
+                        </div>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            Requires <code>#include &lt;iomanip&gt;</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statement (k) -->
+            <div class="statement-card valid">
+                <span class="code-label">(k)</span>
+                <div class="code-block"><span class="keyword">cout</span> << <span class="function">resetiosflags</span>(ios::left | ios::showpos);</div>
+                <span class="status valid">✅ VALID</span>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-icon valid-icon">✓</span>
+                        <div>
+                            Valid with <code>#include &lt;iomanip&gt;</code><br>
+                            Removes specified flags
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Quick Reference for C++ Streams</strong></p>
+            <p>Remember: Always include proper headers (&lt;iostream&gt;, &lt;iomanip&gt;) and check return types!</p>
+        </div>
+    </div>
+    
+    <button class="download-btn" onclick="downloadPDF()">📥 Download PDF</button>
+    
+    <script>
+        function downloadPDF() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
