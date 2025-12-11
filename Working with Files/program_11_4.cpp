@@ -2,7 +2,6 @@
 #include <fstream>
 #include <cstring>
 using namespace std;
-//BUG:FIX IT
 
 int main()
 {
@@ -16,7 +15,7 @@ int main()
     fstream file;   //input and output stream
     cout << "\nOpening the 'TEXT' file and storing the string in it.\n\n";
 
-    file.open("TEXT", ios::in | ios::out);
+    file.open("TEXT", ios::in | ios::out | ios::trunc);
 
     for(int i = 0; i <len; i++)
     {

@@ -38,8 +38,8 @@ Open for writing only:
 All the actions on the file pointers take place automatically by default. How do we then move a file pointer to any desired position inside the file?
 This is possible only if we can take control of the movement of the file pointers ourselves.
 
-    • seekg() Moves get pointer (input) to a specified location 
-    • seekp() Moves put pointer (output) to a specified location
+    • seekg() Moves get pointer (input) to a specified location (reading)
+    • seekp() Moves put pointer (output) to a specified location (writing)
     • tellg() Gives the current position of the get pointer
     • tellp() Gives the current position of the put pointer
 

@@ -26,7 +26,7 @@ void INVENTORY :: writedata(void)
          << setw(10) << name
          << right
          << setw(10) << code
-         << setprecision(2)
+         <<fixed << setprecision(2)
          << right
          << setw(10) << cost
          << endl;

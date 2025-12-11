@@ -1,5 +1,5 @@
 /*
-1. Why do we need Errro Handling?
+1. Why do we need Error Handling?
 when working with files, many things can go wrong:
     • File does not exist
     • File cannot be opened
@@ -106,7 +106,7 @@ C++ file streams inherit a stream-state member from class ios.
 This member uses bit fields to store error conditions related to file operations.
 Possible errors include missing files, invalid filenames, insufficient disk space, invalid operations, and attemps to read past EOF.
 
-The ios class provides member functions to test theses errro flags.
+The ios class provides member functions to test theses error flags.
 These functions are:
     1. eof()    - Returns true (non-zero value) if end-of-file is encountered while reading. Otherwise returns false(zero)
 

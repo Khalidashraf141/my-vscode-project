@@ -11,7 +11,7 @@ int main()
     float height[4] = {175.5, 153.0, 167.25, 160.70};
 
     ofstream outfile;
-    outfile.open(filename);
+    outfile.open(filename,ios::binary);
     outfile.write((char*)&height, sizeof(height));//We write (char*) because write() reads raw bytes, and a char* is the only pointer type that represents raw bytes in C++.
     outfile.close();    // close the file for reading
 
@@ -26,7 +26,7 @@ int main()
     for(int i = 0; i < 4; i++)
     {
         cout.setf(ios::showpoint);
-        cout <<setw(10) << setprecision(2)<<height[i];
+        cout <<setw(10) <<fixed<< setprecision(2)<<height[i];
     }
     infile.close();
 

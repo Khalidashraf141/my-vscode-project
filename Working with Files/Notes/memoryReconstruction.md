@@ -99,7 +99,7 @@ Exactly as before
 
 
 Why does this work so perfectly?
-Because C++ uses a fixed memory layout for siple objects:
+Because C++ uses a fixed memory layout for simple objects:
     • Members are stored in a strict order
     • Each member has fixed size
     • No gaps (or predictable padding)

@@ -38,7 +38,7 @@ int main()
     {
         item.putdata();
     }
-    inoutfile.clear();      //turn of EOF flag
+    inoutfile.clear();      //turn off EOF flag
 
     /* >>>>>>>>>>>>>>>>>>>> Add one more item <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 

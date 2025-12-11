@@ -13,5 +13,10 @@ int main()
     }
     fin.close(); // close file
 
+/*
+• fin -> input stream (file from which we read)
+• line -> string where the read line will be stored
+*/
+
     return 0;
 }

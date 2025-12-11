@@ -1,6 +1,7 @@
 // Creating files with constructor function
 #include <iostream>
 #include <fstream>
+#include <cstring>
 using namespace std;
 
 int main()
@@ -20,6 +21,8 @@ int main()
     outf << cost << "\n"; // write to file ITEM
     outf.close(); //disconnect item file from outf
 
+    memset(name,0,sizeof(name));    //|
+    cost = 0;                       //|clearing the variables ensures you can verify 100% that the value being printed come from the file.
     ifstream inf("ITEM");   //connect item file to inf
 
     inf >> name; // read name from file ITEM
@@ -30,3 +33,15 @@ int main()
     inf.close(); //disconnect ITEM from inf
     return 0;
 }
+
+/*
+What memset(name,0,sizeof(name)) and cost = 0; really do.
+1. memset(name,0,sizeof(name));
+    This fills the entire name array with 0 bytes
+    So the string becomes empty
+    If you try to print name before reading form file, nothing will show.
+
+2. cost = 0;
+    This resets the number variable
+    If you print cost before reading from the file, it will show 0.
+*/
