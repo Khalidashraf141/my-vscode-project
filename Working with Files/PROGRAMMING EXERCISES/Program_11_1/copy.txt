@@ -1,0 +1,52 @@
+This is a large stress test file created specifically to challenge any program that attempts to remove consecutive spaces. The purpose of this text is not meaning, but to generate enough randomness, irregularity, and structure so your C++ logic can be tested thoroughly. 
+
+Many students run into difficulty when handling multiple spaces because they do not realize how loops behave character by character. This file contains hundreds of words arranged in many lines, each line designed to push your program to its limits. 
+
+When you read this input file, you will notice numerous patterns of spaces: some appear in pairs, some in sequences of three, four, or even five consecutive gaps. The challenge is to compress all of them into a single space whenever appropriate. 
+
+Stress testing is critical in real-world applications, especially when you work with input obtained from unpredictable sources. People often paste text from emails, PDF files, or data exports, and these usually contain random spacing errors. 
+
+This file simulates such messy input. The lines are intentionally uneven, and words appear with inconsistent spacing so your logic must treat every character carefully. If your program performs correctly, it will reduce all consecutive spaces to one, regardless of how chaotic the input appears. 
+
+Another reason for using a massive test file is to measure how efficiently your algorithm runs. A simple loop may seem trivial, but when applied to thousands of characters, inefficient logic becomes noticeable. This paragraph therefore includes long sequences of repeated words, extended descriptions, and multi-line blocks aimed at pushing the loop through heavy loads. 
+
+To further complicate the input, additional filler sentences will appear throughout this file. These sentences serve no purpose except to expand the text to roughly one thousand words, ensuring sufficient volume for stress testing. 
+
+Programming often involves cleaning up badly-formatted data. Whether you're building a compiler, reading logs, or parsing configuration files, removing unnecessary whitespace is a foundational step. Such small operations must be reliable, efficient, and predictable. 
+
+Below this paragraph, more content has been added simply to increase the file size. You may scroll through these lines and notice that some sentences intentionally include long stretches of spaces, often inserted between short and long words alike. The goal is not readability, but chaotic spacing. 
+
+Random words follow: alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi rho sigma tau upsilon phi chi psi omega. These Greek letters have been spaced irregularly to make your program work harder. 
+
+In addition to spacing patterns, line lengths vary significantly. Some lines are short, others extend much longer, and a few lines end abruptly after only a few words. Variability ensures real-world robustness. 
+
+Additional sentences appear here to further expand the word count. Software engineers frequently deal with messy data formats, merging logs, cleaning CSV files, and processing user-generated content. All these tasks require careful whitespace handling. 
+
+This file includes repetitive structures like this: 
+word word word word word word word word word word 
+and also: 
+test test test test test test test test test test. 
+
+These blocks simulate bulk data where patterns repeat often. 
+
+Continuing onward, this stress test now contains enough words to approach the thousand-word target. More filler follows: 
+
+Developers often underestimate how messy real datasets can become. Logs include timestamps, usernames, random characters, mis-typed entries, and excessive spacing. A small bug in a loop may cause corruption of data, making debugging extremely difficult. 
+
+Therefore, practicing with stress files like this one strengthens your confidence, ensuring your program handles edge cases correctly. The goal is not perfection, but reliability and consistency. 
+
+Now more filler text continues: 
+Machines learn patterns, humans create errors, programs fix them. 
+Consistency builds stability, stability builds reliability, reliability builds trust. 
+
+This file pushes your loop, your conditions, and your logic. Every extra space forces the program to evaluate its previous state, checking whether lastWasSpace is true or false. Hundreds of such evaluations will happen before the file ends. 
+
+As this massive stress test approaches completion, the remaining lines simply increase the word count until the thousand-word goal is reached. 
+
+More filler: 
+systems grow complexity grows errors grow debugging grows 
+experience grows awareness grows precision grows accuracy grows. 
+
+Even now, additional words continue appearing only to reach the required size. Whether you test a classroom assignment or a production-level tool, this file ensures maximum challenge. 
+
+Finally, this text concludes with enough repeated segments, irregular spacing, and multi-line structures to serve as a true stress test. 
