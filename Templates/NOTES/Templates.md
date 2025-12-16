@@ -46,3 +46,17 @@ T max(T a, T b) {
 ```
 
 Templates provide type safety, better error detection, and are a more robust solution compared to macros.
+
+
+Templates are powerful but compiler-dependent, hence portability issues may arise.
+
+MSYS2 is not a C++ compiler; it is a development environment that includes modern C++ compilers like GCC and Clang.
+
+
+
+Simple Analogy
+MSYS2 = Kitchen 🍳
+
+GCC / Clang = Stove 🔥 (actual cooking happens here)
+
+You don’t cook on the kitchen — you cook on the stove.

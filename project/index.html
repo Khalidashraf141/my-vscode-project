@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MuscleScience</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" type="images/x-icon" href="images/favicon.ico">
+</head>
+
+<body>
+
+    <nav class = "navbar">
+        <div class = "navdiv">
+            <div class="logo"><a href="#">MuscleScience</a></div>
+            
+            <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <ul class="nav-links" id="navLinks"> 
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Contents</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+<div class="container">
+
+    <div class="pdf-card">
+        <img src="covers/OCT.jpg" class="pdf-cover">
+
+        <div class="pdf-info">
+            <h3>OCT</h3>
+            <p>OFF CYCLE THERAPY</p>
+
+            <div class="btns">
+                <a href="pdfs/OCT.pdf" target="_blank" class="btn read">📖 Read</a>
+                <a href="pdfs/OCT.pdf" download class="btn download">⬇ Download</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="disclaimer-section"> 
+    <div class="disclaimer-content">
+        <h4>⚠️ Medical & Legal Disclaimer</h4>
+        <p>The content on MuscleScience is for informational and educational purposes only. It is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of a qualified physician with any questions you may have regarding a medical condition.</p>
+        <p>This website does not promote or encourage the illegal use of controlled substances or prescription drugs. Please consult before starting or stopping any medication or regimen.</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        // Add a click listener to the button
+        hamburgerBtn.addEventListener('click', function() {
+            // This toggles the 'active' class on the navigation links
+            navLinks.classList.toggle('active');
+        });
+    });
+</script>
+</body>
+</html>

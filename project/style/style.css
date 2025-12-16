@@ -1,0 +1,244 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+    background: #0b1220;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.navbar{
+    background-color: #1e2431;
+    font-family: calibri;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.navdiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo a{
+    font-size: 35px;
+    font-weight: 600;
+    color: white;
+}
+
+/* ADDED: Styles for the navigation links list */
+.nav-links {
+    padding: 0;
+    margin: 0;
+}
+.nav-links li{
+    list-style: none;
+    display: inline-block;
+}
+.nav-links li a{
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 25px;
+}
+
+/* --- HAMBURGER STYLING (Desktop: Hidden) --- */
+.hamburger-menu {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 25px;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+    /* Ensure content pushes the footer down */
+    min-height: calc(100vh - 100px); 
+}
+
+.pdf-card {
+    display: flex;
+    gap: 67px;
+    background: #020617;
+    padding: 21px;
+    border-radius: 32px;
+    align-items: center;
+    margin-bottom: 25px; 
+}
+
+.pdf-cover {
+    width: 140px;
+    flex-shrink: 0;
+    border-radius: 6px;
+}
+
+.pdf-info h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.pdf-info p {
+    color: #94a3b8;
+    margin: 6px 0 12px;
+}
+
+.btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.read {
+    background: #2563eb;
+    color: white;
+}
+
+.download {
+    background: #16a34a;
+    color: white;
+}
+
+/* UPDATED: Disclaimer Styling for Footer position */
+.disclaimer-section {
+    padding: 30px 15px; /* Added top/bottom padding */
+    margin-top: 60px; /* Increased margin from main content */
+    background-color: #1e2431; /* Darker background for footer */
+    border-top: 1px solid #ff4d4d; /* Red border at the top for emphasis */
+    text-align: center; 
+}
+
+.disclaimer-content {
+    max-width: 800px; /* Limit width for readability */
+    margin: auto; /* Center the content block */
+    background-color: #331e1e; /* Dark red/brown background for the box */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ff4d4d;
+    text-align: left; /* Make the text left-aligned inside the content box */
+}
+
+.disclaimer-section h4 {
+    color: #ff4d4d; /* Bright red text for heading */
+    margin-top: 0;
+    font-size: 16px;
+    border-bottom: 1px dashed #ff4d4d;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.disclaimer-section p {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.5;
+    margin-bottom: 0; 
+}
+
+/* ====================================
+   📱 RESPONSIVENESS (Mobile Navigation)
+   ==================================== */
+@media (max-width: 600px) {
+    
+    /* Show the hamburger icon */
+    .hamburger-menu {
+        display: flex; 
+    }
+    
+    /* Hide the desktop links on mobile by default */
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px; /* Assuming navbar height is around 60px */
+        left: 0;
+        background-color: #1e2431;
+        padding: 10px 0;
+        border-top: 1px solid #0b1220;
+        /* Ensure the menu appears above other elements */
+        z-index: 999; 
+    }
+
+    /* NEW: This class is toggled by JavaScript to make the menu visible */
+    .nav-links.active {
+        display: flex; 
+    }
+
+    /* Make list items stack */
+    .nav-links li {
+        display: block;
+        text-align: center;
+        padding: 8px 0;
+    }
+
+    .nav-links li a {
+        font-size: 16px;
+        margin-right: 0;
+    }
+    
+    /* Adjustments to the Navbar Div */
+    .navdiv {
+        flex-direction: row; /* Keep logo and hamburger horizontal */
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo a {
+        font-size: 26px; /* Smaller logo */
+    }
+
+}
+    
+/* =========================
+   📱 EXISTING MOBILE FIXES 
+   ========================= */
+@media (max-width: 480px) {
+
+    /* PDF CARD */
+    .pdf-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .pdf-cover {
+        width: 100%;
+        max-width: 180px;
+        margin: auto;
+    }
+
+    .btns {
+        justify-content: center;
+    }
+
+    /* DISCLAIMER */
+    .disclaimer-section {
+        padding: 20px 10px;
+        margin-top: 40px;
+    }
+    .disclaimer-content {
+        padding: 15px;
+    }
+}
