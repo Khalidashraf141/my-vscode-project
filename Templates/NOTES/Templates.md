@@ -21,7 +21,7 @@ While templates can be considered similar to macros in generating multiple versi
 
 ### Differences Between Templates and Macros:
 
-| **Aspect**          | **Macro**                     | **Template**                 |
+| **Aspect**           | **Macro**                     | **Template**                 |
 |----------------------|-------------------------------|------------------------------|
 | **Mechanism**        | Simple text substitution      | Type-based code generation   |
 | **Type Checking**    | No type checking              | Type-safe                    |
@@ -60,3 +60,23 @@ MSYS2 = Kitchen 🍳
 GCC / Clang = Stove 🔥 (actual cooking happens here)
 
 You don’t cook on the kitchen — you cook on the stove.
+
+
+
+What is a Preprocessor in C++?
+The preprocessor in C++ is a program that runs before the actual compilation starts. Its jobs is to prepare the source code by performing certain test-based operations, then pass the modified code to the compiler.
+
+📌 Important point:
+The preprocessor works on source code text, not on C++ syntax or logic
+
+1. Macro Substitution (#define)
+it replaces macros with their defined values.
+#define PI 3.14
+float area = PI * r * r;
+=> Before compilation, PI is replaced with 3.14
+
+2. File Inclusion (#include)
+    - < > -> standard library files
+    - " " -> user-defined files
+
+The C++ preprocessor is a program that processes the source code before compilation by handling directives like macro expansion, file inclusion, and conditional compilation.

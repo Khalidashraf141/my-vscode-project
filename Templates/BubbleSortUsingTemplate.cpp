@@ -2,6 +2,14 @@
 #include <iostream>
 using namespace std;
 
+template<class X>
+void swap(X &a, X &b)
+{
+    X temp = a;
+    a = b;
+    b = temp;
+}
+
 template<class T>
 void bubble(T a[], int n)
 {
@@ -15,13 +23,6 @@ void bubble(T a[], int n)
             }
         }
     }
-}
-template<class X>
-void swap(X &a, X &b)
-{
-    X temp = a;
-    a = b;
-    b = temp;
 }
 
 int main()
