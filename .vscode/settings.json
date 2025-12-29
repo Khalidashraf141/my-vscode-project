@@ -63,6 +63,7 @@
   "cSpell.words": [
     "aagar",
     "aage",
+    "aaye",
     "Agla",
     "aise",
     "Amit",
@@ -74,10 +75,12 @@
     "badhaana",
     "badhaayega",
     "Balagurusamy",
+    "bana",
     "bilkul",
     "bolte",
     "cerr",
     "chahiye",
+    "chalega",
     "chalne",
     "chodkar",
     "constexpr",
@@ -150,6 +153,7 @@
     "Naina",
     "navdiv",
     "nocreate",
+    "noexcept",
     "noreplace",
     "ofstream",
     "openprot",
@@ -159,7 +163,9 @@
     "POORE",
     "pura",
     "raha",
+    "rakho",
     "rehta",
+    "rethrowing",
     "Rohan",
     "saare",
     "sakta",
@@ -192,6 +198,8 @@
     "wajah",
     "wala",
     "wapas",
+    "yaad",
     "Yani"
-  ]
+  ],
+  "liveServer.settings.port": 5501
 }
