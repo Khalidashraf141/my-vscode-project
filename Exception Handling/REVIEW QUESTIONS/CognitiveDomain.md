@@ -287,7 +287,7 @@ Close files, free memory, release locks.
 
 13.9 Explain when to use multiple catch handler
 
-Multiple catch handlers are used when a single tyr block may throw different types of exceptions, and each exception requires a different handling action.
+Multiple catch handlers are used when a single try block may throw different types of exceptions, and each exception requires a different handling action.
 
 Why Multiple catch Blocks are Needed
 Use Multiple catch handlers when:

@@ -156,6 +156,6 @@ When an exception is thrown, the catch statement catches the exception whose typ
 
 After executing the handler, program control passes to the statement immediately following the catch block.
 
-If an exception is thrown and not matching catch block is found dur to type mismatch, the program will terminate abnormally.
+If an exception is thrown and not matching catch block is found due to type mismatch, the program will terminate abnormally.
 
 It is important to note that a catch block is simply skipped if it does not match the type of the thrown exception

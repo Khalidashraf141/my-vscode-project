@@ -9,6 +9,7 @@ public:
     {
         ptr = new int[5];
     }
+/*
     ~Test()
     {
         try
@@ -21,6 +22,13 @@ public:
             cout << "Exception handled inside destructor\n";
         }
         delete[] ptr;   //resource safely released
+        cout << "Memory freed safely\n";
+    }
+*/
+    /*Modern way*/
+    ~Test()noexcept{
+        cout << "Destructor running\n";
+        delete[] ptr;
         cout << "Memory freed safely\n";
     }
 };

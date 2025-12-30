@@ -10,12 +10,17 @@ public:
     Error(int c, const char *d)
     {
         err_code = c;
-        err_desc = new char[strlen(d)];
+        err_desc = new char[strlen(d)+1];
         strcpy(err_desc,d);
     }
-    void err_display(void)
+    void err_display(void)const
     {
         cout << "\nError Code: " << err_code << "\n" << "Error Description: " << err_desc;
+    }
+    ~Error()
+    {
+        cout << "\nDestructor is called";
+        delete[] err_desc;
     }
 };
 
@@ -27,7 +32,7 @@ int main()
         cin.get();
         throw Error(99,"Test Exception");
     }
-    catch(Error e)
+    catch(const Error &e)
     {
         cout << "\nException caught successfully.";
         e.err_display();

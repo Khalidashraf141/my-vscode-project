@@ -13,14 +13,14 @@ public:
         y = b;
     }
 
-    Complex operator+(Complex c)
+    Complex operator+(const Complex &c)
     {
         if(c.x == 0 && c.y == 0)
             throw FLAG();
         return Complex(x + c.x, y+c.y);
     }
 
-    void show()
+    void show()const
     {
         cout << x << " + " << y << "i\n";
     }

@@ -36,6 +36,7 @@ int main()
     {
         cout << "Exception caught in main\n";
     }
+    return 0;
 }
 /*
 this program demonstrate that if an exception occurs in a constructor, the destructor is not called. Therefore, memory allocated in the constructor must be released inside the constructor itself, and the exception should be rethrown to be handled in main().
