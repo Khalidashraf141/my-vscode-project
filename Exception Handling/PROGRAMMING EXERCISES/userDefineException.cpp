@@ -41,3 +41,5 @@ int main()
     cout << "Program continues normally." << endl;
     return 0;
 }
+
+//A user-defined exception is created by inheriting from std::exception and overriding the what() function to provide a meaningful error message.

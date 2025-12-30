@@ -40,7 +40,7 @@ int main()
 Output:
     Caught Exception 1:
     Inside function
-    Caught Exception 2:
+    Caught Exception 3:
     End of main
 
 The catch-all handler is skipped because exception thrown by fun() occurs outside the scope of the inner try block, and is therefore handled by the outer catch handler
