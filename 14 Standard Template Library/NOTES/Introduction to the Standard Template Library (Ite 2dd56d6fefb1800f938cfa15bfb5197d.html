@@ -1,0 +1,1077 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Introduction to the Standard Template Library (Iterators)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2dd56d6f-efb1-800f-938c-fa15bfb5197d" class="page sans"><header><h1 class="page-title" dir="auto">Introduction to the Standard Template Library (Iterators)</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-8080-8456-e3d273b2724a" class=""><code>Iterators</code></h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8028-9770-d7e63294249f" class=""><strong>Definition</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2dd56d6f-efb1-8022-bb86-c3116775a1d8" class="">Iterators behave like pointers and are used to access elements of a container. They are commonly used to traverse from one element to another, a process known as iterating through the container</blockquote></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80e2-8143-d5e9f90b29d3" class="">Why Iterators are Important<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c6-a162-cf77fc460e81" class="bulleted-list"><li style="list-style-type:disc">Provide a uniform way to access different containers</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-804f-96d4-ee8ca6272acc" class="bulleted-list"><li style="list-style-type:disc">Work with STL algorithms</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8023-a32c-c09d005c4d52" class="">Iterators are <strong>not actual pointers, </strong>behave like them</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8037-91f1-e4e5dc28b12d" class=""><strong>Traverse means:</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2dd56d6f-efb1-8034-bcbc-e4c9026d498f" class=""><strong>To visit each element of a container or data structure one by one, usually in a systematic order.</strong></blockquote></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8095-8ff5-da2acc61fe7c" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80be-a29c-c927cb6d999a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+		vector&lt;int&gt; v = {10, 20, 30};
+		
+		for(vector&lt;int&gt;::iterator it = v.begin(); it != v.end(); ++it){
+				cout &lt;&lt; *it &lt;&lt; &quot; &quot;;
+		}
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ba-b917-e11870edf068" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-800f-8f12-f81f3a252c03" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10 20 30</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8026-80cc-e2d9961bcd9e" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-806c-b8fd-c1024326bda1" class="">Iterator Types &amp; Characteristics Table</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80b5-96d2-dba8b4b6d8d9" class="">Iterators are classified based on how they can move and what operations they support</p></div><div style="display:contents" dir="ltr"><table id="2dd56d6f-efb1-808c-a3cc-c0d1bf4a40ea" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8081-95e4-fda5b448596a"><th id="mDTC" class="simple-table-header-color simple-table-header">Iterator Type</th><th id="PEGl" class="simple-table-header-color simple-table-header">Can Read</th><th id="rk_U" class="simple-table-header-color simple-table-header" style="width:102px">Can Write</th><th id="Rx?e" class="simple-table-header-color simple-table-header" style="width:110px">Forward Move (<code>++</code>)</th><th id=";bvr" class="simple-table-header-color simple-table-header" style="width:106px">Backward Move (<code>--</code>)</th><th id="=YyR" class="simple-table-header-color simple-table-header" style="width:96px">Random Access (<code>+</code>,<code>-</code>,<code>[]</code>)</th><th id="WfZd" class="simple-table-header-color simple-table-header" style="width:147px">Example Containers</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-804e-9e42-f1874e673108"><td id="mDTC" class=""><strong>Input Iterator</strong></td><td id="PEGl" class="">✅</td><td id="rk_U" class="" style="width:102px">❌</td><td id="Rx?e" class="" style="width:110px">✅</td><td id=";bvr" class="" style="width:106px">❌</td><td id="=YyR" class="" style="width:96px">❌</td><td id="WfZd" class="" style="width:147px"><code>istream_iterator</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80d9-bfb2-d119ddddc113"><td id="mDTC" class=""><strong>Output Iterator</strong></td><td id="PEGl" class="">❌</td><td id="rk_U" class="" style="width:102px">✅</td><td id="Rx?e" class="" style="width:110px">✅</td><td id=";bvr" class="" style="width:106px">❌</td><td id="=YyR" class="" style="width:96px">❌</td><td id="WfZd" class="" style="width:147px"><code>ostream_iterator</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80a2-8a11-c6b34f676cc6"><td id="mDTC" class=""><strong>Forward Iterator</strong></td><td id="PEGl" class="">✅</td><td id="rk_U" class="" style="width:102px">✅</td><td id="Rx?e" class="" style="width:110px">✅</td><td id=";bvr" class="" style="width:106px">❌</td><td id="=YyR" class="" style="width:96px">❌</td><td id="WfZd" class="" style="width:147px"><code>forward_list</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-808c-ab46-f7ba5bb81a39"><td id="mDTC" class=""><strong>Bidirectional Iterator</strong></td><td id="PEGl" class="">✅</td><td id="rk_U" class="" style="width:102px">✅</td><td id="Rx?e" class="" style="width:110px">✅</td><td id=";bvr" class="" style="width:106px">✅</td><td id="=YyR" class="" style="width:96px">❌</td><td id="WfZd" class="" style="width:147px"><code>list</code>, <code>set</code>, <code>map</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8089-829b-c9b85f6763aa"><td id="mDTC" class=""><strong>Random Access Iterator</strong></td><td id="PEGl" class="">✅</td><td id="rk_U" class="" style="width:102px">✅</td><td id="Rx?e" class="" style="width:110px">✅</td><td id=";bvr" class="" style="width:106px">✅</td><td id="=YyR" class="" style="width:96px">✅</td><td id="WfZd" class="" style="width:147px"><code>vector</code>, <code>deque</code>, <code>array</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-804b-a655-cab5dac8d6fe" class="bulleted-list"><li style="list-style-type:disc">All iterators support <strong>dereferencing (</strong><code><strong>*</strong></code><strong>)</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-805f-9882-f31237ae280a" class="bulleted-list"><li style="list-style-type:disc">Not all containers support all iterator types</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8035-83c4-ef869348f63e" class="bulleted-list"><li style="list-style-type:disc">Iterator capability increases from input → Random Access</li></ul></div><div style="display:contents" dir="auto"><blockquote id="2dd56d6f-efb1-803c-92bf-f372089f6655" class="">Different types of iterators are used with different types of containers. Sequence and associative containers are traversable using iterators.</blockquote></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80fd-9468-ca0572580909" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d0-91ba-e739e70571d2" class="">Why Container Adapter are NOT Traversable</p></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80dc-b2bc-ecdae9b1fb8b" class="bulleted-list"><li style="list-style-type:disc">They provide limited access</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80e5-8940-e0d70448ef50" class="bulleted-list"><li style="list-style-type:disc">Example:<div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80fe-baf4-effc534a4391" class="bulleted-list"><li style="list-style-type:circle"><code>stack</code> → only <code>top()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ab-b149-f98340cd1b5b" class="bulleted-list"><li style="list-style-type:circle">queue → only <code>front()</code> and <code>back()</code></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8021-82c8-caabf90c4edf" class="bulleted-list"><li style="list-style-type:disc">No <code>begin()</code> or <code>end()</code> functions</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ce-b27e-d14cebf11b8a" class=""><div class="indented"><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-800e-beb2-f28c6017bd8c" class="">                 <strong><span style="border-bottom:0.05em solid">  The level of functionality provided by different categories of iterators.</span></strong></p></div><div style="display:contents" dir="ltr"><figure id="2dd56d6f-efb1-8062-8684-e80178df2a8c" class="image"><a href="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/image.drawio.png"><img style="width:685.96875px" src="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/image.drawio.png"/></a></figure></div></div></p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-80f2-be2e-e6ea8dc6ece0" class=""><strong>                                                   Functionality Venn diagram of iterators</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80a9-a38c-e3c5797cdbe3" class="numbered-list" start="1"><li><code>input iterator</code><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ad-8044-cfd4c3d7a8f3" class="">Description<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-808b-9f14-f3637d378970" class="bulleted-list"><li style="list-style-type:disc">Used to read data from a container</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ed-a168-fe10c96e4d8d" class="bulleted-list"><li style="list-style-type:disc">Can move only forward</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80fc-899c-da623a41b8b8" class="bulleted-list"><li style="list-style-type:disc">Supports single-pass traversal (used once)</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c9-9ff4-c62efa962d87" class="">Examples<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8095-bce8-ef43054107b5" class="bulleted-list"><li style="list-style-type:disc"><code>istream_iterator</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a3-8668-dbf2ef0509e9" class="">Supported Operations<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8094-9025-c0ee2237678f" class="bulleted-list"><li style="list-style-type:disc"><code>++it</code> → move forward</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80f8-8490-c7fd685e02fa" class="bulleted-list"><li style="list-style-type:disc"><code>*it</code> → read value</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8032-b72b-d214268f0e9b" class="">📌 <strong>Least powerful iterator</strong></p></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-805f-aa69-e7303922b6a3" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80c0-a736-d1bae9cd293b" class="numbered-list" start="2"><li><code>output iterator</code><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80bf-a959-fd3f2830de13" class=""> Description<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8003-92a9-f152793b9551" class="bulleted-list"><li style="list-style-type:disc">Used to write data into a container</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8000-bb2e-de7d99b51923" class="bulleted-list"><li style="list-style-type:disc">Can move only forward</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8060-9a52-cb51f7d628d7" class="bulleted-list"><li style="list-style-type:disc">Supports single-pass traversal</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-807a-8df2-dd29e77aefa2" class="">Examples<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c9-895f-f1b1b0352586" class="bulleted-list"><li style="list-style-type:disc"><code>ostream_iterator</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d7-ae81-ed086e72b91d" class="">Supported Operations<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-809c-b564-d059bee483a6" class="bulleted-list"><li style="list-style-type:disc"><code>++it</code> → move forward</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-809c-8da9-d775a7d30026" class="bulleted-list"><li style="list-style-type:disc"><code>*it = value</code> → write value</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80dd-b6c2-d8b17af2cf1c" class="">📌 <strong>Input and Output iterators are the same lowest level, </strong>hence show side by side in the diagram.</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8064-b36f-c4ffa07ac827" class="">
+</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80d7-a880-c20c44bb5845" class="numbered-list" start="3"><li><code>forward iterator</code><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80cb-89fd-ddf5ac883967" class="">Description<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-801d-a700-ebd30a118413" class="bulleted-list"><li style="list-style-type:disc">Supports all operations of input and output iterators</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-802a-a105-d806cd3bfbf6" class="bulleted-list"><li style="list-style-type:disc">Retains its position in the container</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d1-8117-e0641e065ce7" class="bulleted-list"><li style="list-style-type:disc">Allows multiple passes over the container</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8027-9e32-ff76e0e49ccb" class="">Examples<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8032-a59d-c75afd08e480" class="bulleted-list"><li style="list-style-type:disc"><code>forward_list</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-802c-90a3-fc4abbdba651" class="">Supported Operations<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c0-9e72-f896f8dff61f" class="bulleted-list"><li style="list-style-type:disc">Read </li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80b7-b9bf-d08f4fcb52eb" class="bulleted-list"><li style="list-style-type:disc">Write</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8053-8482-ce6415a2b0d2" class="bulleted-list"><li style="list-style-type:disc"><code>++it</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80b9-b69c-ea12f81249ad" class="bulleted-list"><li style="list-style-type:disc">Multiple traversal allowed</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ce-87bf-c08c41a4a574" class="">📌 <strong>This is why the forward iterator surrounds input and output iterators in the diagram</strong></p></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8055-bab4-d601742d70a2" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80d1-8846-fca51ba16811" class="numbered-list" start="4"><li><code>bidirectional iterator</code><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c8-8ef6-ee8674738a90" class="">Description<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d7-a158-fab391dbfb1d" class="bulleted-list"><li style="list-style-type:disc">Supports all forward iterator operations</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8045-8baa-e97a9e67f64c" class="bulleted-list"><li style="list-style-type:disc">Can move both forward and backward</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8003-9673-d1cdf10bbcfb" class="">Examples<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80db-b6e3-c808a8ae8a39" class="bulleted-list"><li style="list-style-type:disc"><code>list, set, map</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ae-9d4f-ef345aa3daeb" class="">Supported Operations<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8082-93f9-ee61e29f6fd0" class="bulleted-list"><li style="list-style-type:disc"><code>++it</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8030-803b-ca63d6c9a66c" class="bulleted-list"><li style="list-style-type:disc"><code>--it</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-800f-9894-c3f840d402c4" class="bulleted-list"><li style="list-style-type:disc">Read &amp; write</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80e7-b055-d106c3795266" class=""><strong>📌 Show outside forward iterator because it add backward movement.</strong></p></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8095-9b83-dfce33327806" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8042-896c-c2b339d031a1" class="numbered-list" start="5"><li><code>Random Access Iterator</code>(Most Powerful)<div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d1-a603-eea2e730bdfe" class="">Description<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-802b-9173-e4538e17e55d" class="bulleted-list"><li style="list-style-type:disc">Supports all bidirectional iterator operations</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8009-800b-da399232082f" class="bulleted-list"><li style="list-style-type:disc">Can jump directly to any position in constant time</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8007-adc2-dde9737e23a5" class="">Examples <div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80b4-94e2-cbc9a74dcf5e" class="bulleted-list"><li style="list-style-type:disc"><code>vector</code> , <code>deque</code> , <code>array</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8083-a3be-dc725849aae9" class="">Supported Operations<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8004-a91a-d5a884912608" class="bulleted-list"><li style="list-style-type:disc"><code>it + n</code>, <code>it - n</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8045-9d8a-dee0df8c0652" class="bulleted-list"><li style="list-style-type:disc"><code>it[n]</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c2-9962-d04ec51ceea6" class="bulleted-list"><li style="list-style-type:disc"><code>&lt; , &gt; , &lt;= , &gt;=</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8094-9c22-d54953b40f46" class="bulleted-list"><li style="list-style-type:disc">Read &amp; write</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80be-905a-e168973be0ea" class="">📌Outermost box → maximum functionality</p></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2dd56d6f-efb1-80c4-aee4-ed613e1f4850"/></div><div style="display:contents" dir="auto"><h2 id="2dd56d6f-efb1-8066-a193-c18541fb941d" class="">Applications of Container Classes</h2></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ac-8bd0-db5c78569fc8" class="">In C++, <strong>container classes </strong>(part of the <strong>Standard Template Library — STL) </strong>are used to <strong>store, manage, and manipulate collections of data efficiently. </strong>Each container is designed for specific real-world needs.</p></div><div style="display:contents" dir="ltr"><figure id="2dd56d6f-efb1-80be-be82-c4e2360d10b1" class="image"><a href="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/container.jpg"><img style="width:709.984375px" src="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/container.jpg"/></a></figure></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80fd-9afa-eaaa581763d2" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-80bb-bb39-c1cdd0ae70e6" class="">1. Dynamic Data Storage</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80f9-b388-c26831988e5e" class="">Problem: Size of data is no known at compile time</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8073-818f-d524959b4bed" class="">Solution: Containers automatically resize</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-809e-9540-c8e893c4b281" class="">Used Containers:<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80a9-bcd8-ee43a1a7a397" class="bulleted-list"><li style="list-style-type:disc"><code>vector</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80b3-8fbf-feb3f1ba663a" class="bulleted-list"><li style="list-style-type:disc"><code>deque</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80b6-bec9-dc4ba2bbb2e5" class="bulleted-list"><li style="list-style-type:disc"><code>list</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-808b-9e25-c86645c50491" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">vector&lt;int&gt; marks = {85, 90, 78};
+marks.push_back(92); // dynamic growth</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80eb-8966-d29ce42964ed" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-8037-b6a9-db45a919e75a" class="">2. Fast Searching &amp; Lookup</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8075-9b15-c34a0098e587" class="">Problem: Need quick search by key</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8063-896e-c269126491d0" class="">Solution: Associative containers</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8093-971b-d7d957c7f79a" class="">Used Containers<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80b6-acf1-f846044b082d" class="bulleted-list"><li style="list-style-type:disc"><code>map</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8033-8433-f2fa671c50e3" class="bulleted-list"><li style="list-style-type:disc"><code>unordered_map</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80bb-ae6a-edb6858188e7" class="bulleted-list"><li style="list-style-type:disc"><code>set</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80a4-9550-eee9ae15a216" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">map&lt;int, string&gt; student;
+student[101] = &quot;Ali&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8032-8eaf-dab233ea1fc6" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-8073-9c84-d1754753382b" class="">3. Maintaining Unique Data</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a3-9d68-fa336f7f1607" class="">Problem: Duplicate data not allowed</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-804c-aa6d-ef9962b14691" class="">Solution: <code>set</code> and <code>unordered_set</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-803e-a10b-e7b00d540f7c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">set&lt;int&gt; ids = {1,2,2,3}; // duplicates removed</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-800c-a4dc-ea432186d800" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-80f9-ba9c-de77f63cb8bb" class="">4. Stack-Based Operations (LIFO)</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80b2-9f1c-f176866ac664" class="">Problem: Last In, First Out behavior</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8017-8e72-ee37b6637d9b" class="">Solution: <code>stack</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8024-a3b3-e4862b509b95" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">stack&lt;int&gt; s;
+s.push(10);
+s.pop();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8010-b32c-fa900c13b0eb" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-8095-85ed-d5f9326c174a" class="">5. Queue-Based Operations (FIFO)</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-806f-b957-c2314a8a4baf" class="">Problem: First In, First Out behavior</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-804b-87b0-e308e1790d6c" class="">Solution: <code>queue</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8060-8c07-c40ebeb20097" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">queue&lt;string&gt; q;
+q.push(&quot;Task1&quot;);
+q.pop();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80f2-a757-fa3316b3bdba" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-8023-94f1-e0082179a176" class="">6. Priority-Based Processing</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8028-8194-e8073a264360" class="">Problem: Highest priority task first</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8052-a4f9-fea8537edfe0" class="">Solution: <code>priority_queue</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80b6-bc77-f7f112f27332" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">priority_queue&lt;int&gt; pq;
+pq.push(30);
+pq.push(10);
+cout &lt;&lt; pq.top(); //30</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8097-bf10-fc3f5fde04f6" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-80e6-bb3d-e53ac1c0d973" class="">7. Efficient Insert/Delete Operations</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a2-bef1-cd65f7137487" class="">Problem: Frequent insertions &amp; deletions in middle</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c8-8953-f2ac815331e5" class="">Solution: <code>list</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8000-961c-e2c7d6f43829" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">list&lt;int&gt; l = {1, 2, 3};
+l.push_front(0);</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8011-b3c7-c0616de83a8b" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2dd56d6f-efb1-807e-b3e3-fdb52ebdf98a" class="">Vectors</h2></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8014-87d1-c7ab862d5760" class="bulleted-list"><li style="list-style-type:disc">Vector is the most widely used container in the C++ Standard Template Library (STL).</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80e7-8f0a-c7c3b971e73a" class="bulleted-list"><li style="list-style-type:disc">It stores elements in contiguous memory locations, similar to an array.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80b5-8828-e8da48186070" class="bulleted-list"><li style="list-style-type:disc">Because of contiguous storage, it allows direct access to elements using the <strong>subscript operation (</strong><code><strong>[ ]</strong></code><strong>).</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80bc-8e3d-d7718740ac28" class="bulleted-list"><li style="list-style-type:disc">A vector can grow or shrink dynamically during program execution.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d1-a1b7-fccffbb024bd" class="bulleted-list"><li style="list-style-type:disc">Memory is allocated and deallocated automatically at run time required.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8018-84dd-e6769d55913a" class="bulleted-list"><li style="list-style-type:disc">Vectors provide fast access to elements due to their array-like structure.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-804c-a7ce-efd1ae24aed6" class="bulleted-list"><li style="list-style-type:disc">The vector container supports random access iterators</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80a6-b6fa-e87e0bfbd851" class="bulleted-list"><li style="list-style-type:disc">It allows a wide range of iterator operations, making it compatible with most STL algorithms.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80e9-a21f-c34375695ba3" class="bulleted-list"><li style="list-style-type:disc">Vectors are commonly used when frequent access and dynamic resizing are required.</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8065-8c42-eb783083eb0d" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="2dd56d6f-efb1-808e-9c38-e3c00f6d5a4c" class="image"><a href="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/vector.jpg"><img style="width:600px" src="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/vector.jpg"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-8001-8fa9-da26fdf641bb" class="">Table:- Important member functions of the vector class</h3></div><div style="display:contents" dir="ltr"><table id="2dd56d6f-efb1-809d-9c19-df844cfdc891" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80c4-9395-cd49313ace93"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">Functions</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Task</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80d3-98db-e8dbb8c8f454"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">at( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Gives a reference to an element</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80a4-b162-d847f5f4eef8"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">back( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Gives a reference to the last element</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8031-a9b7-d1b53c4b5c6f"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">begin( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Gives a reference to the first element</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8039-9007-ccab2eb04308"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">capacity( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Give the current capacity of the vector</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8033-9d25-c7482dc29d71"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">clear( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Deletes all the elements from the vector</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8088-b820-ce404a50f044"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">empty( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Determines if the vector is empty or not</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80c9-80a5-fc96786f0166"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">end( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Gives a reference to the end of the vector</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8033-963e-d3dbd5506b00"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">erase( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Deletes specified elements</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8004-8d96-fe214ff8957d"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">insert( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Inserts elements in the vector</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80f4-bc56-c2a93a97744d"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">pop_back( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Deletes the last element</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80ab-bdb9-ee65b55fbe44"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">push_back( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Adds an element to the end</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-805f-ba79-c9dd7c14b467"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">resize( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Modifies the size of the vector to the specified value</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-806f-bd75-fe924b04fbb4"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">size( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Gives the number of elements</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8027-962f-c2bb8ad06bbd"><th id="{{Nm" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">swap( )</th><td id="mmZW" class="block-color-gray_background" style="width:482.328125px">Exchanges elements in the specified two vectors</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80ca-932d-f07f378b5183" class="numbered-list" start="1"><li><code>at()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8029-9e7d-fdd11cdd29ac" class="bulleted-list"><li style="list-style-type:disc">The <code>at()</code> member function of the vector class returns a reference to the element at the specified position</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80f8-93d6-d47cb6e07363" class="bulleted-list"><li style="list-style-type:disc">Because it returns a reference, the element can be both read and modified.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8022-9e1e-c2c996dc56cb" class="bulleted-list"><li style="list-style-type:disc">Unlike <code>operation[]</code>, <code>at()</code> performs bounds checking</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8084-a3ff-c2f1ee04fa0f" class="bulleted-list"><li style="list-style-type:disc">If the index is out of range, it throws an <code>out_of_range</code> exception.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8091-b473-d6d299765630" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80ba-b7d4-ebaf4dfbd202" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.at(index);</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a7-97d2-fa40fe01236e" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80e7-ba07-d7717ce67910" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20, 30};
+
+    // Reading element using at()
+    cout &lt;&lt; &quot;Element at index 1: &quot; &lt;&lt; v.at(1) &lt;&lt; endl;
+
+    // Modifying element using at() (reference behavior)
+    v.at(1) = 50;
+
+    cout &lt;&lt; &quot;After modification:&quot; &lt;&lt; endl;
+    for(int x : v)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-807a-9286-d0bada355854" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80b4-b56a-d0e7ae9825d6" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Element at index 1: 20
+After modification:
+10 50 30</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-807e-9912-cfbc96e5b6ec" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8046-ae47-c90cb09be3d7" class="numbered-list" start="2"><li><code>back()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-801a-8873-d2a4016a0994" class="bulleted-list"><li style="list-style-type:disc">The <code>back()</code> member function of the vector class returns a reference to the last element in the vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-801f-8c68-f82163d730b2" class="bulleted-list"><li style="list-style-type:disc">Since it returns a reference, the last element can be accessed and modified directly.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-809d-b7fa-d09f33c45f75" class="bulleted-list"><li style="list-style-type:disc">The vector must not be empty when calling <code>back()</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8022-97a7-fc5617187f48" class="">Synatx</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80da-9ded-e2cfc1949256" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.back();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d9-8526-c3246d8361fb" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8080-9294-fd3d4899a3df" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20, 30};
+
+    // Accessing last element
+    cout &lt;&lt; &quot;Last element: &quot; &lt;&lt; v.back() &lt;&lt; endl;
+
+    // Modifying last element using back()
+    v.back() = 100;
+
+    cout &lt;&lt; &quot;After modification:&quot; &lt;&lt; endl;
+    for(int x : v)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8097-83e7-eafb05519a57" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8090-93e9-eed9637b4f84" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Last element: 30
+After modification:
+10 20 100</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ba-8ab5-ee8954d0cbef" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80c3-9512-e6ec62d4462d" class="numbered-list" start="3"><li><code>begin()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8002-b819-dc2fca8fe159" class="bulleted-list"><li style="list-style-type:disc">The <code>begin()</code> member function returns an iterator pointing to the first element of the vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8057-9584-f9a9eef60caa" class="bulleted-list"><li style="list-style-type:disc">By dereferencing this iterator (<code>*begin()</code>), we get a reference to the first element.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80bd-84f7-decc6adbc056" class="bulleted-list"><li style="list-style-type:disc">Since it is a reference, the first element can read and modified.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8025-b0fe-e74cf181c2c2" class="bulleted-list"><li style="list-style-type:disc">If the vector is empty, <code>begin()</code> equals <code>end()</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c1-b5d5-c3eb2436cf4c" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8087-ab83-d10746af633b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.begin(); // iterator to first element
+*v.begin(); // reference to first element</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-808e-b7c1-dccc0b4e871e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8065-935e-ea5f1e3807ef" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8039-bd9a-c0be976dd963" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20, 30};
+
+    // Accessing first element
+    cout &lt;&lt; &quot;First element: &quot; &lt;&lt; *v.begin() &lt;&lt; endl;
+
+    // Modifying first element using begin()
+    *v.begin() = 100;
+
+    cout &lt;&lt; &quot;After modification:&quot; &lt;&lt; endl;
+    for(int x : v)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8046-b166-e94ace0254af" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80c2-8217-fba84aef0098" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">First element: 10
+After modification:
+100 20 30</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8097-85e4-cd08486a537b" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-809d-882e-db608b8a50d6" class="numbered-list" start="4"><li><code>capacity()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-808f-85ba-e938904e7271" class="bulleted-list"><li style="list-style-type:disc">The <code>capacity()</code> member function of the vector class returns the current capacity of the vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ec-98e3-cb4c98a593e7" class="bulleted-list"><li style="list-style-type:disc">Capacity means the total number of elements that the vector can store without reallocating memory.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80cf-9f11-cd1a2c330c85" class="bulleted-list"><li style="list-style-type:disc">The capacity is greater than or equal to the size of the vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ce-9232-c035f120bc97" class="bulleted-list"><li style="list-style-type:disc">Capacity changes automatically when more memory is required</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80e8-8641-f3d16f4b7271" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-807f-a82b-c51deb793165" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.capacity();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8043-a1ea-c3c30aaf2893" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80f6-9db3-f00dfbf5b1ae" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v;
+
+    cout &lt;&lt; &quot;Initial capacity: &quot; &lt;&lt; v.capacity() &lt;&lt; endl;
+
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+
+    cout &lt;&lt; &quot;Size: &quot; &lt;&lt; v.size() &lt;&lt; endl;
+    cout &lt;&lt; &quot;Capacity: &quot; &lt;&lt; v.capacity() &lt;&lt; endl;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80cf-bd7c-da0eb153e769" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Initial capacity: 0
+Size: 3
+Capacity: 4</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8085-8454-cd45dae6dfa3" class=""><code>size()</code> → number of elements currently stored</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80e5-8642-d1c3aa110a2d" class=""><code>capacity()</code> → memory allocated for future growth</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80b2-bfad-fd80cd3cfaec" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-801c-9d83-fdb0834ab360" class="numbered-list" start="5"><li><code>clear()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d5-8632-ec5b515353da" class="bulleted-list"><li style="list-style-type:disc">The <code>clear()</code> member function removes all elements from the vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ff-9577-ec5031f02ec0" class="bulleted-list"><li style="list-style-type:disc">After calling <code>clear()</code> the size of the vector becomes 0</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8045-897e-f09ff66b4861" class="bulleted-list"><li style="list-style-type:disc">The capacity usually remains unchanged (memory is not released)</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80f9-b37d-fa68bae0a534" class="bulleted-list"><li style="list-style-type:disc">The vector object itself is still valid and can be resued</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8069-8236-f6e6043eeac4" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-800d-b1e6-d6b845e41e22" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">c.clear();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-809f-9f7f-f68a0dbec308" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-807a-a20f-c09ca637b36d" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20, 30, 40};
+
+    cout &lt;&lt; &quot;Before clear:&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;Size: &quot; &lt;&lt; v.size() &lt;&lt; endl;
+    cout &lt;&lt; &quot;Capacity: &quot; &lt;&lt; v.capacity() &lt;&lt; endl;
+
+    v.clear();
+
+    cout &lt;&lt; &quot;\nAfter clear:&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;Size: &quot; &lt;&lt; v.size() &lt;&lt; endl;
+    cout &lt;&lt; &quot;Capacity: &quot; &lt;&lt; v.capacity() &lt;&lt; endl;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8010-a02e-e92f7860d801" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8097-9b37-c187767310e6" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Before clear:
+Size: 4
+Capacity: 4
+
+After clear:
+Size: 0
+Capacity: 4</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c6-9f28-df2e5971607a" class="bulleted-list"><li style="list-style-type:disc"><code>clear()</code> removes all elements</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8080-bc16-e05f22ed4f30" class="bulleted-list"><li style="list-style-type:disc">Vector becomes empty</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80e3-b3d4-c8a339c0e6bc" class="bulleted-list"><li style="list-style-type:disc">Capacity is not reduced</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80f4-9e9a-d15c59d2a6df" class="bulleted-list"><li style="list-style-type:disc">Use <code>shrink_to_fit()</code> if you want to release memory</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8091-9694-fd703dac8ab8" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-801c-8b94-e5cb2785cf2a" class="numbered-list" start="6"><li><code>empty()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d3-a7ea-cb90c8db557d" class="bulleted-list"><li style="list-style-type:disc">it returns a Boolean value (<code>bool</code>).</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8055-90d5-de5f5ebb3b82" class="bulleted-list"><li style="list-style-type:disc">It checks whether the vector is empty or not.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8008-a0fe-dba5f8ce75b0" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">bool empty() const;</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d1-9cde-cbdeeaa931d2" class="bulleted-list"><li style="list-style-type:disc">Returns <code>true</code> → if vector has no elements</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-803c-a04b-c2b199794885" class="bulleted-list"><li style="list-style-type:disc">Returns <code>false</code> → if vector has at least one element</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8018-9514-d34d20be0907" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8099-aa24-e2a6c5349ccd" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">vector&lt;int&gt; v;
+if(v.empty())
+    cout &lt;&lt; &quot;Vector is empty&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8058-82c8-ea4c24ae9681" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8064-85fd-e2dc94c99e0b" class="numbered-list" start="7"><li><code>end()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ac-b94a-e75376ca9fbe" class="bulleted-list"><li style="list-style-type:disc"><code>end()</code> returns an iterator pointing just past the last element</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-809a-ab81-ec488324fdbd" class="bulleted-list"><li style="list-style-type:disc">It is not a reference to an element</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8024-a35d-ec241c5a4339" class="bulleted-list"><li style="list-style-type:disc">Used mainly in loops and algorithms.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8073-bf0a-d517e9302b6a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.end(); // iterator, not element</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8025-b3dd-d1cda512cc99" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80f5-bf6d-fe1f8555dae5" class="numbered-list" start="8"><li><code>erase()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ad-ba94-cafc2c6a130b" class="bulleted-list"><li style="list-style-type:disc">The <code>erase()</code> member function removes one element or a range of elements from a vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80f1-9a6f-eb728f859f70" class="bulleted-list"><li style="list-style-type:disc">It reduces the size of the vector.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80fa-9b7a-ced1104c9e54" class="bulleted-list"><li style="list-style-type:disc">Elements after the erased position are shifted left.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-807b-bbd2-f923a14efef6" class="bulleted-list"><li style="list-style-type:disc">It returns in iterator pointing to the element that follows the last removed element</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8014-abcb-dbdeef761ee9" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80e0-b666-f29175b58c3f" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.erase(position); // erase single element
+v.eraase(start_iterator, end_iterator); // erase range</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-809f-9be3-c6c87a720bc3" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8066-a0f0-d55d565ba8a9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20, 30, 40};
+
+    v.erase(v.begin() + 1); // removes 20
+
+    for(int x : v)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8050-9446-d9cc94859d89" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80c5-bcf1-ddde381dc75e" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10 30 40</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80b8-aaaa-ce4e3ffc3ab4" class="">Important</p></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8088-aab0-eaaed7cbfb10" class="bulleted-list"><li style="list-style-type:disc"><code>erase()</code> works with iterators, not indexes</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-806b-9c33-f81e0d61357c" class="bulleted-list"><li style="list-style-type:disc">Time complexity: O(n) (due to shifting)</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80e1-a485-dc57782be460" class="bulleted-list"><li style="list-style-type:disc">Does not change capacity</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80f0-a576-f0060693784c" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-805f-815c-db0544520367" class="">Why do we use <code>remove()</code> with <code>erase()</code></h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-801e-989f-fbc72aa8ee35" class="">Because <code>erase()</code> alone cannot remove elements by value and <code>remove()</code> alone does not actually delete elements.<div class="indented"><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8065-a9d7-cd744eaab9a2" class="">so we combine both → this is called the erase-remove idiom</p></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-802b-8c6a-e20a6e55b3f9" class="">What <code>remove()</code> actually does</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8033-8f39-fc7902eeca8c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">remove(v.begin(), v.end(), 20);</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8044-89fc-e3f9aee0f15f" class="bulleted-list"><li style="list-style-type:disc">it does NOT delete element</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8010-ab6c-cfaa48a60eef" class="bulleted-list"><li style="list-style-type:disc">It shifts all elements =! 20 to the front</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d9-8451-c37c361d0192" class="bulleted-list"><li style="list-style-type:disc">It returns an iterator to the new logical end</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8059-a239-e4124029891c" class="">Example:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80c5-966f-ebde325c1cb6" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">vector&lt;int&gt; v = {10, 20, 30, 20, 40};
+remove(v.begin(), v.end(), 20);</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80db-a385-ce834478236d" class="">Vector becomes (logically):</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-806a-9f6e-fa632664a665" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10 30 40 ? ?</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8085-8db6-e97cb1cae89f" class="bulleted-list"><li style="list-style-type:disc">Size is still the same</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8042-a605-c8dad7b1d814" class="bulleted-list"><li style="list-style-type:disc">Extra value are unspecified</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-806c-a80d-e86ed515ee12" class="bulleted-list"><li style="list-style-type:disc"><code>20</code> is not erased from memory</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-808f-8cf6-d5999cb4929b" class="">What <code>erase()</code> does</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80b0-840b-dd8a73cad8c9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.erase(newEnd, v.end());</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d4-8795-df74a7cde978" class="bulleted-list"><li style="list-style-type:disc">It actually deletes elements</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d2-acc2-feefdbd28fab" class="bulleted-list"><li style="list-style-type:disc">Reduces vector size</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-809f-a2af-d2d05ad9854b" class="bulleted-list"><li style="list-style-type:disc">Cleans up the extra elements at the end</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80cf-9f0f-eec552c8f70a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8099-a12e-fea05edfe977" class="">Why Both need Together</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-803e-9ef8-ece7ae09f1ff" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.erase(remove(v.begin(), v.end(), 20), v.end());</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-801e-baa4-d1664a5cf52e" class="numbered-list" start="1"><li><code>remove()</code> rearranges elements and returns new end</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-808a-a42d-e9c3efbedbc6" class="numbered-list" start="2"><li><code>erase()</code> deletes unwanted tail elements</li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a1-aa71-d2b7ca945f6d" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80b7-aad1-f2c48c1b4690" class="numbered-list" start="9"><li><code>insert()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80a4-8927-e7d07f2f6f91" class="bulleted-list"><li style="list-style-type:disc">The <code>insert()</code> member function inserts one or more elements into a vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8044-82ba-f520693c5b33" class="bulleted-list"><li style="list-style-type:disc">Insertion happens at a specified position</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8046-ba44-f9c7c2ecec3d" class="bulleted-list"><li style="list-style-type:disc">Elements after the insertion point are shifted right.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80a6-978d-da12d87afe3e" class="bulleted-list"><li style="list-style-type:disc">The size of the vector increases</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-800a-906c-e544458308f1" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-803b-837d-eff8fa4d4dd4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.insert(position, value);                 // single element
+v.insert(position, count, value);          // multiple same elements
+v.insert(position, first, last);           // range insertion</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80fa-9ff2-ce9387ad6932" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8049-9007-def3e3bb6713" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20, 30};
+
+    v.insert(v.begin() + 1, 15); // insert 15 at index 1
+
+    for(int x : v)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8023-97d7-f84a34736ff0" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8089-b50a-c87594dd1195" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10 15 20 30</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c0-8194-f9bcb6aac70e" class="">Example 2:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80a2-925e-cbe04fbf23e6" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">vector&lt;int&gt; v = {1, 2, 5};
+v.insert(v.begin() + 2, 3, 9); //insert 3 copies of 9</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a8-b0a8-c09a26f49f0c" class="">Result:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-808f-ba4c-e6b2efa8bc24" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">1 2 9 9 9 5</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80aa-9470-d3d7b5821fd8" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8066-9bff-fa953c72946a" class="numbered-list" start="10"><li><code>pop_back()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8099-aedc-c0b1302acd7a" class="bulleted-list"><li style="list-style-type:disc">The <code>pop_back()</code> member function removes (deletes) the last element from the vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-802d-bb36-e5fef5428490" class="bulleted-list"><li style="list-style-type:disc">It reduces the size of the vector by one</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8000-a59a-fb113fd260c2" class="bulleted-list"><li style="list-style-type:disc">It does not return the deleted value.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8098-8428-dff823fa52f3" class="bulleted-list"><li style="list-style-type:disc">The vector must not be empty before calling <code>pop_back()</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-803d-afac-d6f0bac67330" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-807c-8d6a-c0cd72d38a19" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.pop_back();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-802f-9e71-c23fbca2b9c0" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8018-835c-e9e0e5fd6052" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20, 30};
+
+    v.pop_back();   // removes 30
+
+    for(int x : v)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80db-899e-c6199f327451" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80dd-af2c-e35b7834fa6b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10 20</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8082-9786-e10836c5a6e5" class="">Important Points</p></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8075-a2b3-ed844db22db2" class="bulleted-list"><li style="list-style-type:disc">Deletes only the last element</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80dd-a658-d5c2a0133151" class="bulleted-list"><li style="list-style-type:disc">Size decreases, capacity unchanged</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80e4-8397-d98096e6bd67" class="bulleted-list"><li style="list-style-type:disc">Time complexity: O(1)</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8030-89bb-fa0ea2169ce9" class="bulleted-list"><li style="list-style-type:disc">Does not free memory</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d1-b538-c5bd5c822365" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8078-8df2-cd2704a5ab9e" class="numbered-list" start="11"><li><code>push_back()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-806d-8144-c758226562a8" class="bulleted-list"><li style="list-style-type:disc">The <code>push_back()</code> member function adds (inserts) an element at the end of the vector.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8099-88d4-c1d1d4aa1842" class="bulleted-list"><li style="list-style-type:disc">The size of the vector increase by one.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8079-a17e-d5ac1319aca6" class="bulleted-list"><li style="list-style-type:disc">Memory is allocated automatically if the current capacity is full.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8032-bd1a-cf55651068e0" class="bulleted-list"><li style="list-style-type:disc">Average time complexity is O(1) (amortized).</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-805b-a595-d822fa5772b6" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80ef-8d52-eebdb02853bd" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.push_back(value);</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-804d-bc0b-f3c1b8980e53" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80c2-8172-ec2e79cde7c7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20};
+
+    v.push_back(30);   // adds element at the end
+
+    for(int x : v)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80aa-93ef-dbd1d0c3febd" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-801d-9aeb-f911893fd77b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10 20 30</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8085-a805-fe78b41145a9" class="bulleted-list"><li style="list-style-type:disc">May cause reallocation if capacity is full</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-803a-a5dc-d95f400e2ea1" class="bulleted-list"><li style="list-style-type:disc">Faster than <code>insert()</code> in the middle</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8019-98d2-ffd353719e1a" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80e0-8457-fff917b11b0f" class="numbered-list" start="12"><li><code>resize()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80f2-a785-fce46b4770e2" class="bulleted-list"><li style="list-style-type:disc">The <code>resize()</code> member function changes the size of the vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80bd-815e-c64d4dccb6b3" class="bulleted-list"><li style="list-style-type:disc">It can increase or decrease the number of elements</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8004-b6d0-f7d5818d9908" class="bulleted-list"><li style="list-style-type:disc">If the size is increased, new elements are value-initialized (or filled with a given value).</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8034-aaae-f449d16a1394" class="bulleted-list"><li style="list-style-type:disc">If the size is <strong>decreased</strong>, extra elements <strong>are removed </strong>from the end.</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-802f-a371-c6895fef26dc" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8039-9a6c-ca1202413a21" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.resize(new_size);
+v.resize(new_size, value);</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a4-be7b-f2f0bf46e3f2" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80ea-b8f7-d828745b69b8" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v = {10, 20, 30};
+
+    v.resize(5);   // increases size
+
+    for(int x : v)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-808c-a099-c94e741b60e8" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-804d-93ca-e69ea9556912" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10 20 30 0 0</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8096-b148-c6b1353e8555" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80f6-bfe6-ff5db20629b2" class="">Example 2:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8064-b4a6-f518c89fcbf9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">vector&lt;int&gt; v = {1, 2, 3};
+v.resize(6, 9);</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8054-ac14-f46f3b81a5fe" class="">Result:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-802a-9677-d90653ee28fa" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">1 2 3 9 9 9</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-804d-9bb4-c6e50f532198" class="bulleted-list"><li style="list-style-type:disc"><code>resize()</code> changes size, not capacity</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8060-a450-d8d7e567d906" class="bulleted-list"><li style="list-style-type:disc">Removing elements is O(1) form the end</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ed-9bfe-e485c036be74" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-80c0-bb1f-e8c01cc21ab0" class="numbered-list" start="13"><li><code>size()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80db-b6e6-f42ecfdaf1ee" class="bulleted-list"><li style="list-style-type:disc">The <code>size()</code> member function returns the current number of elements in the vector</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c9-81ce-fd66760b3f3e" class="bulleted-list"><li style="list-style-type:disc">It reflects how many elements are actually stored, not the allocated memory.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d1-8338-d8dfc7670993" class="bulleted-list"><li style="list-style-type:disc">Time complexity: O(1)</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8010-8470-e680a8e151f8" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80d8-9257-f7755f5c467e" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v.size();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80b9-970d-f04ff6740925" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8071-9ea5-df2a786cbe14" class="numbered-list" start="14"><li><code>swap()</code><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ee-87bd-c76f74cb182a" class="bulleted-list"><li style="list-style-type:disc">The <code>swap()</code> member function exchanges the contents of two vectors.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8016-a95c-d224f299ec8b" class="bulleted-list"><li style="list-style-type:disc">No element-by-element copying is done</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-806c-a839-d5eef91c8392" class="bulleted-list"><li style="list-style-type:disc">Time complexity: O(1) very fast</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c5-8705-d7f850d9f39b" class="bulleted-list"><li style="list-style-type:disc">Sizes and capacities of both vectors are swapped.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-804f-b3a7-ec79e6166d84" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-801e-a96e-e5597265a886" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v1.swap(v2);</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a4-a38e-ca7db2926438" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80f1-b71a-c4b4caa642ae" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; v1 = {1, 2, 3};
+    vector&lt;int&gt; v2 = {10, 20};
+
+    v1.swap(v2);
+
+    cout &lt;&lt; &quot;v1: &quot;;
+    for(int x : v1) cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    cout &lt;&lt; &quot;\nv2: &quot;;
+    for(int x : v2) cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-808e-bd37-c0e716199357" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-808a-8f91-e66668a320ca" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">v1: 10 20
+v2: 1 2 3</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8011-ae80-c1d9e4f88bdb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8080-ba8c-c92c67b818bf" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2dd56d6f-efb1-801f-b156-decdfab5042d" class="">lists - STL Container</h2></div><div style="display:contents" dir="ltr"><figure id="2dd56d6f-efb1-8070-8259-e3239f0681d7" class="image"><a href="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/lists.png"><img style="width:654px" src="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/lists.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80fd-95ea-da004c94ced9" class="">What is <code>lists</code>?<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8099-9ec4-cf49aaaed8e3" class="bulleted-list"><li style="list-style-type:disc"><code>list</code> is s sequence container in the C++ STL</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ad-ace8-ddd5a8382732" class="bulleted-list"><li style="list-style-type:disc">It stores elements in non-contiguous memory locations</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-802c-bcab-f8ce2a303dbf" class="bulleted-list"><li style="list-style-type:disc">Implemented internally as a doubly linked list.</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-803a-a3de-d6c02bb204d9" class="">Key Characteristics<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8056-94d8-ce16494aa7af" class="bulleted-list"><li style="list-style-type:disc">Supports fast insertion and deletion at any position</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-809b-937d-db605cdec999" class="bulleted-list"><li style="list-style-type:disc">No direct/random access (no <code>[ ]</code> operator)</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c5-90fc-e9b84e58a89d" class="bulleted-list"><li style="list-style-type:disc">Elements are accessed only using iterators.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d0-8251-c074a7f0da7f" class="bulleted-list"><li style="list-style-type:disc">Size can grow or shrink dynamically</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8051-ae4a-ef7c01a5a189" class="bulleted-list"><li style="list-style-type:disc">Extra memory is used to store links (pointers).</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-806d-9399-e6f6eb84eec2" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-804b-84e5-dfbb88486a1c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;list&gt;
+list&lt;int&gt; l;</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8088-bc67-f6ce7b2cb508" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8041-bf9b-f8dd53f1c817" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;list&gt;
+using namespace std;
+
+int main()
+{
+    list&lt;int&gt; l = {10, 20, 30};
+
+    l.push_front(5);
+    l.push_back(40);
+
+    for(int x : l)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8012-9b7e-ce3b6c8562b3" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80de-82d4-c48453786242" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">5 10 20 30 40</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8061-991c-d3d9663a778b" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-80ee-ab37-cb096ac0e88d" class="">Vector vs List</h3></div><div style="display:contents" dir="ltr"><table id="2dd56d6f-efb1-8030-a541-fb94ff3c8936" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8024-8408-e3029dd73527"><th id="Nk@D" class="simple-table-header-color simple-table-header">Feature</th><th id="Ftn;" class="simple-table-header-color simple-table-header">vector</th><th id="J\d}" class="simple-table-header-color simple-table-header">list</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80e4-ae14-f0af860e984c"><td id="Nk@D" class="">Memory</td><td id="Ftn;" class="">Contiguous</td><td id="J\d}" class="">Non-contiguous</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8010-ae88-c21a9a46497f"><td id="Nk@D" class="">Random access</td><td id="Ftn;" class="">Yes</td><td id="J\d}" class="">❌ No</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-806b-9fa5-fb2ef6265130"><td id="Nk@D" class="">Insert/Delete in middle</td><td id="Ftn;" class="">Slow</td><td id="J\d}" class="">Fast</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80c7-baf3-cc76c1d67032"><td id="Nk@D" class="">Iterator type</td><td id="Ftn;" class="">Random access</td><td id="J\d}" class="">Bidirectional</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-805a-8d6b-c276c014395e" class="">When to Use <code>list</code><div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8073-b312-c452b39ee2d2" class="bulleted-list"><li style="list-style-type:disc">Frequent insertions/deletions in the middle</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-805f-88e7-c10a07a16b2e" class="bulleted-list"><li style="list-style-type:disc">No need for random access</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-808e-aa4d-edc390186501" class="bulleted-list"><li style="list-style-type:disc">Managing sequence like:<div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8003-895a-df31346234da" class="bulleted-list"><li style="list-style-type:circle">Music playlists</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c1-b6ee-ccc2a832a006" class="bulleted-list"><li style="list-style-type:circle">Browser history</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ea-9d76-ca5317994d26" class="bulleted-list"><li style="list-style-type:circle">Undo/redo operations</li></ul></div></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-804f-971b-e5dee31446ef" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-8054-aab5-d16e2bb41bcd" class="">What does <em>Bidirectional </em>mean in <code>list</code>?</h3></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80ab-b242-c914ce85dbb8" class="">In C++ STL, <code>list</code> provides bidirectional iterators.</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-806e-9413-fa6f33344036" class="">This means:<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80f8-9760-eb22b7460a08" class="bulleted-list"><li style="list-style-type:disc">You can move the iterator forward</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8015-b489-ef5e150551e9" class="bulleted-list"><li style="list-style-type:disc">You can move the iterator backward</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ca-9957-f518c16f7434" class="bulleted-list"><li style="list-style-type:disc">But you cannot jump directly to any position (no random access)</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c3-9823-caee75cd08eb" class="">Allowed Operations</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-808e-a256-d3718cb675c1" class="">For a <code>list</code> iterator <code>it</code>:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8028-bbac-eff3692897c4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">it++; // move to next element
+it--; // move to previous element</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80af-a339-d2037365553e" class="">No Allowed</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8023-b05c-c45c7a46eef5" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">it + 2;     // ❌ error
+it - 1;     // ❌ error
+l[3];       // ❌ no subscript operator</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-801c-ade8-d6100859fe7c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80e7-a515-e4fc33c9e6ec" class="">Why is it called Bidirectional?</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a3-8907-e7665e3c0bcc" class="">Because internally, <code>list</code> is doubly linked list:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8069-8696-c064103b1fda" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">NULL ← [10] ⇄ [20] ⇄ [30] → NULL</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c7-ba8d-cad42eb3f2ca" class="">Each node stores:<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80bf-9c40-d2b88a321d35" class="bulleted-list"><li style="list-style-type:disc">Data</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-800d-9d18-efedc3ebd82d" class="bulleted-list"><li style="list-style-type:disc">Pointer to next node</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8006-a9ea-f9c8a4461ff4" class="bulleted-list"><li style="list-style-type:disc">Pointer to previous node</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8069-8c14-f1b95c64ddf3" class="">So traversal is possible in both directions</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80bb-b2c8-d00abfe3b54d" class="">
+</p></div><div style="display:contents" dir="ltr"><table id="2dd56d6f-efb1-803d-a4cf-d3290fb4c126" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-801b-a886-ddd9541bcb92"><th id="?=Vn" class="simple-table-header-color simple-table-header">Container</th><th id="RNbp" class="simple-table-header-color simple-table-header">Iterator Type</th><th id="{N^H" class="simple-table-header-color simple-table-header">Movement</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80a3-b5a0-fda5d3d9b64e"><td id="?=Vn" class=""><code>vector</code></td><td id="RNbp" class="">Random Access</td><td id="{N^H" class="">+, -, []</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80ac-9591-f055b7bd701e"><td id="?=Vn" class=""><code>list</code></td><td id="RNbp" class=""><strong>Bidirectional</strong></td><td id="{N^H" class="">++, --</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8025-96aa-ff0263b7bea2"><td id="?=Vn" class=""><code>forward_list</code></td><td id="RNbp" class="">Forward</td><td id="{N^H" class="">++ only</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-804d-8417-c77bb4b74d97" class=""><code>unique()</code> — Removes Consecutive Duplicate Elements<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8020-a713-fb5b0bbca6a6" class="bulleted-list"><li style="list-style-type:disc"><code>unique()</code> removes consecutive duplicate elements from a <code>list</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80e3-98f4-e944295ed955" class="bulleted-list"><li style="list-style-type:disc">It compares neighboring elements only.</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d8-92b5-ec9d8bd52f7d" class="bulleted-list"><li style="list-style-type:disc">The list should be sorted first if you want to remove all duplicates</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-806d-8539-cbe04ada48e7" class="bulleted-list"><li style="list-style-type:disc">Works only with <code>list</code> and <code>forward_list</code> (no with <code>vector</code> directly).</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d0-8010-de138347f0a4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-807f-8544-d3c37f2b017e" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8010-a0b2-c35f1c40d163" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">l.unique();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8034-b5f1-c30a4437b64e" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80ef-9317-cab25726cfb0" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;list&gt;
+using namespace std;
+
+int main()
+{
+    list&lt;int&gt; l = {10, 10, 20, 30, 30, 20};
+
+    l.unique();
+
+    for(int x : l)
+        cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a1-9760-d4fa6177f5f0" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8092-a264-f9ed2bb410c8" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10 20 30 20</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80cd-9394-c4a6044dd9b5" class="">Important Point<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-807a-b341-e6e9189b5914" class="bulleted-list"><li style="list-style-type:disc"><code>unique()</code> removes only adjacent duplicates</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8073-ac30-fe472d174769" class="bulleted-list"><li style="list-style-type:disc">To remove all duplicates:</li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-808e-9ae1-f48b43d29378" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">l.sort();
+l.unique();</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8096-985c-ce9c6bcd64a0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c2-bba5-d26793c9b221" class=""><code>splice()</code><div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-805e-a5b7-febac7756e3e" class="bulleted-list"><li style="list-style-type:disc"><code>splice()</code> moves elements from one list to another</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80b9-9795-c046590761da" class="bulleted-list"><li style="list-style-type:disc">No copying is done — only pointers are adjusted</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80d9-b0b7-cc880d152cbf" class="bulleted-list"><li style="list-style-type:disc">Very fast operation (O(1))</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c3-b14e-cc99a0dd322d" class="bulleted-list"><li style="list-style-type:disc">Source list loses the moved element</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80a6-9cc4-da487664c3cf" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80a1-83ce-fc104a65ff76" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">l1.splice(pos,l2); // move all elements
+l1.splice(pos, l2, it); // move one element
+l1.splice(pos, l2, first, last); // move range</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c9-a980-ea238fa17528" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80cb-81b3-effeb866970a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;list&gt;
+using namespace std;
+
+int main()
+{
+    list&lt;int&gt; l1 = {1, 2, 3};
+    list&lt;int&gt; l2 = {10, 20};
+
+    l1.splice(l1.end(), l2);
+
+    cout &lt;&lt; &quot;l1: &quot;;
+    for(int x : l1) cout &lt;&lt; x &lt;&lt; &quot; &quot;;
+
+    cout &lt;&lt; &quot;\nl2 size: &quot; &lt;&lt; l2.size();
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80e7-beb6-ed3e27bd1795" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8027-8231-ee7389e3a81c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">l1: 1 2 3 10 20
+l2 size: 0</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8077-9e28-eccd3246608c" class="">Why <code>splice()</code> <div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8071-b64e-f3384bdcfa90" class="bulleted-list"><li style="list-style-type:disc">No element copying </li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8084-a23f-df1826c82966" class="bulleted-list"><li style="list-style-type:disc">No memory allocation<div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-806e-b47c-f8e4fe1604c2" class="bulleted-list"><li style="list-style-type:circle">Nodes of <code>list2</code> are detached</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80a6-ad6b-d5ec0256e93b" class="bulleted-list"><li style="list-style-type:circle">Their <code>prev</code> and <code>next</code> pointers are rewired</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80f9-82db-c3d4b7c33510" class="bulleted-list"><li style="list-style-type:circle">Nodes are attached into <code>list1</code></li></ul></div></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80fc-825e-daaaa89ed167" class="">No new memory is requested from heap</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8096-8fe1-c32c41d733f4" class=""><code>splice()</code> does not allocate memory because it transfers existing nodes between lists by pointer manipulating in a doubly linked list, without creating or copying elements.</p></div><div style="display:contents" dir="auto"><hr id="2dd56d6f-efb1-8095-8645-e06eff598d0a"/></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80db-8e18-d10bcab6a6a8" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2dd56d6f-efb1-800a-9c9f-e3fd4592018d" class="">Maps</h2></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8041-a4da-fb6b33a3500a" class="bulleted-list"><li style="list-style-type:disc"><code>std::map</code> is an associative container</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8092-8b24-ed8915aef839" class="bulleted-list"><li style="list-style-type:disc">Stores elements as (<strong>key, value) </strong>pairs</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80bb-9cba-f4a480acf09f" class="bulleted-list"><li style="list-style-type:disc">Keys are unique</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8077-b29c-c87fd1080dcc" class="bulleted-list"><li style="list-style-type:disc">Elements are automatically sorted by key</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80bd-af06-cfc0abf8c94a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">map&lt;int, string&gt; m;</code></pre></div><div style="display:contents" dir="ltr"><figure id="2dd56d6f-efb1-8038-aa28-c985648a842d" class="image"><a href="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/key-value.drawio.png"><img style="width:504px" src="Introduction%20to%20the%20Standard%20Template%20Library%20(Ite/key-value.drawio.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8021-8062-d8a49505da4b" class="">Internal Working<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8047-8b00-d651d1dd4372" class="bulleted-list"><li style="list-style-type:disc">Implemented using a Red-Black Tree (self-balancing BST)</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ae-836d-e130e4b2013c" class="bulleted-list"><li style="list-style-type:disc">Elements are NOT stored contiguously</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c1-9ae7-fdd0d11e3e85" class="bulleted-list"><li style="list-style-type:disc">Each element is stored in a separate node</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8059-91d6-e4b771fd34b5" class="">Memory Allocation in <code>map</code><div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ad-a955-f7b2e7667e82" class="bulleted-list"><li style="list-style-type:disc">Memory is allocated for each node individually</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8090-9370-c252da6a45f0" class="bulleted-list"><li style="list-style-type:disc">Allocation happens when:<div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8027-94df-de61a01fd69f" class="bulleted-list"><li style="list-style-type:circle"><code>insert()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8020-9309-eb5cab64b893" class="bulleted-list"><li style="list-style-type:circle"><code>operator[]</code></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8098-9343-d0b36ab70534" class="bulleted-list"><li style="list-style-type:disc">No reallocation like <code>vector</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8029-8141-f57d4898ed82" class="">map always allocates memory when inserting new elements</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80b7-912a-c48db6019c40" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-80a8-95f2-d7109ce73b8b" class="">Insertion Methods</h3></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8052-b7be-ff6d9e8d349d" class="numbered-list" start="1"><li><code>insert()</code></li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80a1-aaf6-d5793f46293e" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">map&lt;int, int&gt; m;
+m.insert({1, 100})</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8051-9b6e-d931812742d0" class="bulleted-list"><li style="list-style-type:disc">Inserts only if key does not exist</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-807b-b9b8-ecaa34c8f945" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8060-88a4-d01b4f47f122" class="numbered-list" start="2"><li><code>operator[]</code></li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80cd-b08e-ca72341f73c7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">m[2] = 200;</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80a9-812e-e8edee4f6474" class="bulleted-list"><li style="list-style-type:disc">if key does not exist → creates a new node</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8062-b196-f6cfa190a66e" class="bulleted-list"><li style="list-style-type:disc">Default-initializes value first</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8083-ae84-d43f7d8a0a95" class="">Accessing Elements</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8087-90cc-f1b7bff9cdc7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">cout &lt;&lt;m[1];
+cout &lt;&lt;m.at(1); // throws exception if key not found</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d8-9c69-ee2bedbcad11" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80e5-bea8-eada1bbd78a8" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;map&gt;
+using namespace std;
+
+int main() {
+    map&lt;int,string&gt; m;
+
+    m[3] = &quot;Three&quot;;
+    m[1] = &quot;One&quot;;
+    m[2] = &quot;Two&quot;;
+
+    for(auto &amp;p : m)
+        cout &lt;&lt; p.first &lt;&lt; &quot; -&gt; &quot; &lt;&lt; p.second &lt;&lt; endl;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80c9-8fa0-d0a03ce49af2" class="">Output(Sorted by key)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8036-b58e-c10b7deccff7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">1 -&gt; One
+2 -&gt; Two
+3 -&gt; Three</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8016-a3b0-f462b8e08fb8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d3-8a4d-fb0aa2d118e1" class="">Why <code>map::operator[]</code> is considered dangerous<div class="indented"><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8037-bf84-ff4e12f70b42" class=""> <code>operator[]</code> dangerous because accessing a non-existing key automatically inserts a new element with a default value, causing unintended memory allocation and logical bugs.</p></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8040-b761-f50d9601c466" class="">Example:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-807b-b9d3-edbda7626de6" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">map&lt;int, int&gt; m;
+int x = m[10];</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8026-a233-e5922c0275c3" class="">Hidden behavior<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-801b-86ed-e77c3631de85" class="bulleted-list"><li style="list-style-type:disc">key <code>10</code> does not exist</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8076-8e13-d484c02a2371" class="bulleted-list"><li style="list-style-type:disc"><code>map</code> creates a new node</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-806b-bfa7-f5e1d95b6167" class="bulleted-list"><li style="list-style-type:disc">Value is default-initialized → <code>0</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-808b-9b00-f2665cd3b099" class="bulleted-list"><li style="list-style-type:disc">Memory is allocated</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8027-b3ef-f83956230e15" class="bulleted-list"><li style="list-style-type:disc">Tree is rebalanced</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-808f-a70e-f69e47c2834d" class="">You only wanted to read, but you modified the map</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8034-a629-c98b04d86fec" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80fb-aa43-ca89096bea11" class="">Use <code>fin()</code> (Best for checking)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80f8-895f-c916b42c729f" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">auto it = m.find(key);
+if(it != m.end())
+		cout &lt;&lt; it-&gt;second;</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8025-a418-ecbd0b8789ba" class="">Use <code>at()</code> </p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8070-898b-ee960f011863" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">cout &lt;&lt; m.at(key); // throws exception if missing</code></pre></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80f5-82a3-ec62b5d8518a" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2dd56d6f-efb1-8089-ab2a-cfb8ef27bd8f" class=""><mark class="highlight-gray_background">LIMITATIONS</mark></h2></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-808b-bc1d-e042932ddaa2" class="numbered-list" start="1"><li>Use of standard template library should be avoided for real-time applications due to internal memory allocation.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2dd56d6f-efb1-8092-91a7-f8c993924120" class="numbered-list" start="2"><li>Use of standard library helps the programmer by adding precompiled headers but maximizes the compile time.</li></ol></div><div style="display:contents" dir="auto"><blockquote id="2dd56d6f-efb1-8060-8ed0-d3b0b2ed8c21" class="">Deterministic means: <strong>The behavior of a system is completely predictable and repeatable</strong></blockquote></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8074-a2b9-cedea0e64c23" class="">If you run the same operation under the same conditions, you always get the same result in the same amount time.</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-806e-82b2-c40eca2f22b2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-809c-9655-dc122279a6d7" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2dd56d6f-efb1-80d9-82eb-ce6443069b41" class="">FUNCTION OBJECTS</h2></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-805b-a2c8-c3617244fbb2" class=""><strong>Definition</strong></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80bd-8da9-f97fb64374c1" class="">A function object is a function that is wrapped inside a class, so that it behaves like an object.<div class="indented"><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8053-acc3-d0ab84fd0f20" class="bulleted-list"><li style="list-style-type:disc">The class overloads the function call operator <code>()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8021-a589-e3e7dafcf6ac" class="bulleted-list"><li style="list-style-type:disc">This allows the object to be called like a normal function</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8017-8820-d377d0af1fbb" class="">Hence, a function object <em>looks like an object but behaves like a function.</em></p></div></div></p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8013-9d3d-cfdf745c161d" class="">Characteristics of Function Objects</p></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c3-8e24-d9abdf18a30c" class="bulleted-list"><li style="list-style-type:disc">Implemented as a Class</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8015-b71f-f97baa3cd6a7" class="bulleted-list"><li style="list-style-type:disc">The class contains:<div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80a4-bf9a-f2bab93e90a9" class="bulleted-list"><li style="list-style-type:circle">Only one member function</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-802b-9b3b-da4a38d9b35b" class="bulleted-list"><li style="list-style-type:circle">The overloaded <code>operator()</code></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80c4-ad62-f78117d16747" class="bulleted-list"><li style="list-style-type:disc">Usually does not contain data members</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-805c-bfa4-c6fde8927177" class="bulleted-list"><li style="list-style-type:disc">The class is templatized<div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8065-8123-e31cfd696903" class="bulleted-list"><li style="list-style-type:circle">So it can work with different data types</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-80ed-82f3-fc24329950af" class="bulleted-list"><li style="list-style-type:disc">Defined in the <code>&lt;functional&gt;</code> header file</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80e9-b0b7-d4ed1cceee82" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-8030-9268-c0d3bdc32ee2" class="">Function Objects in STL Algorithms</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d0-b571-d3053f560a06" class="">STL provides predefined function objects that can be passed to algorithms.</p></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80f2-afba-f5147f2f0560" class="">Example Code Sorting in Descending Order</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-8093-9bc5-fe4fe7501ee9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;algorithm&gt;
+#include &lt;functional&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int arr[] = {4, 2, 9, 1};
+    sort(arr, arr + 4, greater&lt;int&gt;());
+
+    for(int i = 0; i &lt; 4; i++)
+        cout &lt;&lt; arr[i] &lt;&lt; &quot; &quot;;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-804a-b9ef-eeeb2ef167ab" class="">Output:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2dd56d6f-efb1-80fb-909f-ee6cba4e0ae4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">9 4 2 1</code></pre></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8010-98a9-c553ee51a1cf" class="bulleted-list"><li style="list-style-type:disc"><code>greater&lt;int&gt;</code> is a function object</li></ul></div><div style="display:contents" dir="auto"><ul id="2dd56d6f-efb1-8029-827b-e6b2c6bcbdf7" class="bulleted-list"><li style="list-style-type:disc">It is used to sort elements in descending order</li></ul></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-80d2-a0b2-e19ef1689dd5" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2dd56d6f-efb1-8068-8fd7-de95e8da183e" class="">📌 STL Function Objects (<code>&lt;functional&gt;</code>)</h3></div><div style="display:contents" dir="ltr"><table id="2dd56d6f-efb1-8000-87f9-d14e979efa58" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8045-a0d5-c56e100f1d5f"><th id="IowV" class="simple-table-header-color simple-table-header" style="width:276.9375px"><strong>Function Object Type</strong></th><th id="N=;e" class="simple-table-header-color simple-table-header" style="width:403px"><strong>Description / Operation</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8067-911f-c7b7c17820c7"><td id="IowV" class="" style="width:276.9375px"><code>plus&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns the sum of two values</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80ce-9807-f02a9bfb32a1"><td id="IowV" class="" style="width:276.9375px"><code>minus&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns the difference of two values</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-802e-815a-ccb1fd725703"><td id="IowV" class="" style="width:276.9375px"><code>multiplies&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns the product of two values</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8063-8e90-ca0c46d56725"><td id="IowV" class="" style="width:276.9375px"><code>divides&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns the division of two values</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80a0-b35d-c763b249068e"><td id="IowV" class="" style="width:276.9375px"><code>modulus&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns the remainder of division</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80c6-b9ee-fde3d7529d56"><td id="IowV" class="" style="width:276.9375px"><code>negate&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns the negation of a value</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80e0-9987-c33f0ee8fc56"><td id="IowV" class="" style="width:276.9375px"><code>equal_to&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns true if two values are equal</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8098-8432-e272d94e1f5f"><td id="IowV" class="" style="width:276.9375px"><code>not_equal_to&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns true if two values are not equal</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-802e-b18b-fd2e6f12d876"><td id="IowV" class="" style="width:276.9375px"><code>greater&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns true if first value is greater</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8078-b14d-cf5e5866d77f"><td id="IowV" class="" style="width:276.9375px"><code>less&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns true if first value is smaller</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80bf-91a4-cd6c69783f6b"><td id="IowV" class="" style="width:276.9375px"><code>greater_equal&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns true if first value ≥ second</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80ed-8322-c30df12fd3d5"><td id="IowV" class="" style="width:276.9375px"><code>less_equal&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Returns true if first value ≤ second</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-80d7-b066-ce6e3be3a707"><td id="IowV" class="" style="width:276.9375px"><code>logical_and&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Performs logical AND operation</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-8033-b771-c9a6ea99e20e"><td id="IowV" class="" style="width:276.9375px"><code>logical_or&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Performs logical OR operation</td></tr></div><div style="display:contents" dir="ltr"><tr id="2dd56d6f-efb1-804b-a984-e56f21a0a865"><td id="IowV" class="" style="width:276.9375px"><code>logical_not&lt;T&gt;</code></td><td id="N=;e" class="" style="width:403px">Performs logical NOT operation</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2dd56d6f-efb1-803c-a3bf-eaa049cf874b" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
