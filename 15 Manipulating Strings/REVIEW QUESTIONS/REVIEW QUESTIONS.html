@@ -1,0 +1,776 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>REVIEW QUESTIONS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e156d6f-efb1-8095-bf12-f9011f8ff060" class="page sans"><header><h1 class="page-title" dir="auto">REVIEW QUESTIONS</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2e156d6f-efb1-804c-a140-f156c71bde2d" class="">Cognitive Domain</h2></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-8096-841f-ce86e06c8c5c" class="">15.1 Discriminate between string type and <strong>string</strong> and a C-type string.</h3></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8085-ad08-d71158bae7b9" class="bulleted-list"><li style="list-style-type:disc">Definition</li></ul></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8029-98ac-d7d4e607daff" class=""><strong>C-type String</strong></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8001-a7a7-cd6bfbc94fce" class="">A C-type string is an array of characters terminated by a null character (<code>\0</code>).</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8018-b376-d93b27be380a" class="">It is inherited from the C language.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b2-bd8d-de75e6dab58e" class=""><strong>C++ String (string type)</strong></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80df-a7c1-cb0cd132f8d3" class="">A C++ string is an object of the <code>string</code> class that stores and manages text automatically.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8078-81a0-e1265094b0a8" class="">It is part of the C++ Standard Library.</p></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-80b2-930f-d81d92857ddf"/></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8019-916d-c67a369126ee" class="bulleted-list"><li style="list-style-type:disc">Declaration</li></ul></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-80a0-a036-d5813c9d4a08" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80fa-9a13-e98f2338eb2c"><th id="^:Nb" class="simple-table-header-color simple-table-header">Aspect</th><th id="_B?^" class="simple-table-header-color simple-table-header">C-type String</th><th id="HtFU" class="simple-table-header-color simple-table-header">C++ String</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8022-a354-c576add08f26"><td id="^:Nb" class="">Syntax</td><td id="_B?^" class=""><code>char str[20];</code></td><td id="HtFU" class=""><code>string str;</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-806a-96de-c1b5200bcb0a"><td id="^:Nb" class="">Header</td><td id="_B?^" class=""><code>&lt;cstring&gt;</code></td><td id="HtFU" class=""><code>&lt;string&gt;</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80c6-9b9f-f5c8e81dd3ff"><td id="^:Nb" class="">Termination</td><td id="_B?^" class="">Ends with <code>&#x27;\0&#x27;</code></td><td id="HtFU" class="">No manual terminator</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-803a-9662-dd37dd0499fb" class="bulleted-list"><li style="list-style-type:disc">Memory Management</li></ul></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-807f-9576-c859b4cddc34" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-806b-aa2a-d0ecabefeae4"><th id="&lt;r=G" class="simple-table-header-color simple-table-header">Feature</th><th id="vXA`" class="simple-table-header-color simple-table-header">C-type String</th><th id="bAu`" class="simple-table-header-color simple-table-header">C++ String</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8025-bb4e-c815d93450f9"><td id="&lt;r=G" class="">Memory</td><td id="vXA`" class="">Fixed size</td><td id="bAu`" class="">Dynamic (auto-resizing)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80ee-a784-fc06c51bfc07"><td id="&lt;r=G" class="">Overflow risk</td><td id="vXA`" class="">Yes</td><td id="bAu`" class="">No</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80dc-a86e-ff3dbbce906c"><td id="&lt;r=G" class="">Allocation</td><td id="vXA`" class="">Manual</td><td id="bAu`" class="">Automatic</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80b5-961d-c2b41917b58a" class="bulleted-list"><li style="list-style-type:disc">Operations &amp; Ease to Use</li></ul></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-805c-8f3d-da346cc7b25f" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8061-a496-f063f5876d1f"><th id="|=aM" class="simple-table-header-color simple-table-header">Operation</th><th id="jjpO" class="simple-table-header-color simple-table-header">C-type String</th><th id="f?A~" class="simple-table-header-color simple-table-header">C++ String</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-801f-9e7f-f1041f6a0748"><td id="|=aM" class="">Assignment</td><td id="jjpO" class=""><code>strcpy()</code></td><td id="f?A~" class=""><code>=</code> operator</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-803b-ac49-ee21abc74f51"><td id="|=aM" class="">Concatenation</td><td id="jjpO" class=""><code>strcat()</code></td><td id="f?A~" class=""><code>+</code> operator</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80a0-a823-e0ab96383eb3"><td id="|=aM" class="">Comparison</td><td id="jjpO" class=""><code>strcmp()</code></td><td id="f?A~" class=""><code>==</code>, <code>&lt;</code>, <code>&gt;</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80ef-8e57-eceaccbc3a37"><td id="|=aM" class="">Length</td><td id="jjpO" class=""><code>strlen()</code></td><td id="f?A~" class=""><code>.length()</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80a8-aec8-d9b50b4b546f" class="bulleted-list"><li style="list-style-type:disc">Safety</li></ul></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-804d-9ef4-d5c61231fd77" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8042-9213-c2171aa1cd8a"><th id="=xaO" class="simple-table-header-color simple-table-header">Aspect</th><th id="msUi" class="simple-table-header-color simple-table-header">C-type String</th><th id="dWyI" class="simple-table-header-color simple-table-header">C++ String</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-805d-bc3f-ceac9af512ee"><td id="=xaO" class="">Bounds checking</td><td id="msUi" class="">❌ No</td><td id="dWyI" class="">✅ Yes (via <code>.at()</code>)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8022-b292-fbabbcd2e145"><td id="=xaO" class="">Error-prone</td><td id="msUi" class="">High</td><td id="dWyI" class="">Low</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8098-a71c-c4a17eea64c2"><td id="=xaO" class="">Recommended</td><td id="msUi" class="">❌ Legacy use</td><td id="dWyI" class="">✅ Modern C++</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-802c-9134-ef3cfc2c7421" class="">Example Code</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8041-b201-f95e2584483c" class="">C-type String</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8018-ba19-d794b3df278c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+
+int main()
+{
+		char s1[20] = &quot;Hello&quot;;
+		char s2[20] = &quot;World&quot;;
+		strcat(s1, s2);
+		cout &lt;&lt; s1;
+		return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8001-9ffe-d16e96876d10" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8061-981f-d0bc75817ec8" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">HelloWorld</code></pre></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-8028-ae59-d6584f32042d"/></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-800f-84a9-f96d7424de73" class="">C++ String</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-806d-b84f-f325be4eb958" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main(){
+		string s1 = &quot;Hello&quot;;
+		string s2 = &quot;World&quot;;
+		
+		s1 = s1 + s2;
+		cout &lt;&lt; s1;
+		return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-803a-a574-e7879988d058" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80e8-bd59-cfec1e665e31" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">HelloWorld</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8039-86bd-fc870772c616" class=""><strong>Conclusion</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2e156d6f-efb1-8099-9bca-c52718d240a6" class=""><strong>C-type strings are low-level, error-prone, and require manual handling, whereas C++ strings are safer, dynamic, and provide rich built-in functions. Therefore, C++ strings are preferred in modern C++ programming.</strong></blockquote></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-80d5-b622-e152faf08c14"/></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-80d9-af63-ec685bf39350" class="">15.2 The following statements are available to read strings from the keyboard.</h3></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-8011-86be-cd1ae4d3ad6d" class="numbered-list" start="1"><li>cin &gt;&gt; s1;</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-80af-8954-ca91ed26d2ec" class="numbered-list" start="2"><li>getline(cin,s1);</li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8084-9330-fe62ae770848" class=""><code>cin&gt;&gt;s1;</code></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8044-81dd-f3b8469e4cf6" class="">Meaning<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80c8-911d-d8a414060c89" class="bulleted-list"><li style="list-style-type:disc">Reads a string up to the first whitespace (space, tab, newline).</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8030-9599-f74e7e26de1e" class="bulleted-list"><li style="list-style-type:disc">Input stops as soon as a space is encountered</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b9-9575-ce89882ce7ac" class="">Behavior<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-805e-be4f-c269f45e0127" class="bulleted-list"><li style="list-style-type:disc">Skips leading whitespaces</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80f0-a5dc-d45ff2d35cc5" class="bulleted-list"><li style="list-style-type:disc">Cannot read multi-word strings</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80ce-baff-f12482369dde" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-807a-ab62-fdbf63732150" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s1;
+cin &gt;&gt; s1;</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-800e-9c1b-ecd531f41c4d" class="">Input</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8006-8716-d68495ac3831" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello World</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b2-9189-faf989269de3" class="">Output stored in s1</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8035-b648-cfb08f82d65e" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80d2-8437-fd0badbb44ab" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80ef-b9c7-cf33d488d6d9" class=""><code>getline(cin, s1);</code></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80f9-8bab-efe01ab8ab1d" class="">Meaning<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80d1-bfc6-e8f7e69667d0" class="bulleted-list"><li style="list-style-type:disc">Reads the entire line of text, including spaces.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8076-97c9-cb69fdc77b2b" class="bulleted-list"><li style="list-style-type:disc">Input stops only when Enter key is pressed.</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b5-aef7-f5b545f908c7" class="">Behavior<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80c1-af12-f7f486bde941" class="bulleted-list"><li style="list-style-type:disc">Reads spaces</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80d2-bc53-fee8bf496ce0" class="bulleted-list"><li style="list-style-type:disc">Suitable for full sentences</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80c2-85b2-e8bc0a52badc" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80ae-b955-dbc6d660bdc0" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s1;
+getline(cin, s1);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8030-a5f7-d492797348d6" class="">Input</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80c3-8f2f-f0d9a1728c00" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello World</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b2-98ee-fc242c21f862" class="">Output stored in s1</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8075-adc0-e4780a6d3f96" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello World</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8025-81df-c02a64d7eb22" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80e3-9163-ddfd7748ef46" class="">Key Differences</p></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-806a-8065-d2bdeea8e09b" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80ac-aa10-df2c3fc44516"><th id="g|nA" class="simple-table-header-color simple-table-header">Aspect</th><th id="S|=k" class="simple-table-header-color simple-table-header"><code>cin &gt;&gt; s1</code></th><th id="qAeP" class="simple-table-header-color simple-table-header"><code>getline(cin, s1)</code></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80e9-bf4b-ded62e7f0470"><td id="g|nA" class="">Reads spaces</td><td id="S|=k" class="">❌ No</td><td id="qAeP" class="">✅ Yes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8035-ab4b-f15065183be1"><td id="g|nA" class="">Stops at</td><td id="S|=k" class="">Whitespace</td><td id="qAeP" class="">Newline (<code>\n</code>)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8012-8296-d204400055fa"><td id="g|nA" class="">Input type</td><td id="S|=k" class="">Single word</td><td id="qAeP" class="">Full line</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80bd-a2a9-f4ef97ee729f"><td id="g|nA" class="">Use case</td><td id="S|=k" class="">Names, codes</td><td id="qAeP" class="">Sentences, addresses</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-803c-bb1a-c55c5d40b619"><td id="g|nA" class="">Safety</td><td id="S|=k" class="">Simple</td><td id="qAeP" class="">More flexible</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80af-9230-dc56753fb95e" class="">Common Problem &amp; Solution</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80af-ac6d-ce9d414a4dc7" class="">Problem</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80d1-a1e4-e2bb396609ba" class="">Using <code>getline()</code> after <code>cin&gt;&gt;</code> may skip input.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-809e-a27d-cac5be9c5692" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int x;
+string s;
+cin &gt;&gt; x;
+getline(cin, s); // gets skipped</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8045-aea8-d027e99e9ff4" class="">Reason<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8001-a0c5-fea232771797" class="bulleted-list"><li style="list-style-type:disc"><code>cin &gt;&gt; x</code> leaves a newline (<code>\n</code>) in the buffer</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-803f-b973-ea6d7d31332b" class="">Solution</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8079-89e6-f4d71dc36906" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">cin.ignore();
+getline(cin,s);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8067-b107-c465bdd36e85" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-809a-8fbc-fa9813f6d324" class="">Conclusion</p></div><div style="display:contents" dir="auto"><blockquote id="2e156d6f-efb1-80f1-acfd-fe53622488a0" class=""><code><strong>cin &gt;&gt; s1</strong></code><strong> is used to read a single word without spaces, whereas </strong><code><strong>getline(cin, s1)</strong></code><strong> is used to read an entire line including spaces. Therefore, </strong><code><strong>getline()</strong></code><strong> is preferred when input contains spaces.</strong></blockquote></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-808d-956a-da5eeda39afb"/></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-809d-88dd-c041d712ef11" class="">15.3 Consider the following segment of a program:</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8006-a5b6-f4510681f3f5" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s1(&quot;main&quot;), s2, s3;
+
+s2.assign(s1);
+s3 = s1;
+string s4(&quot;wo&quot; + s1);
+s2 += &quot;age&quot;;
+s3.append(&quot;ager&quot;);
+s1[0] = &#x27;v&#x27;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-805e-bfae-e02c9ad4c870" class="">State the contents of the objects s1, s2, s3 and s4 when executed.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8010-8fe0-ea45bc39a803" class="">Initial values</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80e5-806f-e7e048985884" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s1 = &quot;main&quot;;
+s2 = &quot;&quot;
+s3 = &quot;&quot;</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-80e9-a251-c5ab95948b79" class="numbered-list" start="1"><li><code>s2.assign(s1)</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8057-a189-c0aefd8a7ea1" class="">Copies <code>s1</code> into <code>s2</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80bd-bd49-d309cdf5fb8c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s2 = &quot;main&quot;</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-80c4-a89a-d5f8fc1687c8" class="numbered-list" start="2"><li><code>s3 = s1;</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b1-9e77-d1a28555bf40" class="">Assignment operator copies <code>s1</code> into <code>s3</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80ac-8c30-ebadc6b62887" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s3 = &quot;main&quot;</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-80e7-b11a-c4217156c368" class="numbered-list" start="3"><li><code>string s4(&quot;wo&quot; + s1);</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80a6-a309-f05c31e1b9aa" class="">Concatenates <code>&quot;wo&quot;</code> with <code>s1</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-806d-833b-cd2a80ca9eb8" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s4 = &quot;womain&quot;</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-805a-a2b9-fa5b46842a46" class="numbered-list" start="4"><li><code>s2 += &quot;age&quot;;</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-809f-b46e-d0f8d1985f8f" class="">Appends <code>&quot;age&quot;</code> to <code>s2</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8068-a229-c450f1b930e7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s2 = &quot;mainager&quot;</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-8024-84ec-e7c4402861df" class="numbered-list" start="5"><li><code>s3.append(&quot;age&quot;)</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8072-88a8-d339df34f2e6" class="">Appends <code>&quot;ager</code>&quot; to <code>s3</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80b9-a760-dcd4e8cdf7b9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s3 = &quot;mainager&quot;</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-80de-8024-fa35db8b75cb" class="numbered-list" start="6"><li><code>s1[0] = &#x27;v&#x27;</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8061-ae17-d61c35a7cc96" class="">Replaces first character of <code>s1</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-808f-aa09-d0cb165a5f4f" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s1 = &quot;vain&quot;</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80e6-bbf8-e173cc240320" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80be-936c-cdde42ab7c4c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s1 = vain
+s2 = mainage
+s3 = mainager
+s4 = womain</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2e156d6f-efb1-8046-b38e-e97d2e927f8a" class="">The given program demonstrates assignment, concatenation, appending, and character</blockquote></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8008-b709-c53e66e3df06" class="">modification operations on C++ strings, resulting in the final values shown above</p></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-809b-877c-ed4bb43cf993"/></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-80e6-8d27-ff2fcd5a5d41" class="">15.4 We can access string elements using</h3></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-80d2-a060-e4fecf7eba5d" class="numbered-list" start="1"><li><strong>at() </strong>function</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-809c-a601-e2ecc927e1ba" class="numbered-list" start="2"><li>subscript operator[ ]</li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80ab-8c4b-c615fd6e03aa" class="">Compare their behavior.</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-80c7-a7e3-ea35900330c3" class="numbered-list" start="1"><li><code>at()</code> Function</li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-800e-89f5-d86e33b761a6" class="">Description</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-805b-9e2d-fe131b058803" class="">The <code>at()</code> function is a safe method to access characters of a string.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-801e-8301-fa8defe5dd68" class="">Behavior<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8057-9f0b-e7cea74c5976" class="bulleted-list"><li style="list-style-type:disc">Performs bounds checking</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8072-97b2-f198b3ebc8af" class="bulleted-list"><li style="list-style-type:disc">Throws an exception if index is invalid</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80fc-91a6-e06e7788f72c" class="bulleted-list"><li style="list-style-type:disc">Safer for runtime access</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b0-bc07-cc3e16a8d8ec" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80bd-820f-e35709b819ad" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s.at(index);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8018-be47-c98985fa02aa" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80cc-8ad0-d653e34484d9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;Hello&quot;;
+cout &lt;&lt; s.at(1);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8064-9271-c93803c5be29" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8095-ae4c-ebd631ba21e4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">e</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8066-afe4-e9316e01be37" class="">Out-of-range access</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8095-b3d9-e0ed1cb3cdc0" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s.at(10); // throws exception</code></pre></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-8037-b2b9-cd5598ac72b0"/></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-8036-baf5-d67ebbe08b56" class="numbered-list" start="2"><li>Subscript Operator <code>[]</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8079-9a3b-decd6f59cc4d" class="">Description</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80c0-85b3-c8e85397ccda" class="">The subscript operator provides direct access to string elements.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-806c-9dbe-d644263fde5f" class="">Behavior<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8001-9eaa-dc13fd58347d" class="bulleted-list"><li style="list-style-type:disc">No bounds checking</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80a6-aa00-cb89fae097c9" class="bulleted-list"><li style="list-style-type:disc">Faster but unsafe</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8021-984b-ec745cdeb206" class="bulleted-list"><li style="list-style-type:disc">Out-of-range access leads to undefined behavior</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8008-b0ee-f12930d116ca" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-807b-8434-fd1a7bfa1574" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s[index];</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b3-9cc9-d3f9e00fae69" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-800c-b5bb-d9eae6e36382" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;Hello&quot;;
+cout &lt;&lt; s[1];</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80f4-bb31-d8b6407034f9" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80f8-8d98-efe21a0ca5b0" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">e</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80fa-9f02-fda4166fff9e" class="">Out-of-range access</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80f3-8ead-fd97eabc1412" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s[10]; // undefined behavior</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80a9-a624-e8e6a1cf53cd" class="">Comparison Table</p></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-804e-ac82-feb0a030c3ad" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-807b-95bf-c44702d17700"><th id="?b~S" class="simple-table-header-color simple-table-header">Feature</th><th id="vAd|" class="simple-table-header-color simple-table-header"><code>at()</code> Function</th><th id="Um&lt;b" class="simple-table-header-color simple-table-header"><code>[]</code> Operator</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-801d-9ad8-f8786cbaa347"><td id="?b~S" class="">Bounds checking</td><td id="vAd|" class="">✅ Yes</td><td id="Um&lt;b" class="">❌ No</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80d3-879f-fa0e3c21b66b"><td id="?b~S" class="">Safety</td><td id="vAd|" class="">High</td><td id="Um&lt;b" class="">Low</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-804a-809d-ddc6092b8e49"><td id="?b~S" class="">Speed</td><td id="vAd|" class="">Slower</td><td id="Um&lt;b" class="">Faster</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-801d-9e39-f218447ceaf7"><td id="?b~S" class="">Exception</td><td id="vAd|" class="">Throws exception</td><td id="Um&lt;b" class="">No exception</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80f8-9ffc-f033e0ebb167"><td id="?b~S" class="">Recommended use</td><td id="vAd|" class="">Safe access</td><td id="Um&lt;b" class="">Performance-critical</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b0-8a27-cd204fc5b767" class="">Conclusion</p></div><div style="display:contents" dir="auto"><blockquote id="2e156d6f-efb1-80a6-96ef-d8555030331c" class="">The <code>at()</code> function provides safe access with bounds checking and exception handling, whereas the subscript operator <code>[]</code> provides faster access without bounds checking. Therefore, <code>at()</code> is preferred for safety and <code>[]</code> for performance.</blockquote></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-80ed-86ce-cf0dc4d5ce71"/></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-805e-a7b2-df7084f22c95" class="">15.5 Compute the following statements:</h3></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-80c7-b3d5-ea21c334f1ea" class="numbered-list" start="1"><li>s.replace(n,1,”/”);</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-80a2-a55f-c93cf61d208b" class="numbered-list" start="2"><li>s.erase(10);</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-80af-b2a7-d88edfae4be0" class="numbered-list" start="3"><li>s1.insert(10,s2);</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-806a-9519-d544d58510dd" class="numbered-list" start="4"><li>int x = s1.compare(0,s2.size(),s2);</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-80af-9533-c2882d91c972" class="numbered-list" start="5"><li>s2 = s1.substr(10,5);</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-8072-986b-f2e9a265d549" class="numbered-list" start="6"><li><code>s.replace(n, 1, &quot;/&quot;);</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8010-8a8d-d14d1160d0a4" class="">Meaning</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8048-b275-cfa99cbe5a23" class="">Replaces 1 character of string <code>s</code> starting at index <code>n</code> with the character <code>&quot;/&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80cf-84a9-c19eadb2545d" class="">Effect<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-808a-825e-ea7a2ec36fac" class="bulleted-list"><li style="list-style-type:disc">The character at position <code>n</code> is replaced by <code>/</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8091-82d8-c48bb92fdaf1" class="bulleted-list"><li style="list-style-type:disc">Length of string remains the same</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8017-9779-e39985648987" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80c0-98ec-fa60c94bb96d" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;computer&quot;;
+s.replace(3, 1, &quot;/&quot;);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-801f-b798-e295bcb3d2e4" class="">Result</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8088-8740-e8d4dca879ac" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">com/uter</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-8007-b9d1-dc7560a5bb4b" class="numbered-list" start="2"><li><code>s.erase(10);</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80c9-9628-e13f8304ff9a" class="">Meaning</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8090-81ed-f7ab69bfd2e6" class="">Deletes all characters of string <code>s</code> from index 10 to the end.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-802c-b910-dd376fc3b509" class="">Effect<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8039-98cf-e8f4f325400a" class="bulleted-list"><li style="list-style-type:disc">String is truncated at index 10</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-805c-9a6e-d7c7363e595c" class="bulleted-list"><li style="list-style-type:disc">Characters before index 10 remain unchanged</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-809f-aa04-d9bfcd9ef8d0" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-800d-9328-c3485277aa22" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;programminglanguage&quot;;
+s.erase(10);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80a6-85c1-df10a44fef88" class="">Result</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8028-ab2c-cc208788b3c2" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">programmin</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-80b6-9bbc-d72ab0383591" class="numbered-list" start="3"><li><code>s1.insert(10, s2);</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80f5-bba8-e1ef0da816e0" class="">Meaning</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80c1-a606-d43f1f98f313" class="">Inserts string <code>s2</code> into string <code>s1</code> starting index <code>10</code></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80df-89d9-f66c7a128acf" class="">Effect<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80b4-8c7a-d1fa27692157" class="bulleted-list"><li style="list-style-type:disc">Characters of <code>s1</code> from index 10 onward shift right</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-808c-abf6-dff6c637b890" class="bulleted-list"><li style="list-style-type:disc"><code>s2</code> is inserted at that position</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-804e-8706-c47e8c745a50" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8066-8663-f89ca0288a03" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s1 = &quot;helloworldexample&quot;;
+string s2 = &quot;CPP&quot;;
+s1.insert(10,s2);</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-804b-846c-d92a5ff82621" class="numbered-list" start="4"><li><code>int x = s1.compare(0, s2.size(), s2);</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8091-94d0-d7c678eb0a93" class="">Meaning</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-807d-bbf9-d2022e7f7a3d" class="">Compares:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80fe-870e-f8ccb6e79eda" class="bulleted-list"><li style="list-style-type:disc">Substring of <code>s1</code> starting at index <code>0</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8022-bcb5-d7fd8fd6b6e8" class="bulleted-list"><li style="list-style-type:disc">Length equal to <code>s2.size()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-807c-adff-e3ee2f59f959" class="bulleted-list"><li style="list-style-type:disc">With string <code>s2</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8009-baf4-d8b485808b64" class="">Return Value<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-809f-9561-cc11cb2c3765" class="bulleted-list"><li style="list-style-type:disc"><code>0</code> → string are equal</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8040-8298-cd9d8770a7fb" class="bulleted-list"><li style="list-style-type:disc"><code>&lt; 0</code> → <code>s1</code> substring is smaller</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8004-8625-f1108feb0459" class="bulleted-list"><li style="list-style-type:disc"><code>&gt; 0</code> → s1 substring is greater</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8068-9e0a-f836ca357145" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8069-bdec-cb5cd5b7aab3" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s1 = &quot;computer&quot;;
+string s2 = &quot;com&quot;;
+
+int x = s1.compare(0, s2.size(), s2);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-802d-87a8-e3e01a173a3f" class="">Result</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8071-a557-ff4ca414d6b3" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">x = 0;</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8005-b0eb-f6478d89fbc6" class="">(because  <code>“com” == “com”</code>)</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80da-a5a3-eccc00a2db61" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-800c-98ac-f39e60bf67b9" class="numbered-list" start="5"><li><code>s2 = s1.substr(10, 5);</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8025-a08c-e1ac0a12c1b6" class="">Meaning</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80d6-8a22-c1eb1cd89da6" class="">Extracts a substring of length 5 from string <code>s1</code> starting at index 10 and stores it in <code>s2</code></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8004-aa30-dd3cf15ab355" class="">Effect </p></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-805a-b2b6-d0040da76690" class="bulleted-list"><li style="list-style-type:disc">Original strings remain unchanged</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8045-8bea-fe1c98a217fc" class="bulleted-list"><li style="list-style-type:disc">New substring is created</li></ul></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8053-8e93-fec9982995a3" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8094-b932-cc84cc2cb999" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s1 = &quot;programminglanguage&quot;;
+string s2 = s1.substr(10,5);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80dc-98e7-c6d549c6912e" class="">Result</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8039-a7e9-d8645b53cdd4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s2 = &quot;langu&quot;;</code></pre></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-80b6-8a80-cf5f67142a61" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80be-8cd0-dbd0ee88d8c6"><th id="tH[q" class="simple-table-header-color simple-table-header">Statement</th><th id="&lt;uWG" class="simple-table-header-color simple-table-header">Operation Performed</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80c7-885d-d2144fcb95dc"><td id="tH[q" class=""><code>replace()</code></td><td id="&lt;uWG" class="">Replaces characters</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-806c-99bc-d052d3f9b597"><td id="tH[q" class=""><code>erase()</code></td><td id="&lt;uWG" class="">Deletes part of string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80bd-aa6c-f1fca8d0af0e"><td id="tH[q" class=""><code>insert()</code></td><td id="&lt;uWG" class="">Inserts another string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80fb-ba88-cfdbe7d5e267"><td id="tH[q" class=""><code>compare()</code></td><td id="&lt;uWG" class="">Lexicographical comparison</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-807d-b1b1-db0f274a161b"><td id="tH[q" class=""><code>substr()</code></td><td id="&lt;uWG" class="">Extracts substring</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-80c7-96b8-c9ce1b9623e1"/></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-8055-9b50-c91ca8759f77" class="">15.6 Distinguish between the following pair of functions.</h3></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-801e-a309-eab03c0b0876" class="numbered-list" start="1"><li>max_size() and capacity()</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-8005-8bf4-db8736de2b99" class="numbered-list" start="2"><li>find() and rfind()</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-8020-8dc3-ea05ec07c8a6" class="numbered-list" start="3"><li>begin() and rbegin()</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="2e156d6f-efb1-8050-9416-df6d1e8be1ee" class="numbered-list" start="4"><li><code>max_size()</code> vs <code>capacity()</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b4-b061-e099f7545719" class="">Meaning</p></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-8094-93cc-c6723a20b070" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80f4-aded-f143342cd4e8"><th id="PbrM" class="simple-table-header-color simple-table-header">Feature</th><th id="CtyG" class="simple-table-header-color simple-table-header"><code>max_size()</code></th><th id="b}B|" class="simple-table-header-color simple-table-header"><code>capacity()</code></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-808c-9ce3-f3cadfe30a19"><td id="PbrM" class="">Definition</td><td id="CtyG" class="">Maximum number of characters a string <strong>can theoretically hold</strong></td><td id="b}B|" class="">Amount of memory currently <strong>allocated</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8010-bce9-c086d8f3ed61"><td id="PbrM" class="">Depends on</td><td id="CtyG" class="">System &amp; implementation</td><td id="b}B|" class="">Current allocation</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8025-be4c-ebdee5fc70d8"><td id="PbrM" class="">Practical use</td><td id="CtyG" class="">Rarely used</td><td id="b}B|" class="">Frequently used</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8030-8379-ee0420c33371"><td id="PbrM" class="">Value</td><td id="CtyG" class="">Very large</td><td id="b}B|" class="">Changes dynamically</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-801a-8fab-d62c0879606e"><td id="PbrM" class="">Indicates</td><td id="CtyG" class="">Limit</td><td id="b}B|" class="">Reserved storage</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-8075-9356-f85b7ebee76d" class="numbered-list" start="2"><li><code>find()</code> vs <code>rfind()</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8044-8d03-fde7f5a3f645" class="">Meaning</p></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-807c-93c0-fe6dd4fecc8b" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8096-84c6-c57839455fd6"><th id="rVZG" class="simple-table-header-color simple-table-header">Feature</th><th id="Ro__" class="simple-table-header-color simple-table-header"><code>find()</code></th><th id="J=Pb" class="simple-table-header-color simple-table-header"><code>rfind()</code></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80ab-b16d-e01aa6320a15"><td id="rVZG" class="">Search direction</td><td id="Ro__" class="">Left → Right</td><td id="J=Pb" class="">Right → Left</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80a2-9067-e60dc43ebb07"><td id="rVZG" class="">First occurrence</td><td id="Ro__" class="">Yes</td><td id="J=Pb" class="">No</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-806a-8877-f180a172131c"><td id="rVZG" class="">Last occurrence</td><td id="Ro__" class="">No</td><td id="J=Pb" class="">Yes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-809c-a0b2-dfeca22a4a22"><td id="rVZG" class="">Return value</td><td id="Ro__" class="">Index position</td><td id="J=Pb" class="">Index position</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-804c-afb9-ce153ff199c9"><td id="rVZG" class="">Not found</td><td id="Ro__" class=""><code>string::npos</code></td><td id="J=Pb" class=""><code>string::npos</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80be-af7c-f282e2eea693" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8089-94cc-e10415ea5610" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;banana&quot;;
+cout &lt;&lt; s.find(&quot;a&quot;);
+cout &lt;&lt; s.rfind(&quot;a&quot;);</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80b1-8203-c52ee7188943" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-800f-87e6-fb743421a606" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">1
+5</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8006-ba5d-c39fff99891f" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e156d6f-efb1-800f-ab3a-ffe53f90ed03" class="numbered-list" start="3"><li><code>begin()</code> vs <code>rbegin()</code></li></ol></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80ce-ae9f-ebedd993425a" class="">Meaning</p></div><div style="display:contents" dir="ltr"><table id="2e156d6f-efb1-8076-af1e-f2b345f2b002" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8051-a54c-ec3703170602"><th id="Y?ds" class="simple-table-header-color simple-table-header">Feature</th><th id="q^Jy" class="simple-table-header-color simple-table-header"><code>begin()</code></th><th id="jlCk" class="simple-table-header-color simple-table-header"><code>rbegin()</code></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-80f7-890b-e46d4792a603"><td id="Y?ds" class="">Iterator type</td><td id="q^Jy" class="">Forward iterator</td><td id="jlCk" class="">Reverse iterator</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8063-bc05-e6b645a3ff57"><td id="Y?ds" class="">Starting point</td><td id="q^Jy" class="">First character</td><td id="jlCk" class="">Last character</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-8000-a476-d8029d07388c"><td id="Y?ds" class="">Traversal</td><td id="q^Jy" class="">Left → Right</td><td id="jlCk" class="">Right → Left</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e156d6f-efb1-807f-97b0-e0969fc145e7"><td id="Y?ds" class="">Common use</td><td id="q^Jy" class="">Normal loops</td><td id="jlCk" class="">Reverse loops</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80f0-9af9-edd7c8b472ca" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-806e-b69d-c39e5ef02d98" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;ABC&quot;;
+
+for(auto it = s.begin(); it != s.end(); it++)
+    cout &lt;&lt; *it;</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80ae-af4c-e343160a9328" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-80b0-a8ab-d87e0c43193e" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">ABC</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8071-b1c8-cc2b55c90316" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">for(auto it = s.rbegin(); it != s.rend(); it++)
+    cout &lt;&lt; *it;</code></pre></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-808c-baf1-d675889599ac" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e156d6f-efb1-8082-bc01-c43633b8ec97" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">CBA</code></pre></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8081-96b0-caae05593361" class="bulleted-list"><li style="list-style-type:disc"><code>max_size()</code> shows limit, not memory</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80f9-8778-cd6755a79327" class="bulleted-list"><li style="list-style-type:disc"><code>capacity()</code> shows reserved memory</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-801d-b4ca-dc9b903481b7" class="bulleted-list"><li style="list-style-type:disc"><code>find()</code> searches from start</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80a6-8a91-ecc3da225614" class="bulleted-list"><li style="list-style-type:disc"><code>rfind()</code> searches from end</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8081-8f91-c4c04047330c" class="bulleted-list"><li style="list-style-type:disc"><code>begin()</code> gives forward iterator</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8012-8237-e653e10d4d4f" class="bulleted-list"><li style="list-style-type:disc"><code>rbegin()</code> gives reverse iterator</li></ul></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-8088-86b4-eaf8e4bcf2b5"/></div><div style="display:contents" dir="auto"><h2 id="2e156d6f-efb1-803a-8ca3-ea035b123a4c" class="">Affective Domain</h2></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-80f4-96ec-f5634a609ba9" class="">15.7 Defend the correctness of the following statements:</h3></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-8047-9b41-f5c2f35d48b7" class="">a. For using <strong>string</strong> class, we must include the header &lt;string&gt;.</h3></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8069-9f30-f7f70e683051" class="">The statement is correct because the <code>string</code> class is defined in the <code>&lt;string&gt;</code> header file of the C++ Standard Library.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8076-87e0-c1d438c00263" class="">Without including this header, the compiler does not recognize the <code>string</code> class and will generate an error.</p></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-80d9-9076-d9272dfec489"/></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-803a-9915-e5d15a156481" class="">b. string objects are null terminated.</h3></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80ea-9a6d-f09fb3a77472" class="">The statement is correct because a C++ <code>string</code> object <strong>stores its characters internally in a null-terminated character array </strong>to maintain compatibility with C-style strings.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8009-ad81-d56d3aae2fbf" class="">Although the programmer does <strong>not manually handle </strong>the null character (<code>\0</code>), the <code>string</code> class ensures that:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80f6-a368-e7a39c6d0898" class="bulleted-list"><li style="list-style-type:disc">The internal buffer ends with <code>\0</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-800e-98b6-d13f575b76e6" class="bulleted-list"><li style="list-style-type:disc">Functions like <code>c_str()</code> and <code>data()</code> can safely return a C-style string</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-804f-a9f5-d377dcecf38f" class="">Important Clarification<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8046-abab-f68543eba953" class="bulleted-list"><li style="list-style-type:disc">The null character is managed automatically</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80ad-bffb-dca0405aff25" class="bulleted-list"><li style="list-style-type:disc"><code>\0</code> is not counted in <code>string::length()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80bd-bf21-d06400c3b503" class="bulleted-list"><li style="list-style-type:disc">Users do not need to add or remove the null terminator</li></ul></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-8072-80be-e2d4e187126b"/></div></div></p></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-80c8-a721-f0422884d242" class="">c. The elements of a string object are numbered from 0.</h3></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8024-97d1-fac24a3e9603" class="">The statement is correct because C++ strings follow zero-based indexing, just like arrays and other STL containers.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80c0-93bd-f1d2dcf4bd47" class="">This means the first character of string is stored at index 0, the second at index 1, and so on.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80f4-9873-ed664576291c" class=""><strong>Zero-based indexing is a standard design choice in C and C++, allowing:</strong><div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8054-bd6f-c5d8a85862c8" class="bulleted-list"><li style="list-style-type:disc">Efficient memory addressing</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80a1-9361-c4d310cd3cb5" class="bulleted-list"><li style="list-style-type:disc">Consistency with arrays, vectors, and iterators</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80f5-b95d-fab3d19bfde8" class="bulleted-list"><li style="list-style-type:disc">Easy integration with pointer arithmetic</li></ul></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-805b-a528-d056ef4b8382"/></div></div></p></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-8081-9037-c3fc60d85975" class="">d. Objects of string class can be copied using the assignment operator</h3></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80f4-a950-ee8f6bcaec7d" class="">The statement is correct because the C++ <code>string</code> class overloads the assignment operator (<code>=</code>) to support deep copying of string objects.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-80a3-9170-c32fbf2969df" class="">When one string object is assigned to another, the contents of the source string are copied into the destination string.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-800d-857f-f716cb4eb54d" class="">Each string object maintains its own memory, so modifying one string does not affect the other.</p></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-80a7-811e-f72fbecc16a1"/></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-809b-bbfd-e5fc68fb4e15" class="">c. Function end() returns an iterator to the invoking string object</h3></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8092-b9e2-c0a8e22da250" class="">The statement is correct because the <code>end()</code> function of a C++ <code>string</code> object returns an iterator that refers to the position just past the last character of the invoking string object.</p></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-809a-878b-ea8736598977" class="">This Iterator:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80b5-944c-f490857d9712" class="bulleted-list"><li style="list-style-type:disc">Does not point to a valid character</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80fd-9a55-e59cbff6ccca" class="bulleted-list"><li style="list-style-type:disc">Acts as a sentinel marking the end of the string</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-809e-8fac-c03ace445dac" class="bulleted-list"><li style="list-style-type:disc">Is mainly used in loops and algorithms to control traversal</li></ul></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e156d6f-efb1-80d5-b9a4-c0cd090d8994"/></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-8067-9fd9-c7a002573373" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e156d6f-efb1-8023-bbb0-fe1697ff3226" class="">📌 <code>shrink_to_fit()</code></h3></div><div style="display:contents" dir="auto"><p id="2e156d6f-efb1-801c-be3d-d743fdfe1ecb" class="">What does <code>shrink_to_fit()</code> do?<div class="indented"><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8035-ae66-f2039c398de4" class="bulleted-list"><li style="list-style-type:disc">It requests the string to reduce its capacity to match its current size</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-80ba-acdd-d99c5371fbd7" class="bulleted-list"><li style="list-style-type:disc">Frees unused (extra) memory</li></ul></div><div style="display:contents" dir="auto"><ul id="2e156d6f-efb1-8076-bd01-cfd1444b5113" class="bulleted-list"><li style="list-style-type:disc">It is a non-binding request (compiler may or may not reduce capacity)</li></ul></div></div></p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

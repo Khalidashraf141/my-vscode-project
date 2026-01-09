@@ -1,0 +1,809 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>15 Manipulating Strings</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e056d6f-efb1-80da-adc9-c1dd3c0bea2d" class="page sans"><header><h1 class="page-title" dir="auto">15 Manipulating Strings</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2e056d6f-efb1-8076-b644-e5405c526367" class="">INTRODUCTION</h2></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80cb-996d-fea6ef724c5c" class="">What is a String in C++</h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8022-8465-d52ebfde1169" class=""><strong>A string is a sequence of characters.</strong></p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8055-8db4-ee516221b54f" class=""><strong>Old way (C-strings)</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80b4-bdac-dd54c8cda31d" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">char name[20] = &quot;Khalid&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-806a-a620-e57101306695" class="">Problems:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8070-9c5f-ed8586adb1f3" class="bulleted-list"><li style="list-style-type:disc">Fixed size</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-80fb-9319-e9b5e073b5b2" class="bulleted-list"><li style="list-style-type:disc">Manual memory handling</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-80f1-8f24-e37c02612a52" class="bulleted-list"><li style="list-style-type:disc">No direct comparison, concatenation, etc.</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8021-90fc-c2f53e54ec32" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-802c-a36c-f9dd9f298803" class=""><strong>Modern way (C++ string class)</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-803e-95b0-c6d6859346bf" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;string&gt;
+string name = &quot;Khalid&quot;;</code></pre></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-80cb-9d6a-f4d3d51a7264" class="bulleted-list"><li style="list-style-type:disc">Dynamic size</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8067-8b4e-cb45849e64b6" class="bulleted-list"><li style="list-style-type:disc">Safe</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8037-a6b4-e95278ffc692" class="bulleted-list"><li style="list-style-type:disc">Powerful build-in functions</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-80cd-892c-d3141d03abee" class="bulleted-list"><li style="list-style-type:disc">Easy to use</li></ul></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80f6-b58a-c0720222dce2" class="">That’s why <strong>ANSI C++ introduced </strong><code><strong>string</strong></code><strong> class</strong></p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80c8-9109-c4f5ded3f4a0" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80dd-aee5-eae8ed4aaf3d" class="">Why <code>string</code> is NOT STL but behaves like one</h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8001-bead-c1b97561c439" class="">Although <code>string</code> is not officially part of STL, it:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8046-a4c7-fb26861e12ed" class="bulleted-list"><li style="list-style-type:disc">Works like a container</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8012-a263-d4fa238937d1" class="bulleted-list"><li style="list-style-type:disc">Supports iterators</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8070-9289-f7e449d7a57b" class="bulleted-list"><li style="list-style-type:disc">Works with STL algorithms</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-800c-b9a0-dbd4f2f30dbd" class="">So practically, we treat it like an STL container.</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-800d-bf15-e01560789e71" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8068-adbd-c3f0e228a35d" class=""><strong>Table: Commonly used string constructors</strong></h3></div><div style="display:contents" dir="ltr"><table id="2e056d6f-efb1-80be-b005-f229803a6c8f" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80a5-a692-d07afb046dcd"><td id="Rohj" class="block-color-orange_background" style="width:236.33333333333334px">Constructor</td><td id="ye@c" class="block-color-gray_background" style="width:506.328125px">Usage</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8077-bec4-d3557134dbb7"><td id="Rohj" class="block-color-orange_background" style="width:236.33333333333334px">string();</td><td id="ye@c" class="block-color-gray_background" style="width:506.328125px">For creating an empty string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80c8-b096-e51354e9ee73"><td id="Rohj" class="block-color-orange_background" style="width:236.33333333333334px">string(const char *str);</td><td id="ye@c" class="block-color-gray_background" style="width:506.328125px">For creating a string object from a null-terminated string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-803e-9431-ddf1c4d6e10f"><td id="Rohj" class="block-color-orange_background" style="width:236.33333333333334px">string(const string &amp;str);</td><td id="ye@c" class="block-color-gray_background" style="width:506.328125px">For creating a string object from other string object</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><ol type="1" id="2e056d6f-efb1-800a-9925-cef80bf31792" class="numbered-list" start="1"><li><code>string()</code><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-802f-9e3c-d9880e9fa988" class="">Creates an empty string</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80d2-b7e2-fbb125e36336" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s;
+cout &lt;&lt; s;</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80f4-b8d7-c48eec1c08ff" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e056d6f-efb1-80c7-9bf1-c43c4ac709c7" class="numbered-list" start="2"><li><code>string(const char *str)</code><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8020-a765-de7f98ea2172" class="">Creates string from <strong>C-string</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80f8-a4ff-d2c92d6f9935" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;Hello&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8010-b435-ce3a3e8c07a4" class="">Equivalent:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-805f-872e-fd949a350561" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">char ch[] = &quot;Hello&quot;;
+string s(ch);</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-808e-9e1e-ec7d6f67f1bb" class="">Used when converting old C-style strings.</p></div></li></ol></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8009-a69b-dd1edb7b8ec7" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e056d6f-efb1-8094-b3db-cce36048c9f4" class="numbered-list" start="3"><li><code>string(const string &amp;str)</code><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80a8-9664-c191077b8c7f" class="">Copy constructor</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8048-916c-d76781c115a3" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s1 = &quot;C++&quot;;
+string s2(s1); // s2 = &quot;C++&quot;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-806d-bc1a-c8b2736913e5" class="">Creates a copy of another string object</p></div></li></ol></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80e1-9691-c6d1c0bbdd0b" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2e056d6f-efb1-801e-bdf5-cb633a72cb0d" class="">Table: Important functions supported by the string class</h2></div><div style="display:contents" dir="ltr"><table id="2e056d6f-efb1-8044-9496-fc7a6ea4af37" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8025-b5a3-d1c3f9504c14"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">Function</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Task</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8056-8904-e7ea18abf5ee"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">append()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Appends a part of string to another string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8021-bd79-cd0844c5b1b6"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">assign()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Assigns a partial string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8053-bc22-e2c058150587"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">at()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Obtains the character stored at a specified location</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8074-a5c0-fb9b8890f40c"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">begin()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Return a reference to the start of string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8051-b400-e4285c4960b4"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">capacity()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Gives the total elements that can be stored</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8068-a999-e153a7410e4f"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">compare()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Compares string against the invoking string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80a6-9998-efad81f13bce"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">empty()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Returns true if the string is empty; Otherwise returns false</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80b8-b9b9-e8034bd2b3fe"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">end()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Returns a reference to the end of a string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80bc-9089-cd25c0e6bfb2"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">erase()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Removes characters as specified</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80dd-9c51-e7a15957a780"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">find()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Searches for the occurrence of a specified substring</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-807e-b8a5-c0d041d0493e"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">insert()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Inserts characters at a specified location</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80ec-9ed5-f2d2bce3f7f1"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">length()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Gives the number of elements in a string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-803c-b86d-ddff02dd8de3"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">max_size()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Gives the maximum possible size of a string object in a give system</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8001-bb8c-e21817942f6b"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">replace()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Replace specified characters with a given string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8032-9fa0-ddf72228a6dd"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">resize()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Change the size of the string as specified</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8056-8ac2-f790b9541083"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">size()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Gives the number of characters in the string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8072-b764-fafff5a9d55d"><th id="kVRI" class="block-color-orange_background simple-table-header" style="width:236.33333333333334px">swap()</th><td id="ylCq" class="block-color-gray_background" style="width:525.328125px">Swaps the given string with the invoking string</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80b3-89ad-f7fc7c081e23" class=""><code>append()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80f2-9c9f-cb896960ba7d" class="">Adds one string to another</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80eb-ae48-e206ef781a7a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string a = &quot;Hello&quot;;
+string b = &quot; World&quot;;
+a.append(b);
+cout &lt;&lt; a;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8013-9fb5-d4c55b778db8" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-805e-8bb4-ce37b7e8d496" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello World</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-804c-af5f-eff581e0cdb8" class="">Same as <code>+</code> but safer and faster.</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-805f-936a-e0f08dbe498f" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-802b-a2d6-fdc84c25bc96" class=""><code>assign()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-807d-b4b5-d90c8b89bc2e" class="">Assigns new value (replaces old one)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8016-86f2-d4007fa334ca" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s;
+s.assign(&quot;Balagurusamy&quot;);
+cout &lt;&lt; s;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-801e-919b-e73fa69e4b4d" class="">Useful when reusing string variables.</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80e6-bcbe-cef5bde2899a" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8046-b62f-d381468e460b" class=""><code>at()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80a8-a4bb-c5d979684f7c" class="">Access character at given index (safe)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80de-b9fd-dc4b771c663d" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;CPLUS&quot;;
+cout &lt;&lt; s.at(2);</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8080-be18-feeb0201a7b5" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8015-bbfb-f4f51f19e76c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">L</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8017-b33e-c6056999d9e2" class="">Bounds-checked —&gt; safer than <code>[]</code></p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80e1-a475-d838de18daf0" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8022-b5f2-c3952c9e9999" class=""><code>begin()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8070-b809-cbb0a2c8a65d" class="">Returns iterator to first character</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80eb-bd8f-e66527ec5698" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;ABC&quot;;
+cout &lt;&lt; *s.begin();</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-800e-93cb-e3c8b48f45e1" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8089-beda-e4a8caf61959" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">A</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8062-b07e-dd3abac9a6fa" class="">Used with STL algorithms</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8090-b969-ce5f08923310" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-800b-9a9a-cc5772006b62" class=""><code>capacity()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8092-8b0b-e7427ca1d64d" class="">Total allocated storage capacity</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80f5-bafd-eaabc666b5c2" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;Hello&quot;;
+cout &lt;&lt; s.capacity();</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80f1-b0a1-f9c4c0a66448" class="">Capacity ≥ size</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-803b-bf3b-e00db8db4a57" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80b4-938e-d60c330b27e2" class="">`compare()</h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-804f-bfbe-db23bc0e93ef" class="">Compares two strings lexicographically</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80cb-bc5a-cd51e87f22ea" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string a = &quot;Apple&quot;;
+string b = &quot;Banana&quot;;
+cout &lt;&lt; a.compare(b);</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80cd-bb00-d17b62f14c31" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-809d-a62e-eeb47cf7ec6d" class=""><code>empty()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8053-8c07-e844e43858e5" class="">Checks if string is empty</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8055-9ea5-e6a8a9fd9cbf" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s;
+if(s.empty())
+		cout &lt;&lt; &quot;Empty string&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8045-8c97-c7ccd613f3c0" class="">Very important before accessing characters.</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-807a-a24c-f990ed952bcd" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-808a-8820-e6f9c34da040" class=""><code>end()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-805f-99fb-fd2162d6371d" class="">Returns iterator after last character</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-806c-ad72-c9271f4aedfe" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;ABC&quot;;
+auto it = s.end();
+it--;
+cout &lt;&lt; *it;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80aa-89a7-fd67b87625ee" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8020-9fe8-f3dabc5f280d" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">C</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-806f-b028-ea86665f980b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80bb-b105-dc92e5c2883b" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8016-b87a-e5818e2552e0" class=""><code>erase()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80a3-a422-ed60d5438737" class="">Removes characters</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80fb-a3a5-eac3bfdf528c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;HelloWorld&quot;;
+s.erase(5,5);
+cout &lt;&lt; s;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8080-a52d-d3813ac640cb" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8003-94a8-cf9fd3948d8c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8051-be67-dbe9e143ff8f" class=""><code>(start, length)</code></p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80c9-9f9e-d2bd1402b0fa" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8058-9a0a-f63e1d2f787c" class=""><code>find()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-804a-b731-d527517ec243" class="">Finds substring position</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8026-8872-f1f4bff73c47" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;Programming&quot;;
+cout &lt;&lt; s.find(&quot;gram&quot;);</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8022-b39d-dde320031fa1" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80fa-b350-c5b33ffe83f8" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">3</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-807b-97b9-e5852c227db3" class="">Returns <code>string::npos</code> if not found</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8011-8b89-fe7dbd244b51" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-807b-be05-e8fa7f2a8ebd" class=""><code>insert()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80e0-a68d-f9ba8db5f273" class="">Inserts characters</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-804b-a829-e814452fc173" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;Hello&quot;;
+s.insert(5, &quot; World&quot;);
+cout &lt;&lt; s;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80aa-9ebd-f85456a40a41" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8021-93c6-e43dbdd7343f" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello World</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8043-a4e7-f2859cceaeb5" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-802c-b197-fb670d307a7a" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8024-82bb-e51f56b84877" class=""><code>length()</code> / <code>size()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-800b-886c-c213b48fb346" class="">Returns number of characters</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80d1-a7db-ccb741dbf643" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;C++&quot;;
+cout &lt;&lt; s.length();</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80a7-861d-c21d7051cfcb" class=""><code>length()</code> and <code>size()</code> are SAME</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80c4-ac89-ef7b329ab5f5" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-805c-a891-ea115eec2a88" class=""><code>max_size()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8027-bde7-e01dab721b86" class="">Maximum possible size of string</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80b6-bc49-f010ee66b244" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s;
+cout &lt;&lt; s.max_size();</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8006-9b98-d4ab330e6e60" class="">System dependent</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80b9-8afb-e73ac17b6600" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80b7-b404-f669da26468c" class=""><code>replace()</code></p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80b7-b438-dd303d54d8d3" class="">Replace part of string</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8018-a39e-e46c4b169e6a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;Hello World&quot;;
+s.replace(6,5, &quot;C++&quot;);
+cout &lt;&lt; s;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80fd-b102-d45eed39020e" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8012-9b73-e6d195a2cbc4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello C++</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80bc-af39-ef812ee7ee84" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-808a-b8aa-f5d80a8da149" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-802a-8720-e644fc842032" class=""><code>resize()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80b7-bca3-fc3e39354740" class="">Change string size</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8039-b592-fa6901f438cc" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;HelloWorld&quot;;
+s.resize(5);
+cout &lt;&lt; s;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-802f-af9e-d210d79b7a8b" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8012-ae95-fbd2b6e11153" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Hello</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-806b-82e5-d170553c5c90" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8084-9b03-d8d7d68a7208" class=""><code>swap()</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80fc-8fa3-f4ec3a4b8e2a" class="">Swaps two strings</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8036-9bc3-f452836f290c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string a = &quot;One&quot;;
+string b = &quot;Two&quot;;
+a.swap(b);
+cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8054-b8a4-c20f0b994048" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80e6-b80c-f719db7b2043" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Two One</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8013-a777-eade13607c12" class="">Very fast → no deep copy.</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-801f-8f83-d169973d5d3f" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2e056d6f-efb1-80a9-945d-f5be93976271" class="">Table Operators for string objects</h2></div><div style="display:contents" dir="ltr"><table id="2e056d6f-efb1-80a6-8bb9-dae371cd7b3c" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8007-a351-e12ac216aa2f"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">Operator</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Meaning</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80be-9b39-f90257e3606c"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">=</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Assignment</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-809d-a21e-f1d90a377b92"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">+</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Concatenation</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80c1-aca4-c543d1e2c259"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">+=</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Concatenation assignment</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8049-b594-e79dd135e9e9"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">==</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Equality</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-809c-ab97-ebe74a3bd047"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">!=</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Inequality</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-801a-9217-caee98d49c3a"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">&lt;</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Less than</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80b6-a445-ee2dccec8f14"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">&lt;=</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Less than or equal</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80a5-a1e5-ed7b92e1b44c"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">&gt;</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Greater than</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-808f-9b4f-ce6995873904"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">&gt;=</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Greater than or equal</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-803d-ba8b-c87f49589a75"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">[ ]</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Subscription</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-80d5-8362-fb64ee67c99d"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">&lt;&lt;</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Output </td></tr></div><div style="display:contents" dir="ltr"><tr id="2e056d6f-efb1-8045-890f-d919ef43504f"><td id="EYxE" class="block-color-orange_background" style="width:236.33333333333334px">&gt;&gt;</td><td id="INKA" class="block-color-gray_background" style="width:508.328125px">Input</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8019-a995-f3d6ed99c5fe" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8060-85f0-fd34562aee1a" class=""><code>=</code></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80a1-90b5-d5da8d7e10c9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string a;
+a = &quot;C++&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8025-9486-cf7a81801126" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80c7-a0fd-f8e3c49f38a7" class=""><code>+</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80f3-ae3a-c113cae57045" class="">Concatenation</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80e3-8d86-c0d19a25cec9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string a = &quot;Hello&quot;;
+string b = &quot;World&quot;;
+cout &lt;&lt; a + &quot; &quot; + b;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8099-b0ab-d35326ba6c03" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80de-9004-cf5bbe256c87" class=""><code>+=</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80dd-bb91-cb4ca7e4e62f" class="">Concatenation assignment</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-806c-b4d8-da6a245963dc" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s = &quot;Hello&quot;;
+s += &quot; World&quot;;
+cout &lt;&lt; s;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-807c-997e-f37a50a39557" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8041-94fa-e5180b3bb8d7" class=""><code>==</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80f3-a270-ff36cd005885" class="">Equality comparison</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8076-96df-d5ec697f2528" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string a = &quot;C++&quot;;
+string b = &quot;C++&quot;;
+if(a == b)
+	cout &lt;&lt; &quot;Equal&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-801c-9e11-d494361f467c" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-806c-89ed-e8d4c3bc4fc6" class=""><code>!=</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80cb-a2fa-f48da100d142" class="">Inequality Operator</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8013-b0cf-febb36318896" class="">It checks whether two values are different</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8063-b85a-f5339b0c2714" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 16, b = 20;
+if(a != b)
+		cout &lt;&lt; &quot;a and b are different&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8081-90e0-fa3cc7e524e4" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8020-aedd-c9441f6ca774" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">a and b are different</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80d5-94f3-d7c73a317f6e" class="">Example (Strings)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-800f-acf1-c2322d713542" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">string s1 = &quot;Hello&quot;;
+string s2 = &quot;World&quot;;
+if(s1 != s2)
+		cout &lt;&lt; &quot;Strings are not equal&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8043-b2da-e87a5a92e32d" class="">Here <code>!=</code> compares string contents, not memory addresses</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-807e-b9a0-d88a59baea98" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8055-b36c-ff324f361f48" class=""><code>&lt;</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-807d-a6d9-f8a1f3a9457b" class="">Less than</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80e5-b1cd-f82cffa9bd91" class="">Checks whether left value is smaller than right value</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8093-bf59-d1e0cbc9471f" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 5, b = 10;
+if(a &lt; b)
+		cout &lt;&lt; &quot;a is smaller than b&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-806b-98d3-e95df3a57d48" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-808e-a15b-d021a1243246" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">a is smaller than b</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8064-a255-d1eb8eb13b37" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80d2-92c4-f39b9387f58a" class=""><code>&lt;=</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-805f-89e7-fdf7ac7dc6d3" class="">Less than or equal to</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8029-90a3-fe3c0aeb5d73" class="">Checks whether left value is smaller than or equal to right value</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80b0-9f3b-e6ba1309bf53" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int  marks = 40;
+if (marks &lt;= 40)
+		cout &lt;&lt; &quot;Pass&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-804a-af92-e1ddb08d45c6" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-801a-a08c-ebc4bb77bd9b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Pass</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8007-b54f-ff1435e671b1" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-804c-ad6a-fe9f9bc728bb" class=""><code>&gt;</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80cb-a128-d44bcbc8ff6d" class="">Greater than</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8039-ad33-dd92fd8973aa" class="">Checks whether left value is greater than right value.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-802f-bd0d-d0226bbe75ea" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int x = 15, y = 10;
+if(x &gt; y)
+		cout &lt;&lt; &quot;x is greater&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80eb-bf43-d0108c1aaf28" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8037-a7f0-e137c3481466" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">x is greater</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80f3-9b4f-fe2e4c839463" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80fa-a267-cc40ff165e12" class=""><code>&gt;=</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80c1-addc-fe78c04f66a7" class="">Greater than or equal to</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8044-82af-f0532aa6f498" class="">Checks whether left value is greater than or equal to right value</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80dd-aa16-f825b8518888" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int age = 18;
+if(age &gt;= 18)
+		cout &lt;&lt; &quot;Eligible to vote&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8089-b02d-d77dcc530511" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-8067-a2d4-d31eefa179aa" class=""><code>[]</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8002-8a8c-eeabaf06b371" class="">Subscript Operator</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8003-966d-d2a7a7904707" class="">Used to access elements of:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8041-b4e8-d3b75d7e795c" class="bulleted-list"><li style="list-style-type:disc">arrays</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8036-b457-f3fe0be664f8" class="bulleted-list"><li style="list-style-type:disc">strings</li></ul></div><div style="display:contents" dir="auto"><ul id="2e056d6f-efb1-8034-b667-cc37be0fec9d" class="bulleted-list"><li style="list-style-type:disc">vectors</li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8071-b1d5-f0b4c5c31976" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int arr[3] = {10, 20, 30};
+cout &lt;&lt; arr[1];;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8052-bd1a-d0c52718808f" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-809c-ac77-c7e1b7bfeb2d" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">20</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8045-a678-e0f024ca0304" class="">Index starts from 0</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8020-b5d9-db033137846c" class=""><code>[]</code>  does NOT do bounds checking in string</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8064-8476-ece970d29f85" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">s[10]; //unsafe</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80d9-9199-db53f9b768ae" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80ec-ae22-c87db8133b2a" class=""><code>&lt;&lt;</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80dd-977f-dbe672fc841b" class="">Output</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-806a-a3a5-faca12e50bf8" class=""><code>&lt;&lt;</code> is used to send data to an output stream, usually the screen.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8077-8611-d9233ca4bf6c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int x = 10;
+cout &lt;&lt; x;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-804c-8540-c64ba57bff1c" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-80da-95b6-d0a8b08be29e" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">10</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80ba-8689-dc551c457376" class="">Multiple outputs</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-8030-95da-c84ffe9cb722" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">cout &lt;&lt; &quot;Value = &quot; &lt;&lt; x;</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80c2-8558-d123bcf136ee" class="">Data flows from program → output device</p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-805f-a6ba-edc15f010121" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e056d6f-efb1-80fa-bc96-d8cdc45a1daf" class=""><code>&gt;&gt;</code></h3></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-802b-b0e2-eed3c00f5e74" class="">Input </p></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-8010-95d1-c0a37dfb672b" class=""><code>&gt;&gt;</code> is used to take data form an input stream, usually the keyboard</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e056d6f-efb1-805c-a3e5-f46569703dd2" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int age;
+cin &gt;&gt; age;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2e056d6f-efb1-80fd-a1b6-d8c887f46662" class="">Data flows from input device → program</p></div><div style="display:contents" dir="ltr"><figure id="2e156d6f-efb1-8095-bf12-f9011f8ff060" class="link-to-page"><a href="https://www.notion.so/REVIEW-QUESTIONS-2e156d6fefb18095bf12f9011f8ff060?pvs=21">REVIEW QUESTIONS</a></figure></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
