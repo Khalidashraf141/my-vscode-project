@@ -1,0 +1,844 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>16 New Features of ANSI C++ Standard</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e256d6f-efb1-80fc-b741-d1e71584066b" class="page sans"><header><h1 class="page-title" dir="auto">16 New Features of ANSI C++ Standard</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2e256d6f-efb1-80eb-9066-e7d386342ff5" class="">ANSI and ISO in C++</h2></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8044-b9b2-da0593c5e4d9" class="bulleted-list"><li style="list-style-type:disc"><strong>ANSI</strong> (American National Standards Institute)<div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-801d-b7e5-d1674ff69d15" class="bulleted-list"><li style="list-style-type:circle">Early standardization of <strong>C</strong> and initial <strong>C++</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8057-85b6-c6c7e8169ec4" class="bulleted-list"><li style="list-style-type:circle">ANSI C → C89 / C90</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-806c-a380-fabc859ec9b8" class="bulleted-list"><li style="list-style-type:circle">No longer maintains C++ standards</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80de-9f56-ebbaf6710027" class="bulleted-list"><li style="list-style-type:disc"><strong>ISO </strong>(International Organization for Standardization)<div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8020-a321-d8ea2bce2d75" class="bulleted-list"><li style="list-style-type:circle">Current and official authority for C++</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8087-9761-f0af28dfd5e2" class="bulleted-list"><li style="list-style-type:circle">All modern C++ versions are <strong>ISO standards</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80a2-bb12-ed0d66b5a89c" class="bulleted-list"><li style="list-style-type:circle">Examples: C++11, C++14, C++17, C++20</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80da-b293-d4c795950bee" class="bulleted-list"><li style="list-style-type:disc">Important Point<div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8060-a615-c207e651e774" class="bulleted-list"><li style="list-style-type:circle">C++ is an <strong>ISO standardized language</strong></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2e256d6f-efb1-804d-b944-cfcc6a3cf16b"/></div><div style="display:contents" dir="auto"><h2 id="2e256d6f-efb1-80f9-8dc8-c4b3cfcddc13" class=""><code>explicit</code> Keyword</h2></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-802a-83d3-ffdae25e1357" class="bulleted-list"><li style="list-style-type:disc">Used with single-argument constructors</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80f2-9992-fc208acd59e5" class="bulleted-list"><li style="list-style-type:disc">Prevents implicit type conversion</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80b8-8c97-cc32912d8fd1" class="bulleted-list"><li style="list-style-type:disc">Improves code safety and clarity</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e256d6f-efb1-80bb-aee4-d38385c67da6" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">explicit Test(int x);</code></pre></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80c2-9ae2-cf3de7a28bc0" class="bulleted-list"><li style="list-style-type:disc">Disallows:</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e256d6f-efb1-80a4-a229-dbd73b2dff98" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Test t = 5; // error</code></pre></div><div style="display:contents" dir="auto"><hr id="2e256d6f-efb1-808c-b9e6-f6ae9f9748aa"/></div><div style="display:contents" dir="auto"><h2 id="2e256d6f-efb1-806e-aa52-db91ea47c243" class=""><code>mutable</code> Keyword</h2></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80c6-910e-d32ca416019d" class="bulleted-list"><li style="list-style-type:disc">Allows a data member to be modified inside:<div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-805e-9daf-efd9c1f337b6" class="bulleted-list"><li style="list-style-type:circle"><code>const</code> member function</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8088-a696-dbce7c62d64c" class="bulleted-list"><li style="list-style-type:circle"><code>const</code> object</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-808c-b0c3-e2c681b02d79" class="bulleted-list"><li style="list-style-type:disc">Used for:<div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8017-a780-c68d39a51487" class="bulleted-list"><li style="list-style-type:circle">counters</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-808d-af1d-f786dd392221" class="bulleted-list"><li style="list-style-type:circle">caches</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80a8-938b-c97289f84bd0" class="bulleted-list"><li style="list-style-type:circle">internal state changes</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e256d6f-efb1-80f0-bd4a-db5300e3adfc" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">mutable int count;</code></pre></div><div style="display:contents" dir="auto"><hr id="2e256d6f-efb1-80af-a849-c190c73bda71"/></div><div style="display:contents" dir="auto"><h2 id="2e256d6f-efb1-80a7-a33b-fbb3918ed19b" class=""><code>wchar_t</code> Data Type</h2></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8046-9f5e-e4f1b31a83e1" class="bulleted-list"><li style="list-style-type:disc">Introduced in <strong>ANSI C++</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-803f-a94d-c2861e23179a" class="bulleted-list"><li style="list-style-type:disc">Stores <strong>wide characters</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8008-8b6f-f7fd9b799e52" class="bulleted-list"><li style="list-style-type:disc">Size: <strong>16 bits (2 bytes) (</strong>traditional explanation)</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-802c-b521-e39bb7d7fdf7" class="bulleted-list"><li style="list-style-type:disc">Used for languages with <strong>larger character sets</strong><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8000-b441-f67862a165b1" class="bulleted-list"><li style="list-style-type:circle">Japanese</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8050-bea6-cadef8c9e398" class="bulleted-list"><li style="list-style-type:circle">Chinese</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8002-8e2c-c1e0b577f15c" class="bulleted-list"><li style="list-style-type:circle">Korean</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2e256d6f-efb1-80eb-aa47-fbfd56c460a6" class="">Wide Character Literal<div class="indented"><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8026-a2de-f6aa51ba4204" class="bulleted-list"><li style="list-style-type:disc">Represents a wide character</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8055-8fe8-db91a6fb8463" class="bulleted-list"><li style="list-style-type:disc">Begins with <code>L</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-805d-b20c-fae92ef63935" class="bulleted-list"><li style="list-style-type:disc">Used <strong>two bytes of memory</strong></li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e256d6f-efb1-804c-8fbe-de1d84ed2832" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">wchar_t ch = L&#x27;A&#x27;;</code></pre></div><div style="display:contents" dir="auto"><p id="2e256d6f-efb1-8011-b034-cfe6e606c455" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e256d6f-efb1-8073-9ad5-cdbd1a0c3c8c" class=""><code>char</code> Character Type<div class="indented"><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8053-9f08-c7da078406f3" class="bulleted-list"><li style="list-style-type:disc">Size: <strong>1 byte (8 bits)</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80b0-aa99-d50d87718c1c" class="bulleted-list"><li style="list-style-type:disc">Can represent <strong>256 different values (0-255)</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80d9-86aa-e01a683f636c" class="bulleted-list"><li style="list-style-type:disc">Suitable for English characters</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8050-8c88-e4658b350601" class="bulleted-list"><li style="list-style-type:disc">Uses numeric character codes (ASCII)</li></ul></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e256d6f-efb1-80da-9514-d7bccec4263e"/></div><div style="display:contents" dir="auto"><h2 id="2e256d6f-efb1-8041-a7a3-de9db115f997" class=""><code>bool</code> Data Type</h2></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80a2-ad44-db8e352539e5" class="bulleted-list"><li style="list-style-type:disc">Stores logical values:<div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-802d-9fab-eb63f23cc1d1" class="bulleted-list"><li style="list-style-type:circle"><code>true</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8011-bc74-ffbeb9402567" class="bulleted-list"><li style="list-style-type:circle"><code>false</code></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2e256d6f-efb1-80b6-bbb1-d366acdaa79c" class="">Implicit Conversion to <code>bool</code><div class="indented"><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80c2-83e9-e0081c7dac6b" class="bulleted-list"><li style="list-style-type:disc">Allowed from:<div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8063-bbfc-d9d03b02563f" class="bulleted-list"><li style="list-style-type:circle">integer</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80a1-84d1-f3010dae0176" class="bulleted-list"><li style="list-style-type:circle">floating-point</li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-8026-b5a6-c0d1f4da78f9" class="bulleted-list"><li style="list-style-type:circle">pointer</li></ul></div></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e256d6f-efb1-80bb-b0d4-d1532792e369" class="">Conversion Rules<div class="indented"><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-80e2-b53f-f19dc1fbf382" class="bulleted-list"><li style="list-style-type:disc"><code>0</code> <code>0.0</code> <code>nullptr</code> → <code>false</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e256d6f-efb1-802e-8456-e4cb06c7673b" class="bulleted-list"><li style="list-style-type:disc">Any non-zero value → <code>true</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e256d6f-efb1-808d-a566-d112026ac9d2" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">	bool x = 0; //false
+	bool y = 100; // true
+	bool z = 15.75; // true</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2e256d6f-efb1-8049-a148-e0f8488f2880" class="">In C++, <strong>zero is false and non-zero is true</strong></blockquote></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-8017-9799-d897df43fe5e"/></div><div style="display:contents" dir="auto"><h1 id="2e356d6f-efb1-806a-a5dd-f9c9ea813c7f" class="">NEW OPERATORS</h1></div><div style="display:contents" dir="auto"><h3 id="2e356d6f-efb1-805f-b835-face84696063" class=""><code>static_cast</code> Operator in C++</h3></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-801c-a542-fd3acbbab4fb" class=""><code>static_cast</code> is a C++ type-casting operator used to convert one data type into another <strong>at compile time.</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-80d5-852d-f5eaec34fa60" class="">It performs no runtime checking. The compiler assumes that the programmer knows what they are doing.</blockquote></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-800b-bfb7-da4491a80ec6" class="">In C++:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8093-8690-f7a77cd8b1b4" class="bulleted-list"><li style="list-style-type:disc">Implicit conversions are sometimes not allowed</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-801e-bd1e-d26e7722094f" class="bulleted-list"><li style="list-style-type:disc">C-style casts are unsafe and unclear</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80e4-8b69-e5dfaa8edc36" class=""><code>static_cast</code> provides:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80d4-b75c-c350aacb9e86" class="bulleted-list"><li style="list-style-type:disc">Safer and clearer casting than C-style casts</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8043-ba6d-f252ddfecaad" class="bulleted-list"><li style="list-style-type:disc">Controlled type conversion</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8020-b066-f8b3f85b9299" class="bulleted-list"><li style="list-style-type:disc">Better readability</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-801c-bb39-ca4c289da6b2" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-809d-ad36-f3a42b5b0b2a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">static_cast&lt;new_type&gt;(expression)</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-801a-81a1-f5ce44a46a31" class="">Where <code>static_cast</code> is used</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e356d6f-efb1-808b-9e23-e984b7b31863" class="numbered-list" start="1"><li>Primitive type conversion</li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8046-8a55-fbaca6102cd0" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 10;
+double b = static_cast&lt;double&gt;(a);</code></pre></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8099-b341-e4f2908e1f76" class="bulleted-list"><li style="list-style-type:disc">Converts <code>int</code> to <code>double</code> safely</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80ca-b7e1-e91212a96468" class="bulleted-list"><li style="list-style-type:disc">Happens at compile time</li></ul></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-8005-bf64-dc0f9753c3d9"/></div><div style="display:contents" dir="auto"><ol type="1" id="2e356d6f-efb1-8094-992c-e1dbbf99a152" class="numbered-list" start="2"><li>Upcasting (Derived → Base) → ALWAYS SAFE</li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8061-9977-ef24f42d21bd" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">class Person{};
+class Student : public Person{};
+
+Student s;
+Person* p = static_cast&lt;Person*&gt;(&amp;s);</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e356d6f-efb1-8096-9b1c-ca5834939554" class="numbered-list" start="3"><li>Downcasting (Base —&gt; Derived) — RISKY</li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8060-9d62-e697bfddd00d" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">class Person{
+public:
+		virtual ~Person(){}
+};
+
+class Student : public Person{};
+
+Person* p = new Student();
+Student* s = static_cast&lt;Student*&gt;(p); // works, but no check</code></pre></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8028-bc3c-cf7410680ccc" class="bulleted-list"><li style="list-style-type:disc">Works only if object is actually <code>Student</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8062-ba43-d7f051db2f4a" class="bulleted-list"><li style="list-style-type:disc">Dangerous if object is not <code>Student</code></li></ul></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-802d-9509-c07bef5346b3"/></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80e0-8dbe-fbae500b67ce" class="">Dangerous example (Undefined Behavior)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8009-9fe9-dbd4c6fe1f0a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Person* p = new Teacher();  //object is Teacher
+Student* s = static_cast&lt;Student*&gt;(p);  // WRONG
+s-&gt;study();  // undefined behavior</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-805e-817b-dab89589af64" class="">Compiler does not stop you</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-809b-9b8e-e720e9a45fad" class="">Program may crash or corrupt memory</p></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-8022-93bc-e7b1725dddcf"/></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80e9-9299-f9ad0b53b22d" class="">Why <code>static_cast</code> is dangerous in polymorphism</p></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8033-b682-db66ee6a3b98" class="bulleted-list"><li style="list-style-type:disc">It does not check the actual object type</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8083-87b8-eab7a9501cf6" class="bulleted-list"><li style="list-style-type:disc">It blindly trusts the programmer</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80dd-8fff-e301fb5205ff" class="bulleted-list"><li style="list-style-type:disc">Wrong downcast leads to undefined behavior</li></ul></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80ea-a3a4-c982bd0c6e35" class="">This is why <code>dynamic_cast</code> exists.</p></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-8084-88ce-f0fc4166e4a6"/></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-802b-a96d-ced8432e38ac" class="">When should you use <code>static_cast</code><div class="indented"><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8006-badf-c162e16257c3" class="">Use <code>static_cast</code> When:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8045-a2f4-d4690b40d3b8" class="bulleted-list"><li style="list-style-type:disc">You are 100% sure of the object type</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8011-87f0-d8f6d6c5f2a7" class="bulleted-list"><li style="list-style-type:disc">Performance is critical</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80c4-b69b-c0a542cdeccf" class="bulleted-list"><li style="list-style-type:disc">Casting between related types safely</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8096-a680-e82b0dbb3d7b" class="bulleted-list"><li style="list-style-type:disc">Primitive type conversions</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80dd-b726-f1c1f897d054" class="">Avoid <code>static_cast</code> when:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-801d-be84-d75c45f62517" class="bulleted-list"><li style="list-style-type:disc">Object type is unknown at runtime</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80a4-9787-d4bc2fb6af77" class="bulleted-list"><li style="list-style-type:disc">Polymorphism is involved without certainty</li></ul></div></div></p></div></div></p></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-804e-925e-ff6282bb0abc" class=""><code>static_cast</code> is fast and efficient, but unsafe for incorrect downcasting in polymorphic class hierarchies.</blockquote></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-8055-9286-e13cf5088e9c"/></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80d2-a8fa-eaa7d4caa865" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e356d6f-efb1-80c8-9981-f7f16e12690a" class=""><code>const_cast</code> Operator in C++</h3></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8040-8a93-c98e04476a61" class=""><code>const_cast</code> is a C++ casting operator used to add or remove <code>const</code> and/or <code>volatile</code> qualifiers from a variable.</p></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-804a-84f2-ccc773d1584b" class="">It does NOT change the data type. It works with pointer and references</blockquote></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8059-a077-fbdeab465e1f" class="">What <code>const_cast</code> can and cannot do</p></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80b1-aca0-d9fc1dd0b408" class="bulleted-list"><li style="list-style-type:disc">Remove <code>const</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8038-ad29-caa96b18ea97" class="bulleted-list"><li style="list-style-type:disc">Add <code>const</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8036-bd65-d76926e36ddd" class="bulleted-list"><li style="list-style-type:disc">Remove <code>volatile</code></li></ul></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80b8-8297-fba731000a37" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80c8-9832-cb099cb01c63" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">const_cast&lt;type&gt;(expression)</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-807f-b578-ee9a93e46647" class="">Valid forms:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80d6-a7d0-db444737cfe6" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int* p = const_cast&lt;int*&gt;(const_ptr);
+int&amp; r = const_cast&lt;int&amp;&gt;(const_ref);</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8042-ac12-fc856e26a255" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80b1-900a-f99e651c6274" class="">Not allowed</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8068-8273-fc808be8c1f4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">const int a = 10;
+int b = const_cast&lt;int&gt;(a); //Error</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8067-a1f2-c2ebd8624a13" class="">Reason:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-809b-8e27-d51de14dd8bd" class="bulleted-list"><li style="list-style-type:disc"><code>const_cast</code> works only on pointers or references</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8088-bd22-f79c64a180f4" class="bulleted-list"><li style="list-style-type:disc">Values create copies → removing const makes no sense</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80ce-9106-d8f840be1d71" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8031-8273-ed8ec4a1d600" class="">Unsafe(Undefined Behavior)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8085-b5c9-c277ffc3cf92" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">const int a = 10;
+int* p = const_cast&lt;int*&gt;(&amp;a);
+*p = 20; // undefined behavior</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-806a-8aa2-df71d662c0d6" class="">Reason:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80e8-86db-c0e4cdea5b86" class="bulleted-list"><li style="list-style-type:disc">Original object is truly <code>const</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80cc-b1f3-fcef171b8821" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80cc-8566-e8e1c6ebbb04" class="">Safe Use</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8009-8fd6-e4cc2a1eef79" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 10;
+const int* p = &amp;a;
+
+int* q = const_cast&lt;int*&gt;(p);
+*q = 20; //safe</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80bb-b568-c384987797ca" class="">Reason:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80d1-951e-f6b763e673e5" class="bulleted-list"><li style="list-style-type:disc">Object was NOT originally const</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80ae-b68c-f44f64a36f47" class="bulleted-list"><li style="list-style-type:disc"><code>const</code> was added later</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80ec-8ad9-f2abbb35d360" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80b2-90b2-c9f03273d57d" class="">What is <code>volatile</code>?</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8055-92fe-cd223216d0b8" class=""><code>volatile</code> tells the compiler</p></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-80c8-b7cb-fa4db93b1bff" class="">This variable can change at any time, outside the control of the program</blockquote></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80b2-b228-c6952d4e7dbc" class="">So the compiler:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80f9-8693-ce41d98c27bd" class="bulleted-list"><li style="list-style-type:disc">Must NOT optimize access</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-803d-9718-e7f281c633c7" class="bulleted-list"><li style="list-style-type:disc">Must NOT cache the value in a register</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80ce-a856-e92b58abb2dc" class="bulleted-list"><li style="list-style-type:disc">Must always read from memory</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80a1-9cbf-fe2f8ff284c8" class="">Why <code>volatile</code> is needed</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80aa-a12a-c047f841dc9a" class="">Without <code>volatile</code> compiler may assume:</p></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-8054-82a5-fe7e52b518a7" class="">This value never changes here</blockquote></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8030-8240-f071fd24fae5" class="">This assumption is wrong when:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80a0-b23f-e499341627d6" class="bulleted-list"><li style="list-style-type:disc">Hardware changes the value</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80a7-a1bc-d5d786d41731" class="bulleted-list"><li style="list-style-type:disc">Interrupts modify the value</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-807b-9562-fc5a5e88f5a4" class="bulleted-list"><li style="list-style-type:disc">OS or signal handlers modify it</li></ul></div></div></p></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-80d2-b1e1-d34f427146eb" class=""><code>volatile</code> is a type qualifier that prevents compiler optimizations for variables whose values may change unexpectedly outside the program flow.</blockquote></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80cf-9796-c782da4b8067" class="bulleted-list"><li style="list-style-type:disc"><code>const_cast</code> → removes/adds <code>const</code> or <code>volatile</code> (only pointer/references)</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80e9-93df-da878a072824" class="bulleted-list"><li style="list-style-type:disc">Unsafe if original object is truly const</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-805e-b0b4-f39a35ecf440" class="bulleted-list"><li style="list-style-type:disc"><code>volatile</code> → tells compiler “don’t optimize, value may change externally</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8084-b7b0-cf257d8082b3" class="bulleted-list"><li style="list-style-type:disc"><code>volatile</code> ≠ thread safety</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8012-9def-d2788537d45c" class="bulleted-list"><li style="list-style-type:disc">Used heavily in embedded systems, hardware access, ISRs</li></ul></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-8037-8370-d855bc5397ca"/></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80d8-b9c3-e7f92b787839" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e356d6f-efb1-80cb-9ae8-e5927f014999" class=""><code>dynamic_cast</code> Operator in C++</h3></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80c4-aca7-eb28cb468641" class=""><code>dynamic_cast</code> is a C++ casting operator used to perform safe type conversion at runtime in an inheritance hierarchy.<div class="indented"><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-80c1-909b-e96747efd5be" class="">It checks the actual (runtime) type of an object before casting</blockquote></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-803d-9f57-f56f6caa00f0" class="">If the cast is not valid:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-809e-b518-f90350a1ff8c" class="bulleted-list"><li style="list-style-type:disc">For pointers → returns <code>nullptr</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80b3-b645-f5f984ab89cf" class="bulleted-list"><li style="list-style-type:disc">For references → throws <code>std::bad_cast</code></li></ul></div></div></p></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80ca-96b6-db658fc04ece" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-802f-bebc-eebb74781e6d" class="">Why do we need <code>dynamic_cast</code>?</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-803b-8fe7-c11a171d4aea" class="">In polymorphism, we often write:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80ae-b3ff-e7b970ed5d1b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Base* b = new Derived();</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80bb-9e64-ff6a97013bbf" class="">At runtime, we may not know:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80d1-a53d-f10894f2f500" class="bulleted-list"><li style="list-style-type:disc">Which derived object b is pointing to</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8024-99e8-d06d07f09412" class="">Using <code>static_cast</code> here is dangerous, because it does not runtime checking.</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80c1-a51b-d5c0d8f89a0a" class=""><code>dynamic_cast</code> solves this problem safely.</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80c6-a397-d4c018b00499" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e356d6f-efb1-808e-b6d8-f82ebce86af3" class="numbered-list" start="3"><li>Most IMPORTANT RULE </li></ol></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-8026-8640-e48cbc243bc5" class=""><code>dynamic_cast</code> works only with polymorphic classes.</blockquote></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8038-b785-d518bb5cd724" class="">This means:<div class="indented"><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80cf-b474-e8a782a57341" class="">Base class must have at least one virtual function</p></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-804e-839f-c99116c66d5b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">class Base{
+public:
+	virtual ~Base(){}
+	
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-803b-a678-cc25d70d1770" class="">Without a virtual function → compile time error.</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8081-85a0-c5e1ca465a83" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80f1-98ac-d159caf9a5e3" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">dynamic_cast&lt;new_type&gt;(expression)</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8011-8f16-f229b8bae9bf" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+using namespace std;
+
+class Person {
+public:
+    virtual ~Person() {}
+};
+
+class Student : public Person {
+public:
+    void study() {
+        cout &lt;&lt; &quot;Student is studying&quot; &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Person* p = new Student();
+
+    Student* s = dynamic_cast&lt;Student*&gt;(p);
+
+    if (s != nullptr) {
+        s-&gt;study();   // ✅ safe
+    }
+
+    delete p;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80f9-a828-fcc27b00734d" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8009-9f4b-c392b405686a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Student is studying</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8062-9242-dce3dbc05ee6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8094-9241-d21572328c30" class="">Failing Example (Safe Failure)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80fc-9a27-e048490785d7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">class Teacher : public Person {};
+
+int main() {
+    Person* p = new Teacher();
+
+    Student* s = dynamic_cast&lt;Student*&gt;(p);
+
+    if (s == nullptr) {
+        cout &lt;&lt; &quot;Not a Student&quot;;
+    }
+
+    delete p;
+}</code></pre></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8061-9776-f7de8e81c0f2" class="bulleted-list"><li style="list-style-type:disc">Program does NOT crash</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-802e-b325-d3837dbcd018" class="bulleted-list"><li style="list-style-type:disc">Cast fails safely</li></ul></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80fa-addb-fd3021f551a4" class="">When should you use <code>dynamic_cast</code>?</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80d8-9591-e4c7cb90541e" class="">Use When:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8020-ae7b-d5585fdf9e79" class="bulleted-list"><li style="list-style-type:disc">Runtime type is unknown </li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8035-b093-f38a7b4398d4" class="bulleted-list"><li style="list-style-type:disc">Polymorphism is used</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80b2-861a-ef2cbf98f2da" class="bulleted-list"><li style="list-style-type:disc">Safety is more important than speed</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8036-9e32-cb3a8262c897" class="">Avoid when:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-807e-895b-cd7921f0e96a" class="bulleted-list"><li style="list-style-type:disc">You already know the exact type</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80a9-85a6-dee76a856cbd" class="bulleted-list"><li style="list-style-type:disc">Performance is critical</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80ef-84e9-f3daaadf93af" class="bulleted-list"><li style="list-style-type:disc">No polymorphism is involved</li></ul></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-802e-8267-dff0f29864a3"/></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-801f-a69e-f787f2aec543" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2e356d6f-efb1-80a2-9f48-c6d49cc36d9f" class=""><code>typeid</code> Operator in C++</h3></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80a6-8701-c2eb412ca076" class="">What is the <code>typeid</code> operator?</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80fe-9e0a-e906d7486e1e" class="">The <code>typeid</code> operator is used to obtain type information of an expression at runtime.</p></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-80ee-8fed-e1ff990e8287" class="">It tells what type an object really is, especially when polymorphism is involved.</blockquote></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-806d-9f21-f48a0f5dff54" class=""><code>typeid</code> is part of RTTI (Run-Time Type Information)</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8012-9ce5-fa4c7584207f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-801a-b720-cecf6a529c78" class="">Why do we need <code>typeid</code></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80ce-bdcb-e9f9626bccdb" class="">In polymorphism, we often write:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-804e-a9b3-ded6dd0533c6" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Base* b = new Derived();</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80c8-ad70-d619f26395a0" class="">At compile time:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8019-8834-f462e7cbca9e" class="bulleted-list"><li style="list-style-type:disc"><code>b</code> is of type <code>Base*</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80a0-b604-fb352bc40694" class="">At runtime:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80a4-af34-e0c076a1236f" class="bulleted-list"><li style="list-style-type:disc">The actual object may be derived</li></ul></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8095-91c7-f0c9d64a336a" class=""><code>typeid</code> helps us identify the real object type at runtime.</p></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-808e-8113-cf4df735cd75"/></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8081-86db-dee85f8a94d5" class="">Header File Required</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8015-bf9e-c783e7524a9e" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;typeinfo&gt;</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2e356d6f-efb1-8078-92cc-e1b6f9ac938a" class=""><code>typeid</code> gives runtime (dynamic) type information only if the class is polymorphic</blockquote></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80ea-8c78-fa6f34ca7baf" class="">That means:<div class="indented"><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-802c-876b-cbf62e9cbe94" class="">Base class must have at least one virtual function</p></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80a2-a9c7-d13bcef44112" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">class Base{
+	public:
+		virtual ~Base(){}
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80e0-b0aa-d0e7539a5ccf" class="">Without a virtual function → <code>typeid</code> gives compile-time type only.</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8001-b433-d3d651784757" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8064-939a-e40d0abe9d94" class=""><code>typeid(ptr)</code> vs <code>typeid(*ptr)</code></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8061-9b8e-f1b4b388ac3b" class="">Rule to remember:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-807c-a220-dbe09579558b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">typeid(ptr) -&gt; static (compile-time) type
+typeid(*ptr) -&gt; dynamic (runtime) type</code></pre></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-8067-8e7f-e39220a03997"/></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80ec-8302-e9f644e9da41" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+using namespace std;
+
+class Org {
+public:
+    virtual ~Org() {}
+};
+
+class Dept : public Org {};
+
+int main() {
+    Dept d;
+    Org* ptr = &amp;d;
+
+    cout &lt;&lt; typeid(ptr).name() &lt;&lt; endl;    // Org*
+    cout &lt;&lt; typeid(*ptr).name() &lt;&lt; endl;   // Dept
+}</code></pre></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80c9-af7e-c7ccb24efe70" class="bulleted-list"><li style="list-style-type:disc"><code>ptr</code> is a pointer variable</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8029-8cc0-e5684e266380" class="bulleted-list"><li style="list-style-type:disc"><code>typeid(ptr)</code> checks the pointer’s type → <code>Org*</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80f7-a137-dc67adb1445a" class="bulleted-list"><li style="list-style-type:disc"><code>*ptr</code> refers to the actual object</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80fd-8401-f5f570c0507b" class="bulleted-list"><li style="list-style-type:disc">Since <code>Org</code> is polymorphic, RTTI is used</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-807a-8883-c10102c6a3ec" class="bulleted-list"><li style="list-style-type:disc"><code>typeid(*ptr)</code> returns the real object type → <code>Dept</code></li></ul></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-80e6-99aa-ecadffd77f1b"/></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8032-82c3-cec1000c4fbc" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2e356d6f-efb1-806b-b0ed-d398afcaa13c" class="">NAMESPACE SCOPE</h2></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8004-8a45-e379856d9de4" class="">Namespace scope means that a name (variable, function, class, etc.) is visible inside a namespace where it is defined</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8051-932a-e55c83100a8b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace Math{
+		int value = 10;
+		
+		void show(){
+				cout &lt;&lt; value;
+		}
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-805b-82c0-ce1276264aa2" class="">Key points<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-801f-ba70-ea723df727ac" class="bulleted-list"><li style="list-style-type:disc"><code>value</code> and <code>show()</code> belong to namespace <code>Math</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80e5-aa0f-cb22478dcef2" class="bulleted-list"><li style="list-style-type:disc">Outside the namespace, they are not directly accessible</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80b8-a662-d72c1753da4c" class="">❌Invalid:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80ef-965a-cc63212aa235" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">cout &lt;&lt; value;  // ERROR</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8023-87f1-d5e073222277" class="">✅Valid:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-805e-b6be-ec2d3d649fd1" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">cout &lt;&lt; Math::value;
+Math::show();</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-802e-ba56-d13b5d073f1e" class="">The scope of <code>value</code> is the <code>Math</code> namespace → namespace scope</p></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-8097-b43e-cd30f026af09"/></div><div style="display:contents" dir="auto"><h3 id="2e356d6f-efb1-80a5-b592-c463def9303e" class="">Unnamed (Anonymous) Namespace</h3></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80fb-a620-c7d5cd38be96" class="">An unnamed namespace has no name and is used to restrict visibility only to the current source file.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8020-860f-cde753115945" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace{
+		int x = 5;
+		void display(){
+				cout &lt;&lt; x;
+		}
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-808c-b668-c6395d05d5ae" class="">Why use unnamed namespace?<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-802d-aebc-c33923aff970" class="bulleted-list"><li style="list-style-type:disc">Provides internal linkage</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80d9-91ec-d803fead3b62" class="bulleted-list"><li style="list-style-type:disc">Similar to <code>static</code> at global scope</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8064-94e5-dcee2c4d28cf" class="bulleted-list"><li style="list-style-type:disc">Prevents name conflicts across file</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80cc-82a1-eeb3b4f9cb9b" class="">Key points<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8032-96e7-c70c3ae2a7ba" class="bulleted-list"><li style="list-style-type:disc">Accessible only inside the same <code>.cpp</code> file</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8020-993e-e73a344882f9" class="bulleted-list"><li style="list-style-type:disc">Automatically treated as unique per file</li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8099-bbeb-d733387fcfc5" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">display(); // OK (same file)</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8053-8bec-d19f92d5df33" class="">❌ From another file:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80d3-ad23-d26499327b2b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">display(); // ERROR</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-806f-846b-f5cd1ddc9b05" class="">Unnamed namespaces = file-scope protection</p></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-808b-a2f8-c3bc24babab6"/></div><div style="display:contents" dir="auto"><h3 id="2e356d6f-efb1-8012-9134-e521884f0f0a" class="">Qualified Name</h3></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8081-bde2-eba53af33095" class="">A qualified name explicitly specifies which namespace the name belongs to using the scope resolution operator <code>::</code>.</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8060-aac0-f3e7e92f62be" class="">Syntax</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80ce-b090-daff2537fb99" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace_name::identifier</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8031-b0f2-d3f7a016ef98" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8036-b50b-e35ddd43d641" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace A{
+		int num = 100;
+}
+cout &lt;&lt; A::num; //qualified name</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80bd-8fd2-c05799e62598" class="">Key points<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8080-89eb-e6d97e5163fb" class="bulleted-list"><li style="list-style-type:disc">Avoids ambiguity</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8000-9f9d-e32f3d7a01d3" class="bulleted-list"><li style="list-style-type:disc">Used when multiple namespaces have same name</li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80c6-8e99-d1c517417233" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace A{int x = 1;}
+namespace B{int x = 2;}
+
+cout &lt;&lt; A::x; // qualified
+cout &lt;&lt; B::x; // qualified</code></pre></div><div style="display:contents" dir="auto"><hr id="2e356d6f-efb1-800d-8661-f6521636cab7"/></div><div style="display:contents" dir="auto"><h3 id="2e356d6f-efb1-809d-a378-ca5f9cf083c4" class="">Unqualified Name</h3></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80c8-96d1-ccb28b33a55c" class="">An unqualified name is used without specifying the namespace</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-801b-8ab7-f3d5c8232b55" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">cout &lt;&lt; x;  // unqualified name</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8022-9176-e0daaaf7bf6e" class="">When is it allowed?</p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8021-888b-f6de135a5e06" class="">If:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80cd-9ce6-dc745ae60856" class="bulleted-list"><li style="list-style-type:disc">Name is in the same scope</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8076-8a32-c099b8cfc1c6" class="bulleted-list"><li style="list-style-type:disc"><code>using namespace</code> is used</li></ul></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-8027-afee-cac8f8d2a4ac" class="bulleted-list"><li style="list-style-type:disc"><code>using declaration</code> is used</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-8082-94ff-c3ed8d9fecce" class="">Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-8099-b984-c88c42779549" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace A{
+		int x = 10;
+}
+using namespace A;
+cout &lt;&lt; x; //unqualified name (valid)</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-80a1-864e-e6fad3578137" class="">or</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-800c-910f-c4a42f4ed602" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">using A::x;
+cout &lt;&lt; x; //unqualified</code></pre></div><div style="display:contents" dir="auto"><p id="2e356d6f-efb1-809c-a0f9-f425c944c7cb" class="">⚠️Risk:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e356d6f-efb1-80f0-8989-e6ddf6d4c4f4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">using namespace std;</code></pre></div><div style="display:contents" dir="auto"><ul id="2e356d6f-efb1-80d0-a1a2-c8bf37ef8fdc" class="bulleted-list"><li style="list-style-type:disc">Can cause name clashes in large programs</li></ul></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8037-8520-fe341c3c8bfd"/></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80e6-a150-eebd4fcd66a0" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2e456d6f-efb1-80af-957d-c02b9f5f4240" class="">OPERATOR KEYWORDS</h2></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80f4-9b3f-f41b6d2c12a6" class="">The ANSI C++ Standard proposes keywords for several C++ operators. These keywords, can be used in place of operator symbols in expressions.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8007-8696-d2b5d1df781d" class="">For Example:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8061-a886-efb8c981d302" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">x &gt; y &amp;&amp; m != 100
+may be written as
+x &gt; y and m not_eq 100</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8063-9295-cf92f0c31fdb" class="">Operator keywords not only enhance the readability of logical expressions but are also useful in situations where keyboards do not support certain special characters such as &amp;, ^ and ~</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8064-9e72-ea26a68c4c60" class="">Table <em><strong>Operator Keywords</strong></em></p></div><div style="display:contents" dir="ltr"><table id="2e456d6f-efb1-8013-91ed-fe0f28f142c0" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8070-885d-c9f31c3088d7"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px"><em>Operator</em></td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px"><em>Operator keyword</em></td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px"><em>Description</em></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-805d-ac3c-c1d58d1eef78"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">&amp;&amp;</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">and</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">logical AND</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8078-ba7a-cdea61244366"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">| |</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">or</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">logical OR</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8044-aee2-d52cd5702793"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">!</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">not</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">logical NOT</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8071-abb5-d7de7d41580d"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">! =</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">not_eq</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">inequality</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80dc-ac48-d12ec6948b3f"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">&amp;</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">bitand</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">bitwise AND</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8007-af57-dea718035e27"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">|</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">bitor</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">bitwise inclusive OR</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8080-b3cf-fd3a6ad0b1c5"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">^</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">xor</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">bitwise exclusive OR</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8054-83a8-c2b25553c8fe"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">~</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">compl</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">bitwise complement</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80cb-b974-fff39d531151"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">&amp;=</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">and_eq</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">bitwise AND assignment</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8028-a0f5-fa18c1220dc5"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">|=</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">or_eq</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">bitwise inclusive OR assignment</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-802e-8c76-f802a781fe7c"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px">^=</td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px">xor_eq</td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px">bitwise exclusive OR assignment</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80a5-b594-f64086888d30"><td id="PGA\" class="block-color-orange_background" style="width:236.33333333333334px"></td><td id="hBEK" class="block-color-gray_background" style="width:236.33333333333334px"></td><td id="|TC_" class="block-color-orange_background" style="width:236.33333333333334px"></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8078-9db4-d2face1fbe18"/></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80de-bc22-c7cd34bf53d1" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2e456d6f-efb1-80b4-bcd6-f2eb4a9d6c7c" class="">NEW HEADERS</h2></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-805f-9eda-cde86feac5ab" class="">The ANSI C++ Standard has defined a new way to specify header files. They do not use .h extension to filenames. Example:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-807e-bd08-d60183426f0b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;fstream&gt;</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80e2-b746-d7d04bd9c0e0" class="">However, the traditional style &lt;iostream.h&gt;, &lt;fstream.h&gt;, etc., is still fully supported. Some old header files are renamed as shown below:</p></div><div style="display:contents" dir="ltr"><table id="2e456d6f-efb1-802b-a353-e0b2b703121d" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8093-987a-c5429e92e156"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px"><em>Old style</em></td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px"><em>New style</em></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80a0-951b-f0192ab1aa01"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;assert.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;cassert&gt;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80fc-9f7d-f14966d3fa97"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;ctype.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;cctype&gt;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-804b-9bc0-dbd1b48a42f7"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;float.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;cfloat&gt;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8084-a8ba-e651d791f871"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;limits.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;climits&gt;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-806d-8d3f-fc1ad48edb74"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;math.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;cmath&gt;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-807a-920c-d5f06b2c9314"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;stdio.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;cstdio&gt;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8077-a0d0-d9c4a6d65897"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;stdlib.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;cstdlib&gt;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80ec-a0c3-e2e2c246802e"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;string.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;cstring&gt;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80eb-91a9-caad0f3f186f"><td id="Kasn" class="block-color-orange_background" style="width:236.33333333333334px">&lt;time.h&gt;</td><td id="biT@" class="block-color-gray_background" style="width:236.33333333333334px">&lt;ctime&gt;</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80b6-b789-f51942b6124b" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
