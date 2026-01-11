@@ -1,0 +1,890 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>REVIEW QUESTIONS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e456d6f-efb1-80cf-8375-d65cddf117ff" class="page sans"><header><h1 class="page-title" dir="auto">REVIEW QUESTIONS</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2e456d6f-efb1-8064-9859-f91d698f217e" class="">Cognitive Domain</h2></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-8064-8c19-ce0f18f298d2" class="">16.1 List the two data types added by the ANSI C++ standard committee.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-805a-a72c-fe831525dba3" class="">The ANSI C++ standard committee added the following two data types:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80bc-a766-db4cc9fb0c8a" class="numbered-list" start="1"><li><code>bool</code><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8051-b8cc-dd2dc57a7114" class="bulleted-list"><li style="list-style-type:disc">Used to represent Boolean values</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8046-ab14-fc38b1bbcced" class="bulleted-list"><li style="list-style-type:disc">Can store only <code>true</code> or <code>false</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8010-9ea7-fefcafcc534a" class="numbered-list" start="2"><li><code>wchar_t</code><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80e4-a980-ed6dc2f531e1" class="bulleted-list"><li style="list-style-type:disc">Used to represent wide characters</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8028-9e05-df38e8135927" class="bulleted-list"><li style="list-style-type:disc">Supports extended character sets (Unicode/ wide characters)</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8060-8f52-d846a598ddd2"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-8015-930c-fb766822f69b" class="">16.2 State application of bool type variables.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-806f-b21e-e977cafd9ec3" class="">The <code>bool</code> data type is used to store logical values <code>true</code> or <code>false</code>.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80b7-bec5-df1e56049f08" class="">Its main applications are:<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8028-bef5-c48df0d4538c" class="numbered-list" start="1"><li>Decision making in conditional statements such as <code>if</code> , <code>if-else</code> , and <code>switch</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8006-9d32-d7d0bb8cd7ef" class="numbered-list" start="2"><li>Controlling loops like <code>while</code> <code>for</code> and <code>do-while</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8038-bb28-cba7f3bb22f9" class="numbered-list" start="3"><li>Storing results of relational and logical expressions</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-804a-9449-e3b573021f46" class="numbered-list" start="4"><li>Returning logical status from functions (success/failure)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8062-965c-cea5f6de8359" class="numbered-list" start="5"><li>Using flags to control program flow</li></ol></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-806c-b4e6-e281ada2f404"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-80ea-b364-df6202e0d9f5" class="">16.3 Review the need for <strong>wchar_t </strong>character type.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-804f-9c39-c278f9110b79" class="">The <code>wchar_t</code> character type was introduced to support wide characters that cannot be represented using the ordinary <code>char</code> type.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8095-8836-c81929deb1fd" class="">The <code>char</code> data type is limited to one byte and is sufficient only for basic ASCII characters.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-807d-b2ac-fe437224a9e3" class="">However, many language require large character sets such as Unicode</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80ee-9d6d-dba27f694523" class="">The <code>wchar_t</code> type provides a larger storage size (typically 2 or 4 bytes) to represent extended and international characters.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-803f-9c52-e50252703295" class="">Thus, <code>wchar_t</code> is needed for internationalization, multilingual applications, and Unicode character handling in ANSI C++.</p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80a2-9411-ec2679975cd7"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-808f-bead-c3e25672171b" class="">16.4 List the new operators added by the ANSI C++ standard committee.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8048-a4c2-ff41aa6a8b52" class="">The ANSI C++ Standard Committee added the following new operators to provide type safety and runtime information:<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8009-a8da-cb629f770aaa" class="numbered-list" start="1"><li><code>static_cast</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-806d-9197-c1c5ee6f268f" class="numbered-list" start="2"><li><code>const_cast</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80a2-be56-ec591b141d4e" class="numbered-list" start="3"><li><code>reinterpret_cast</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80f4-b86b-ca57ec7c80ad" class="numbered-list" start="4"><li><code>dynamic_cast</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8042-9f9a-d2b4e5d9d025" class="numbered-list" start="5"><li><code>typeid</code></li></ol></div></div></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80ce-afab-e911f70e310f" class="">These operators replace unsafe C-style casts and help in performing controlled and meaningful type conversions in C++ programs.</p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8015-8e19-f6a0b5a37f24"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-80b3-ac01-d0c80df7043b" class="">16.5 Rewrite the application of const_cast operator.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80a3-ab9a-f35b2f083720" class="">The <code>const_cast</code> operator is used to add or remove <code>const</code> and <code>volatile</code> qualifiers from a variable.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8048-8b66-fa736f16f092" class="">Its main applications are:<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80e9-afc8-c1f8ca7d68c3" class="numbered-list" start="1"><li>Removing <code>const</code> qualification from a pointer or reference when the original object is non-const</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8085-b89a-d3becba5bb04" class="numbered-list" start="2"><li>Passing const data to legacy functions that do not accept <code>const</code> parameters</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-803a-9f68-ede9c55c9ed5" class="numbered-list" start="3"><li>Modifying object qualifiers without changing the object type</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-800b-8a7f-db9964444307" class="numbered-list" start="4"><li>Interfacing with C libraries that do not support <code>const</code> correctness</li></ol></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80d1-b9cb-f1c04f3e4e7d"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-804a-b49f-e6186f5616e0" class="">16.6 Explain the need of the operator static_cast while the old style cast does the same job.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80ef-86ef-ffaf1257c16f" class="">Although the old C-style cast can perform type conversion, it is unsafe and unclear because it can perform multiple kinds of conversions without restriction. The <code>static_cast</code> operator was introduced to provide type safety and clarity in type conversion.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80d9-ae3f-da045e489fb9" class="">The need for <code>static_cast</code> is explained as follows:<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8049-b9fa-f6162a3ee36e" class="numbered-list" start="1"><li><strong>Improves type safety</strong><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80b4-a8bf-f2ca89ac5b18" class=""><code>static_cast</code> allows only well-defined and meaningful conversions and prevents many unsafe conversions that are allowed by C-style casts.</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8011-ad62-d041f6d5464c" class="numbered-list" start="2"><li><strong>Better readability and clarity</strong><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80a1-a037-f27b57394ce0" class="">It clearly indicates the programmer’s intention, making the code easier to understand and maintain.</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8094-9486-ec958e0236b0" class="numbered-list" start="3"><li><strong>Compile-time checking</strong><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80ec-82c0-ff6985c8dd85" class="">Most errors are detected at compile time, reducing runtime errors.</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-803c-805c-e1b9fdad1747" class="numbered-list" start="4"><li><strong>Controlled conversion</strong><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80f3-94d9-f879ecbfb2c4" class="">It is mainly used for conversions between related data types such as numeric types and based-derived class pointers (without runtime checking).</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8052-b7c9-d5dd5a9cdc64" class="numbered-list" start="5"><li><strong>Avoids accidental misuse</strong><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80c7-9f1f-e62faababfb1" class="">Unlike old-style casts, it cannot remove <code>const</code> or perform reinterpretation of unrelated types.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80e5-a28c-df1e6fc5363b" class="">
+</p></div></li></ol></div></div></p></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80a2-9cbd-c08c361f4e44" class="numbered-list" start="1"><li>Basic type conversion</li></ol></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80c7-a2b4-f86af47d9d09" class="">Old-style cast</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8095-a702-f7812f8d0cc9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 10;
+double b = (double)a;  // old C-style cast</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80d6-8dc3-f286542da577" class=""><code>static_cast</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80a4-89c6-c9acb4ae68db" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 10;
+double b = static_cast&lt;double&gt;(a);  // new C++ style</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80d0-a28d-f68fa0e4665d" class="">Both work</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80fc-ade3-d7ae94907255" class=""><code>static_cast</code> is clearer and safer</p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-806f-8b9b-c9cf078b1848"/></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8095-8226-f2765be8e782" class="numbered-list" start="2"><li>Pointer conversion (Base↔Derived)</li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80ef-a270-e433ee8c5297" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">class Base{};
+class Derived : public Base{};</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8007-bd28-e96273146f10" class="">Old-style cast (Unsafe)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80a8-ae70-ec91d62355a2" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Base* b = new Derived;
+Derived* d = (Derived*)b;  // no check, unsafe</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8064-a6f2-cd4804552536" class=""><code>static_cast</code> (Restricted)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80e0-b2c4-c51d1f1a75ec" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">Base* b = new Derived;
+Derived* d = static_cast&lt;Derived*&gt;(b);  // allowed but explicit</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8072-b335-e0dbca37aaca" class=""><code>static_cast</code> makes the conversion visible and intentional</p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8041-9e86-f251a71d9286"/></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8019-8500-f1e3221022bf" class="numbered-list" start="3"><li>Removing const (Not allowed in <code>static_cast</code>)</li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-808c-95b0-f6dcd3e25abb" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">const int x = 10;</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8038-8df7-deb3a41f5afd" class="">Old-style cast (Dangerous)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-803e-af26-f80ea6c00dff" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int* p = (int*)&amp;x;  // allowed, unsafe</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80c7-808a-ddfd65cad87d" class=""><code>static_cast</code> (Compile-time error)</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80f8-ac5a-f441fc4c4961" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int* p = static_cast&lt;int*&gt;(&amp;x); // ERROR</code></pre></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80ee-b9c4-e11725556c34"/></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80be-83b4-c7afc8881a07" class="numbered-list" start="4"><li>Unrelated pointer conversion</li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-800e-88b1-e355dce1bdc8" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 10;</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-809b-b796-dff69071c392" class="">Old-style cast</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8080-9113-e9df24f255f4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">char* p = (char*)&amp;a; // allowed, unsafe</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-803a-ba86-c883c770dcf8" class=""><code>static_cast</code></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80a8-84bf-d9e5677e9bbe" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">char* p = static_cast&lt;char*&gt;(&amp;a);  // ERROR</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8007-ad12-c9d42764514f" class="">Blocks meaningless conversions</p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80e6-bc97-fc7f9c8fc1d2"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-8078-ac70-c8d005d3edc6" class="">16.7 Differentiate between reinterpret_cast and static_cast.</h3></div><div style="display:contents" dir="ltr"><table id="2e456d6f-efb1-80cb-90ef-fbbc1e19dbc9" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8047-a266-e2180c488ef0"><th id="XtXv" class="simple-table-header-color simple-table-header">Aspect</th><th id="oTNI" class="simple-table-header-color simple-table-header"><code>static_cast</code></th><th id="YhLX" class="simple-table-header-color simple-table-header"><code>reinterpret_cast</code></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-802b-827a-de36367a7d8f"><td id="XtXv" class="">Type of conversion</td><td id="oTNI" class="">Performs <strong>well-defined and meaningful</strong> conversions</td><td id="YhLX" class="">Performs <strong>low-level, bitwise</strong> reinterpretation</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80f7-aaee-fe9c5a010a69"><td id="XtXv" class="">Type safety</td><td id="oTNI" class=""><strong>Type-safe</strong></td><td id="YhLX" class=""><strong>Not type-safe</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80d6-8a04-da53c5c3e713"><td id="XtXv" class="">Compile-time checking</td><td id="oTNI" class="">Strong compile-time checks</td><td id="YhLX" class="">Minimal or no safety checks</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8003-924b-cac4225993ab"><td id="XtXv" class="">Usage</td><td id="oTNI" class="">Numeric conversions, related class pointer conversions</td><td id="YhLX" class="">Converting between unrelated pointer types</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80be-bd61-d142cd18b027"><td id="XtXv" class="">Removes <code>const</code></td><td id="oTNI" class="">❌ Not allowed</td><td id="YhLX" class="">❌ Not allowed</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-80fa-8523-d9d76b8647d1"><td id="XtXv" class="">Runtime behavior</td><td id="oTNI" class="">Predictable and portable</td><td id="YhLX" class="">Implementation-dependent, non-portable</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e456d6f-efb1-8067-9d88-dd2848dbfd79"><td id="XtXv" class="">Typical use</td><td id="oTNI" class="">Preferred for normal type conversions</td><td id="YhLX" class="">Used only in special low-level programming</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80e8-8d2b-dc47655fec08" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8004-957c-cb5c14d33cba" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">// static_cast example
+int a = 10;
+double b = static_cast&lt;double&gt;(a);</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8059-b8ee-d2ecf9f4470b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">// reinterpret_cast example
+int a = 10;
+char* p = reinterpret_cast&lt;char*&gt;(&amp;a);</code></pre></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8022-b48e-ddc11c84c066"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-80f4-a55d-cfd512c172a9" class="">16.8 Extend about dynamic casting. Also explain how it is achieved in C++</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-805c-af68-e0e41a08bc08" class="">The <code>dynamic_cast</code> operator is used for safe runtime type conversion in polymorphic class hierarchies.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-809d-bd15-d97f15578293" class="">It mainly converts base class pointers or references into derived class pointers or references by checking the object’s actual type at runtime.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80b5-89be-f7c842e8577d" class="">Unlike <code>static_cast</code> , <code>dynamic_cast</code> performs runtime checking and ensures that the conversion is valid and safe.</p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80b2-b06f-ca12db3caf76"/></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80d4-9b1d-d6a5ff593614" class="">Need for <code>dynamic_cast</code><div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80fa-a90e-ec88b4c25ddb" class="numbered-list" start="1"><li>To avoid unsafe downcasting (base↔derived)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8094-aa9b-d4330203b3a1" class="numbered-list" start="2"><li>To ensure that the object being pointed to is actually of the target derived type</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80a9-b64f-f6cac2a6c373" class="numbered-list" start="3"><li>To prevent runtime errors caused by invalid casts</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80d1-8e44-e6313617f469" class="numbered-list" start="4"><li>To support Runtime Type Information (RTTI)</li></ol></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80ba-a124-c2ae0185ac6c"/></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80ce-97c4-c6b583c7678e" class="">Conditions for using <code>dynamic_cast</code><div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8026-81cb-f8cf9b26c401" class="numbered-list" start="1"><li>The base class must contain at least one virtual function</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8004-b558-fe18175ac0d1" class="numbered-list" start="2"><li>It works only with pointers and references</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8055-a327-f27897712bcb" class="numbered-list" start="3"><li>RTTI must be enabled by the compiler (enabled by default)</li></ol></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8089-9700-c718a5a43e70"/></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80c2-9ab9-c3b63f0bb2d9" class="">How dynamic casting is achieved in C++</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80ed-b98b-c10a0f986688" class="">Dynamic casting is achieved using Runtime Type Information (RTTI)</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80a0-b6c9-f51b290561bb" class="">When a class contains a virtual function, the compiler creates a virtual table (vtable).</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8094-800e-d59091ff5764" class="">Each object of such a class contains a vptr pointing to the vtable.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-809f-982b-d479d212776d" class="">During <code>dynamic_cast</code>:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80be-ad0f-e68163c919a5" class="bulleted-list"><li style="list-style-type:disc">The runtime system checks the actual object type using RTTI</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80da-a315-cd975441e3f3" class="bulleted-list"><li style="list-style-type:disc">If the conversion is valid, the cast succeeds</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-805e-b6c5-eb354856773d" class="bulleted-list"><li style="list-style-type:disc">If invalid:<div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8002-9eb4-c6d4901a6628" class="bulleted-list"><li style="list-style-type:circle">Pointer cast returns <code>NULL</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8043-b935-fb0e744e8bac" class="bulleted-list"><li style="list-style-type:circle">Reference cast throws <code>std::bad_cast</code> exception</li></ul></div></li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8083-a258-d39a56c374d5" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-804f-b2a4-cbcc3cf98049" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+using namespace std;
+
+class Base {
+public:
+    virtual void show() { }
+};
+
+class Derived : public Base {
+};
+
+int main() {
+    Base* b = new Derived;
+
+    Derived* d = dynamic_cast&lt;Derived*&gt;(b);
+
+    if (d)
+        cout &lt;&lt; &quot;Cast successful&quot;;
+    else
+        cout &lt;&lt; &quot;Cast failed&quot;;
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8002-9bfa-e7c53b4e7e8c" class="">Difference in behavior<div class="indented"><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8008-9cd8-c8ec5013e319" class="bulleted-list"><li style="list-style-type:disc">Pointer casting → returns <code>NULL</code> if cast fails</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8075-88e8-fe028b1c1b45" class="bulleted-list"><li style="list-style-type:disc">Reference casting → throws an exception if cast fails</li></ul></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8004-bb64-d87a2826c76e"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-808b-9da2-d919854521d6" class="">16.9 Outline typeid operator and its usage.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8085-98c2-e04f499dc450" class="">The <code>typeid</code> operator is used to obtain type information of an object or expression at runtime.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-807a-9200-d1e9a1d23e99" class="">It is a part of Runtime Type Information (RTTI) in ANSI C++ and returns a reference to an object of type <code>type_info</code></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-803c-ae29-ebbfaed82509" class="">Need for <code>typeid</code></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8007-bf76-cf6b5cb10336" class="">The <code>typeid</code> operator is required to:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80a7-8360-de7b2363f870" class="bulleted-list"><li style="list-style-type:disc">Identify the actual data type of an object during program execution</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80e9-a5b1-ed7331b5ad94" class="bulleted-list"><li style="list-style-type:disc">Support runtime type checking</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80b4-bd42-cfa76e811530" class="bulleted-list"><li style="list-style-type:disc">Assist in debugging and type comparisons in polymorphic programs</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8002-b351-cf34168386e1" class="">Code Example</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8094-b156-ecf42582d21c" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+using namespace std;
+
+class Base {
+public:
+    virtual void show() { }
+};
+
+class Derived : public Base {
+};
+
+int main() {
+    Base* b = new Derived;
+
+    cout &lt;&lt; typeid(*b).name();
+
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-809b-b758-d866c46cb057" class="">The presence of a virtual function ensures correct runtime type detection.</p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-803a-9d67-f38c3a0bc4ce"/></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80b6-b50e-de4523fe87ec" class="">Important Points<div class="indented"><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80a6-8d26-fbc23beb4a13" class="bulleted-list"><li style="list-style-type:disc">If used with a polymorphic object, <code>typeid</code> returns the derived type</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8037-83a3-c968205f2bd3" class="bulleted-list"><li style="list-style-type:disc">If used with a non-polymorphic object, it returns the static type</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-804c-a34c-c238091f0fac" class="bulleted-list"><li style="list-style-type:disc">Requires inclusion of <code>&lt;typeinfo&gt;</code></li></ul></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8079-a5e8-e61bebee05e7"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-8051-9a79-de4f9d7d1562" class="">16.10 Describe explicit conversion and how it is performed it C++</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-803d-837a-cc29dfaae0a2" class="">Explicit conversion is a type conversion in which the programmer intentionally specifies the target data type.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8066-8341-d85346ff1f87" class="">It is used when automatic (implicit) conversion is not allowed or not safe.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80c5-abb9-c76c8a520634" class="">In C++, explicit conversion is performed using cast operators that clearly indicate the type of conversion to be carried out.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8051-88b4-e6f9f409e6db" class="">Ways of Performing Explicit Conversion in C++</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80b5-9864-fee0db907f11" class="numbered-list" start="1"><li>C-style cast (Old method)</li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-801e-a952-d0c525f6a8ec" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 10;
+double b = (double)a;</code></pre></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80ef-927d-d5d07cf01409" class="numbered-list" start="2"><li>C++ cast operators (Preferred method)<div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-800b-a059-cb38cd5be79c" class="bulleted-list"><li style="list-style-type:disc"><code>static_cast</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-809c-bf3c-ed1e932e1601" class="bulleted-list"><li style="list-style-type:disc"><code>const_cast</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80a8-8851-c35b4af549ca" class="bulleted-list"><li style="list-style-type:disc"><code>reinterpret_cast</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8059-91a3-c3106959f93c" class="bulleted-list"><li style="list-style-type:disc"><code>dynamic_cast</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80f2-95e9-c862df06d742" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int a = 10;
+double b = static_cast&lt;double&gt;(a);</code></pre></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8092-9620-eda0338c84f9"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-80f5-a735-eeb6f9eb56dd" class="">16.11 Recall the use of keyword mutable.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80ad-a7c4-f7bd89c223fb" class="">The keyword <code>mutable</code> is used to allow a data member of a class to be modified even when the object is declared as <code>const</code>.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80c0-8718-fd1e4fb0efba" class="">Normally, <code>const</code> objects do not permit modification of their data members, but <code>mutable</code> provides an exception to this rule</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80fc-a096-dccc20ecffc8" class="">Used of <code>mutable</code> keyword<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8080-9f5a-d51d7f33abf8" class="numbered-list" start="1"><li>Allows modification of specific data members inside <code>const</code> member functions</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80b9-a0a7-c34adc7917bb" class="numbered-list" start="2"><li>Used for caching values, logging, or reference counting</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8000-a56c-d1ff4ba31a4b" class="numbered-list" start="3"><li>Helps maintain logical constness of an object</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-805a-805f-db3024a236d0" class="numbered-list" start="4"><li>Does not affect the physical constness of other data member</li></ol></div></div></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80d4-9076-f42c0d41ee73" class="">Example Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-809e-a1f2-fba2bf5fecf7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">class Sample {
+    mutable int count;
+public:
+    Sample() : count(0) {}
+
+    void display() const {
+        count++;   // allowed because count is mutable
+    }
+};</code></pre></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8056-983d-cbc1ea133964"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-80e2-8cbf-fb781d4103cf" class="">16.12 Review namespace conflict and its handling in C++.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8051-9b1d-fa810d97c8c3" class="">A namespace conflict occurs when two or more identifiers (such as variables, functions, or classes) have the same name and are defined in different scopes or libraries, causing ambiguity for the compiler.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-800b-9fa1-c40768be224a" class="">C++ introduces namespace to avoid such naming conflicts and to organize large programs.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-806b-85c3-eb8ec0bb52b8" class="">Causes of Namespace Conflict<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8074-812e-d667005d6adb" class="numbered-list" start="1"><li>Same function or variable names in different libraries</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8019-8736-f5660e213026" class="numbered-list" start="2"><li>Large programs developed by multiple programmers</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8004-8be5-fb177d3bd5a5" class="numbered-list" start="3"><li>Use of common or generic identifier names</li></ol></div></div></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8080-83ea-f61c82152950" class="">Handling Namespace Conflict in C++<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80fb-8885-ede00456549f" class="numbered-list" start="1"><li>Using Scope Resolution Operator(<code>::</code>)<div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8011-a192-cc8fb03565b8" class="">Allows explicit access to a particular namespace.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8035-a7da-d85f2f2b8c75" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">std::cout &lt;&lt; &quot;Hello&quot;;</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80c3-9b2c-f5898bbd2692" class="numbered-list" start="2"><li>Using <code>using</code> Declaration<div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80c9-a909-ec6b97161dab" class="">Imports a specific name from a namespace</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8041-b3d5-e4565a468994" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">using std::cout;</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8072-b9b7-f84e79d0db51" class="numbered-list" start="3"><li>Using <code>using</code> Directive<div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8050-8706-c77791dc553a" class="">Imports all members of a namespace (use with caution).</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8092-8462-fcdbd65423e3" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">using namespace std;</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80e1-9bac-c3c86247c41d" class="numbered-list" start="4"><li>Creating User-defined Namespaces<div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8030-a397-d350c633fa47" class="">Helps organize code and avoid clashes</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8054-b918-fb7bb875b53a" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace MySpace{
+		int x;
+}</code></pre></div></li></ol></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80c9-89fb-fc70a36ba650"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-80ea-a3d2-f1cf931d7fda" class="">16.13 State the method to access the variables declared in a named namespace.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-802f-a184-cac7aacf4757" class="">The variables declared in a named namespace can be accessed in C++ using the following methods:<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8040-93c3-cb6024d44236" class="numbered-list" start="1"><li>Using the scope resolution operator (<code>::</code>)<div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-808f-978d-c1724dab6340" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace A{
+		int x = 10;
+}
+int main(){
+		cout &lt;&lt; A::x;
+}</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-801f-a18d-c44293a05731" class="numbered-list" start="2"><li>Using <code>using</code> declaration<div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80bf-be26-f2c7ab639ce3" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">using A::x;
+cout &lt;&lt; x;</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-800c-b5f0-e3f88b262629" class="numbered-list" start="3"><li>Using <code>using</code> directive<div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80f5-b391-dc0fa7fde12b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">using namespace A;
+cout &lt;&lt; x;</code></pre></div></li></ol></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8032-98c8-c9dea61c0956"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-802e-8f41-e547de5ea067" class="">16.14 Outline namespace and differentiate between using the <code>using namespace</code> directive and using the <code>using</code> declaration for accessing namespace members.</h3></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80a2-b713-ced2fda96cc5" class="">A namespace is a declarative region that provides a scope for identifiers such as variables, functions, and classes.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8059-9b4d-f7d1e51b45f0" class="">Namespace are used in C++ to avoid name conflicts, organize code, and improve program readability, especially in large projects.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8016-bc70-ce3f927b7d2b" class="">Using <code>using namespace</code> Directive<div class="indented"><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8058-9716-de08be8d08f9" class="bulleted-list"><li style="list-style-type:disc">Imports all members of a namespace into the current scope</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80a4-b369-db66af5a272d" class="bulleted-list"><li style="list-style-type:disc">May cause name conflicts</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8060-900e-d2a238aa8491" class="bulleted-list"><li style="list-style-type:disc">Less safe in large programs</li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8020-85ff-d6c0e6f9cc52" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">using namespace std;</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-806f-9245-e763c868c029" class="">Using <code>using</code> Declaration<div class="indented"><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80bf-bbf1-fa1ff4439a24" class="bulleted-list"><li style="list-style-type:disc">Imports only specific members of a namespace</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-809a-a0ef-d2ca1fb92ec4" class="bulleted-list"><li style="list-style-type:disc">Reduces chances of name conflicts</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8095-9024-d7767826825d" class="bulleted-list"><li style="list-style-type:disc">Safer and more controlled</li></ul></div></div></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-809d-b97e-e4db38424ec5" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">using std::cout;</code></pre></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-8055-98ef-fb139ccb3e87"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-80ec-9858-d17a038d7201" class="">16.15 Review the error in the following code segment:</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8059-8bc6-e971eec4339b" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">const int m = 100;
+int *ptr = &amp;m;</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80cc-b477-c7f6669eff84" class="">The error in the given code is due to violation of const correctness.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8018-bcd2-f3ce23edd36b" class="">Here, <code>m</code> is declared as constant integer (<code>const int</code>).</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-809b-8f15-e35bc50fc10c" class="">This means its value cannot be modified after initialization.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80dc-984c-fd5937b7012b" class="">However, <code>ptr</code> is declared as a pointer to non-const int (<code>int *</code>).</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80bd-9737-e8669e4b9dff" class="">Assigning the address of a <code>const int</code> to a non-const pointer is not allowed in C++, because it may allow modification of a constant object through the pointer.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80f2-b38a-e95bca975554" class="">Hence, the compiler generates an error.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8051-bdbd-c2696f4da793" class="">Correct Code</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80ed-b7e3-dc61a419c2d2" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">const int m = 100;
+const int *ptr = &amp;m; // correct</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80e2-a8c8-dd314a2b47e7" class="">Now, <code>ptr</code> is pointer to a constant integer, so the value of <code>m</code> cannot be modified through <code>ptr</code>.</p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80da-8c99-c5088460f8ae"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-80dc-ac49-de0c19652614" class="">16.16 Discover the problem with the following statements:</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8067-a68b-d1b57e0c58b1" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">const int m = 100;
+double *ptr = const_cast&lt;double*&gt;(&amp;m);</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80eb-abc0-c3cdd2bf5950" class="">The given code has multiple serious problems related to type safety and illegal casting.<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-807a-b478-c0c488cd0004" class="numbered-list" start="1"><li><code>const_cast</code> cannot change data type<div style="display:contents" dir="auto"><p id="2e456d6f-efb1-807e-ba18-dd6581afcfb3" class="">The <code>const_cast</code> operator is used only to add or remove <code>const</code> or <code>volatile</code> qualifiers.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80da-b252-d58fb69696f0" class="">It cannot covert one data type to another (from <code>int</code> to <code>double</code>).</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-809c-9a67-e6374ff37b52" class="numbered-list" start="2"><li>Invalid pointer type conversion<div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80ca-9055-f599a7a7be9d" class="">The address of an <code>int</code> object is being converted to a <code>double*</code> , which is not allowed and leads to undefined behavior</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8018-b01f-f45dcdef29dd" class="numbered-list" start="3"><li>Violation of const correctness<div style="display:contents" dir="auto"><p id="2e456d6f-efb1-807c-9606-cc0194413835" class="">The object <code>m</code> is declared as <code>const</code>. Any attempt to modify it through a pointer (even after casting) results in undefined behavior.</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-804c-9bd9-c9cd29614091" class="numbered-list" start="4"><li>Compilation error<div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80c8-b13b-e8ce87c0a64a" class="">The code will not compile, because <code>const_cast</code> does not permit changing the underlying type.</p></div></li></ol></div></div></p></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80ca-af29-db30d9eeec19"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-807c-b131-f189c819688a" class="">16.17 Compute the output of the following program:</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80aa-80cc-df2844e350d3" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream.h&gt;
+class Person
+{
+// ...
+}
+int main(){
+		Person John;
+		cout &lt;&lt; &quot;John is a &quot;;
+		cout &lt;&lt; typeid(John).name() &lt;&lt; &quot;\n&quot;;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8018-9caa-e3622d7b1bad" class="">The expression <code>typeid(John).name()</code> returns a string representing the type name of the object <code>John</code>.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8032-85d0-ec067f9f0b0b" class="">However, the exact format of this name depends on the compiler.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8001-90fa-c0ae9ceb1e67" class="">Output</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80d6-b05f-f247069f00f9" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">John is a 6Person</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8004-be6f-ed00fcb90f4e" class="">Reason:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80cb-828a-cc2b62134f96" class="bulleted-list"><li style="list-style-type:disc"><code>John</code> is an object of class <code>Person</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-802e-b863-ed89e2fa676f" class="bulleted-list"><li style="list-style-type:disc"><code>typeid(John)</code> obtains the type information</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80e0-9938-f00055f4e52b" class="bulleted-list"><li style="list-style-type:disc"><code>.name()</code> returns a compiler-specific type name</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-809d-9650-f4771b597cf0" class="bulleted-list"><li style="list-style-type:disc">The C++ standard does not guarantee a readable or demangled name</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8098-b4ee-e01169eac8db" class=""><strong>But</strong></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-802e-b532-ee826471bd92" class="">The given program contains the following errors:<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-807f-9e5d-d9467232b6c3" class="numbered-list" start="1"><li>Missing header file <code>&lt;typeinfot&gt;</code><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80b5-9431-ca3d3029267c" class="bulleted-list"><li style="list-style-type:disc">The <code>typeid</code> operator requires the <code>&lt;typeinfo&gt;</code> header.</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-8089-b525-e88b625f8be4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;typeinfo&gt;</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80f2-80bc-f9366e93101e" class="numbered-list" start="2"><li>Old-style header file <code>&lt;iostream.h&gt;</code> used<div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-802a-bc62-e50652dd7bc4" class="bulleted-list"><li style="list-style-type:disc">ANSI C++ uses <code>&lt;iostream&gt;</code> instead of <code>&lt;iostream.h&gt;</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-8043-a093-d30d4a4257fc" class="numbered-list" start="3"><li><code>std</code> namespace not specified<div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-806f-ae6b-c3753b0bb7d8" class="bulleted-list"><li style="list-style-type:disc"><code>cout</code> and <code>typeid</code> belong to the <code>std</code> namespace</li></ul></div><div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8046-a001-cc3094a88812" class="bulleted-list"><li style="list-style-type:disc">Either <code>using namespace std;</code> must be used or <code>std::</code> prefix applied</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-809e-b5c1-d1d9cd84ad2f" class="numbered-list" start="4"><li>Missing semicolon after class definition<div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-80e2-b55d-f14a4bca87a8" class="bulleted-list"><li style="list-style-type:disc">A semicolon is required after the closing brace of a class</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e456d6f-efb1-80ee-bb0e-d1c244571174" class="numbered-list" start="5"><li>Incomplete class definition syntax<div style="display:contents" dir="auto"><ul id="2e456d6f-efb1-8042-95a0-f0f6a9d29598" class="bulleted-list"><li style="list-style-type:disc">Even an empty class must end properly with <code>};</code>.</li></ul></div></li></ol></div></div></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8027-8d88-db3fd6f8c321" class="">Corrected Program</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-802a-b08f-d329789508d5" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+using namespace std;
+
+class Person {
+};
+
+int main() {
+    Person John;
+    cout &lt;&lt; &quot;John is a &quot;;
+    cout &lt;&lt; typeid(John).name() &lt;&lt; endl;
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><hr id="2e456d6f-efb1-80d7-bea4-c2a19b0bd34c"/></div><div style="display:contents" dir="auto"><h3 id="2e456d6f-efb1-806a-a638-c8d907902bfc" class="">16.18 Analyze the correctness of the following namespace definition</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-80d2-b6e3-c9ffce4411b8" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace Main
+{
+int main()
+{
+// ....
+}
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8053-b05c-f5250bce9cd0" class="">The given namespace definition is syntactically correct, but it is logically incorrect according to the C++ program execution rules.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80a0-911b-d1d1d38c3775" class="">In C++, the function <code>main()</code> must be defined in the global namespace.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-80d2-8791-c35ae2aaa2ce" class="">The C++ standard specifies that program execution always starts from <code>::main()</code></p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-8070-bd16-f5f7a27e26d7" class="">Placing <code>main()</code> inside a namespace (such as <code>Main</code>) makes it inaccessible to the runtime system as the program entry point.</p></div><div style="display:contents" dir="auto"><p id="2e456d6f-efb1-807c-b6c2-e6b4c233883a" class="">Therefore, the program will compile successfully, but it will fail to link or execute properly, because the required global <code>main()</code> function is missing.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e456d6f-efb1-807e-852d-fb68203fb3f7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">namespace Main(){
+	void run(){
+	}
+}
+int main(){
+		Main::run();
+}</code></pre></div><div style="display:contents" dir="auto"><hr id="2e556d6f-efb1-80af-85e0-db929b2598ec"/></div><div style="display:contents" dir="auto"><h2 id="2e556d6f-efb1-80ab-8007-f18c21412361" class="">DEBUGGING CODE </h2></div><div style="display:contents" dir="auto"><h3 id="2e556d6f-efb1-80de-b1be-f66d9f415f9c" class="">Program 16.2</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e556d6f-efb1-80c9-a14a-dac8abca1fa1" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">#include &lt;iostream&gt;
+using namespace std;
+
+class A
+{
+    protected:
+        int i;
+    public:
+        A()
+        {
+            i = 10;
+        }
+        int getI()
+        {
+            return i;
+        }
+};
+
+class B : public A
+{
+    public:
+        B()
+        {
+
+        }
+        int getI()
+        {
+            return i + i;
+        }
+};
+
+int main()
+{
+    A *a = new A();
+    B *b = static_cast&lt;B*&gt;(a);
+    cout &lt;&lt; b-&gt;getI();
+    return 0;
+}</code></pre></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e556d6f-efb1-80c9-976b-f744b5f483d3" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">B *b = static_cast&lt;B*&gt;(a); // The real problem</code></pre></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-803b-9d9f-e2424572d2cd" class="">What the code actually does</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e556d6f-efb1-80b1-99fe-f696fa8f6664" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">A *a = new A();</code></pre></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-80f4-ad4e-d4b2c2516199" class="">This creates an object of type <code>A</code> in memory</p></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8067-9363-f7e5e70fe94e" class="">Memory layout:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e556d6f-efb1-8013-be4b-e16a90c0dcd7" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">[A object]</code></pre></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8042-945c-f3dd812e4bd4" class="">
+</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e556d6f-efb1-804e-b054-d28394d1d4e4" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">B *b = static_cast&lt;B*&gt;(a);</code></pre></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-80d4-932e-d95207817b26" class="">You are <strong>telling the compiler</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2e556d6f-efb1-802e-8914-db01ac6bdc30" class="">True me, this <code>A</code> object is actually a <code>B</code> object</blockquote></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-802d-80bb-e1cdd6211b63" class="">But it is <strong>NOT</strong></p></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8026-bb6e-d4c375ede03b" class="">This is called <strong>downcasting without RTTI check</strong></p></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8080-bb8e-ebaf558fad82" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-803f-a734-c91d42639149" class="">Why this is Wrong</p></div><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-80e6-a2d8-fbee0e378bed" class="bulleted-list"><li style="list-style-type:disc"><code>a</code> points to an A object</li></ul></div><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-8033-b38f-c3a8b58ba69d" class="bulleted-list"><li style="list-style-type:disc">You cast it to <code>B*</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-80cc-8113-cf7552706012" class="bulleted-list"><li style="list-style-type:disc">Then you call:</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e556d6f-efb1-80c1-b3a2-d09e0ac31fed" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">b-&gt;getI();</code></pre></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8071-9857-cb5744c1c07b" class="">What happens?</p></div><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-80da-a31d-f68def6c329e" class="bulleted-list"><li style="list-style-type:disc"><code>B::getI()</code> accesses member <code>i</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-8067-91e3-f8b04be15e05" class="bulleted-list"><li style="list-style-type:disc">But the object in memory is only an <code>A</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-8008-8323-fff93e52a5c5" class="bulleted-list"><li style="list-style-type:disc">Result: Undefined Behavior (UB)</li></ul></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8041-9b13-ff15c9460d03" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-800e-a6dc-f497f364549e" class="">Why <code>static_cast</code> is the bug</p></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-80de-be02-ed1b7fa0dcfa" class=""><code>static_cast</code>:<div class="indented"><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-8070-bab6-d9aabf3fe88c" class="bulleted-list"><li style="list-style-type:disc">does NO runtime type checking</li></ul></div><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-802e-a8d8-d1c7449b0e15" class="bulleted-list"><li style="list-style-type:disc">blindly converts pointer types</li></ul></div><div style="display:contents" dir="auto"><ul id="2e556d6f-efb1-8035-aeb9-f03acbeb119c" class="bulleted-list"><li style="list-style-type:disc">assumes programmer is correct</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8067-9909-f94d0830c54a" class="">So yes - this line is the debugging error</p></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8021-b237-d3e91779491c" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2e556d6f-efb1-803b-a4ac-f57989f05c13" class="">Is <code>virtual</code> needed here? ✅ YES (if downcasting is intended)</h2></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-8004-8f0c-c58131bfe581" class="">If you <strong>intend polymorphism</strong>, then:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2e556d6f-efb1-80af-80d6-d2d383a84e39" class="numbered-list" start="1"><li>Base class must be <strong>polymorphic</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e556d6f-efb1-8001-ac22-efb4cfb7cc33" class="numbered-list" start="2"><li>Use <code><strong>virtual</strong></code><strong> function</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2e556d6f-efb1-8054-9294-cdfd7bad217a" class="numbered-list" start="3"><li>Use <code><strong>dynamic_cast</strong></code></li></ol></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2e556d6f-efb1-804c-9158-d5094b3c3a86" class="code code-wrap"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">class A
+{
+protected:
+    int i;
+public:
+    A() { i = 10; }
+    virtual int getI()   // virtual is REQUIRED
+    {
+        return i;
+    }
+    virtual ~A() {}      // good practice
+};
+
+class B : public A
+{
+public:
+    int getI() override
+    {
+        return i + i;
+    }
+};
+
+int main()
+{
+    A *a = new B();               // base pointer to derived object
+    B *b = dynamic_cast&lt;B*&gt;(a);  // SAFE downcast
+
+    if (b)
+        cout &lt;&lt; b-&gt;getI();        // prints 20
+}
+</code></pre></div><div style="display:contents" dir="auto"><h2 id="2e556d6f-efb1-80bc-9423-c6c5de7c245f" class="">🔑 Important Rule (EXAM GOLD)</h2></div><div style="display:contents" dir="auto"><blockquote id="2e556d6f-efb1-803f-bf82-f95dd9c351c6" class="">❝ static_cast must NEVER be used for downcasting unless you are 100% sure of the actual object type. ❞</blockquote></div><div style="display:contents" dir="auto"><p id="2e556d6f-efb1-80fa-a303-f92b827fe442" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
