@@ -4,8 +4,7 @@ using namespace std;
 class Person{};
 int main()
 {
-    Person John;
-    cout << "John is a ";
-    cout << typeid(John).name() << "\n";
+    int count = -1;
+    cout << ++count;
     return 0;
 }
