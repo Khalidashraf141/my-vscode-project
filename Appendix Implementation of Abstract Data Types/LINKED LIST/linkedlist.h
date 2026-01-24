@@ -64,6 +64,12 @@ public:
             cout << "LL is empty\n";
             return;
         }
+        if(head == tail)
+        {
+            delete head;
+            head = tail = NULL;
+            return;
+        }
         Node* temp = head;
         while(temp->next != tail){
             temp = temp->next;
