@@ -1,0 +1,3 @@
+Potato 20 5
+Tomato 50 47
+banana 40 12
