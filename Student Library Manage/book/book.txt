@@ -1,0 +1,7 @@
+101|Clean Code|Robert C. Martin|0
+102|C++ Primer|Stanley B. Lippman|0
+103|The Pragmatic Programmer|Andrew Hunt|0
+104|Introduction to Algorithms|Thomas H. Coremen|0
+105|Data Structures and Algorithms|Narasimha Karumanchi|0
+106|Object Oriented Programming with C++|E. Balagurusamy|0
+107|C Basics|Dennis Ritchie|0
