@@ -78,8 +78,6 @@ public:
         }
     }
 
-
-
     void findBook()
     {
         string searchTitle;
@@ -108,16 +106,12 @@ public:
         }
     };
 
-
-
-
     void returnBook()
     {
         int bookId;
         cout << "Enter Book ID: ";
         cin >> bookId;
 
-   
         if (!isBookIssued(bookId))
         {
             cout << "Book not found in issue record\n";
@@ -127,7 +121,8 @@ public:
         Student s;
         Book b;
 
-        if(!getIssueDetailsByBookId(bookId,s,b)){
+        if (!getIssueDetailsByBookId(bookId, s, b))
+        {
             cout << "Failed to fetch issue details\n";
             return;
         }
@@ -139,36 +134,34 @@ public:
 
         int fine = 0;
 
-        if(currentDays > dueDays){
+        if (currentDays > dueDays)
+        {
             int delay = currentDays - dueDays;
             fine = delay * 5;
 
             cout << "Late return by " << delay << " days\n";
             cout << "Fine: " << fine << endl;
-
-        }else{
+        }
+        else
+        {
             cout << "Book returned on time. No fine\n";
         }
 
-        saveReturnLog(s.rollNumber,s.studentName,s.fatherName,s.section,s.email,b.bookId,b.title,s.issueDate,s.dueDate,currentDate,fine);
+        saveReturnLog(s.rollNumber, s.studentName, s.fatherName, s.section, s.email, b.bookId, b.title, s.issueDate, s.dueDate, currentDate, fine);
 
+        // send return email
+        string cmd = "python book/return_email.py \"" + s.email + "\" \"" + s.studentName + "\" \"" + b.title + "\" \"" + currentDate + "\" \"" + to_string(fine) + "\"";
 
-        //send return email
-        string cmd = "python book/return_email.py \""
-                     + s.email + "\" \""
-                     + s.studentName + "\" \""
-                     + b.title + "\" \""
-                     + currentDate + "\" \""
-                     + to_string(fine) + "\"";
-        
         int emailStatus = system(cmd.c_str());
 
-        if(emailStatus!=0){
+        if (emailStatus != 0)
+        {
             cout << "Warning: Email could not be sent.\n";
-        }else{
+        }
+        else
+        {
             cout << "Return confirmation email sent successfully.\n";
         }
-
 
         // Remove from issue record
         removeIssueRecord(bookId);
@@ -241,17 +234,35 @@ public:
                     rewriteBooksFile(); // UPDATE THE FILE
                     cout << "Book issued successfully\n";
                     saveIssueBook(s, b);
-                    generateReceiptHTML(s, b);
-                    convertHTMLtoPDF();
+
+                    string receiptBaseName = s.studentName;
+                    for (char &c : receiptBaseName)
+                    {
+                        if (c == ' ')
+                            c = '_';
+                    }
+                    receiptBaseName += "_" + to_string(s.rollNumber) + "_receipt";
+
+                    generateReceiptHTML(s, b, receiptBaseName);
+
+                    convertHTMLtoPDF(receiptBaseName);
                     cout << "Receipt generated successfully (PDF)\n";
-                    string cmd = "python book/send_email.py \"" + s.email + "\"";
-                    system(cmd.c_str());
-                    break;
+
+                    string cmd = "python book/send_email.py \"" + s.email + "\" \"" + receiptBaseName + "\"";
+
+                    int emailStatus = system(cmd.c_str());
+                    if (emailStatus != 0)
+                        cout << "Email could not be sent\n";
+
+                    else
+                        cout << "Receipt email sent successfully\n";
+
+                    return;
                 }
                 else
                 {
                     cout << "Sorry this book is not available for issue";
-                    break;
+                    return;
                 }
                 return;
             }
@@ -261,6 +272,77 @@ public:
             cout << "Book not fund in library\n";
         }
     };
+
+    void viewIssuedBooks()
+    {
+        ifstream file("book/issueBookRecord.txt");
+        if (!file.is_open())
+        {
+            cout << "No issued book records found.\n";
+            return;
+        }
+
+        cout << "\n========== ISSUED BOOK RECORDS ==========\n";
+
+        string line;
+        bool empty = true;
+
+        while (getline(file, line))
+        {
+            if (line.empty())
+                continue;
+
+            empty = false;
+
+            stringstream ss(line);
+            string field;
+
+            int bookId, rollNumber, days;
+            char section;
+            string studentName, fatherName, issueDate, email, dueDate;
+
+            // Read fields in the SAME order as writing
+            getline(ss, field, '|');
+            bookId = stoi(field);
+
+            getline(ss, studentName, '|');
+            getline(ss, fatherName, '|');
+
+            getline(ss, field, '|');
+            rollNumber = stoi(field);
+
+            getline(ss, field, '|');
+            section = field[0];
+
+            getline(ss, field, '|');
+            days = stoi(field);
+
+            getline(ss, issueDate, '|');
+            getline(ss, email, '|');
+            getline(ss, dueDate);
+
+            // Display
+            cout << "----------------------------------\n";
+            cout << "Book ID        : " << bookId << endl;
+            cout << "Student Name   : " << studentName << endl;
+            cout << "Father Name    : " << fatherName << endl;
+            cout << "Roll Number    : " << rollNumber << endl;
+            cout << "Section        : " << section << endl;
+            cout << "Issued Days    : " << days << endl;
+            cout << "Issue Date     : " << issueDate << endl;
+            cout << "Due Date       : " << dueDate << endl;
+            cout << "Student Email  : " << email << endl;
+        }
+
+        if (empty)
+        {
+            cout << "No books are currently issued.\n";
+        }
+
+        cout << "========================================\n";
+
+        file.close();
+    }
 
     /*---------------------------------------------PRIVATE FUNCTION-----------------------------------------------*/
 private:
@@ -282,9 +364,18 @@ private:
 
         return newId;
     }
-    void generateReceiptHTML(const Student &s, const Book &b)
+    void generateReceiptHTML(const Student &s, const Book &b, const string &baseName)
     {
-        ofstream html("book/receipt.html");
+        // Create safe filename using student name + roll number
+        string fileName = baseName + ".html";
+
+        ofstream html("book/" + fileName);
+        if (!html)
+        {
+            cout << "Failed to create receipt file\n";
+            return;
+        }
+
         html << "<!DOCTYPE html>\n";
         html << "<html><head><meta charset='UTF-8'>\n";
         html << "<title>Library Receipt</title>\n";
@@ -324,16 +415,17 @@ private:
         html << "</div></body></html>\n";
 
         html.close();
+
+        cout << "Receipt generated: book/" << fileName << endl;
     }
 
-    void convertHTMLtoPDF()
+    void convertHTMLtoPDF(const string &baseFileName)
     {
+        // Paths
+        string htmlPath = filesystem::absolute("book/" + baseFileName + ".html").string();
+        string pdfPath = filesystem::absolute("book/" + baseFileName + ".pdf").string();
 
-        // Get absolute paths to avoid confusion
-        std::string htmlPath = std::filesystem::absolute("book/receipt.html").string();
-        std::string pdfPath = std::filesystem::absolute("book/receipt.pdf").string();
-
-        // Windows needs forward slashes for the file:/// protocol
+        // Windows: fix slashes
         for (char &c : htmlPath)
             if (c == '\\')
                 c = '/';
@@ -341,19 +433,18 @@ private:
             if (c == '\\')
                 c = '/';
 
-        // Added --quiet to hide the technical logs and --enable-local-file-access
-        std::string cmd = "wkhtmltopdf --quiet --enable-local-file-access "
-                          "\"file:///" +
-                          htmlPath + "\" "
-                                     "\"" +
-                          pdfPath + "\"";
+        string cmd = "wkhtmltopdf --quiet --enable-local-file-access "
+                     "\"file:///" +
+                     htmlPath + "\" "
+                                "\"" +
+                     pdfPath + "\"";
 
         int result = system(cmd.c_str());
 
         if (result == 0)
-            std::cout << "Receipt PDF generated successfully\n";
+            cout << "Receipt PDF generated: book/" << baseFileName << ".pdf\n";
         else
-            std::cout << "PDF generation failed. Is wkhtmltopdf installed?\n";
+            cout << "PDF generation failed. Is wkhtmltopdf installed?\n";
     }
 
     string getCurrentDate()

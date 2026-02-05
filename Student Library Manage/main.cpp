@@ -22,7 +22,7 @@ int safeIntInput()
             return x;
         }
     }
-}
+}   
 
 
 
@@ -65,7 +65,8 @@ while(libraryRunning)
                     cout << "3. Issue Book\n";
                     cout << "4. Find Book\n";
                     cout << "5. Return Book\n";
-                    cout << "6. Exit Admin Panel\n";
+                    cout << "6. Show Issue Book Record\n";
+                    cout << "7. Exit Admin Panel\n";
 
                     cout << "Enter your choice: ";
                     choice = safeIntInput();
@@ -79,7 +80,8 @@ while(libraryRunning)
                         case 3:library.issueBook();break;
                         case 4:library.findBook();break;
                         case 5:library.returnBook();break;
-                        case 6:
+                        case 6:library.viewIssuedBooks();break;
+                        case 7:
                             adminRunning = false;
                             cout << "\nReturning to Library Menu...\n";
                             break;
