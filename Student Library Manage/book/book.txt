@@ -3,3 +3,4 @@
 103|Let Us C|Yashavant Kanetkar|1
 104|Computer Fundamentals|P.K. Sinha|1
 105|The C++ Programming Language|Bjarne Stroustrup|1
+106|Head First Design Patterns|Eric Freeman, Elisabeth Robson|1
