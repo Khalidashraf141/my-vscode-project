@@ -5,7 +5,6 @@
 #include "book/book.h"
 
 using namespace std;
-
 int safeIntInput()
 {
     int x;
@@ -54,6 +53,7 @@ while(libraryRunning)
             Login login;
             if(login.admin())
             {
+                adminRunning = true;
                 while(adminRunning)
                 {
                     int choice;
@@ -91,6 +91,7 @@ while(libraryRunning)
         }   
         case 2:
             {
+                studentRunning = true;
                 while(studentRunning)
                 {
                     LibraryBook studentAccess;
